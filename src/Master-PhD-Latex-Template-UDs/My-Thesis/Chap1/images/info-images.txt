@@ -1,0 +1,34 @@
+human_pfas_pathologies.jpg: 
+    link: https://ars.els-cdn.com/content/image/1-s2.0-S0007996024001639-gr7.jpg
+    description sur la page web: Pathologies suspectées d’être induites par la toxicité des PFAS chez l’humain. Au centre en rose, les 4 effets néfastes associés à l’exposition à des PFAS d’après des études épidémiologiques et corroborés par des études expérimentales [30]. En gris, différentes pathologies pour lesquelles des données in vivo et in vitro existent. Dans les panels à droite et à gauche, les effets reprotoxiques potentiels.
+    liens de la pages source: https://www.sciencedirect.com/science/article/pii/S0007996024001639
+    ou ajouter: I.2.5.1. Voies d’exposition et effets documentés
+    
+repre_pfas_polyflore.png: 
+    link: https://vds.hypotheses.org/files/2025/04/Erika-Fig-2-768x387.png
+    titre:  Représentation schématique d’un PFAS non polymérique, le PFOS, acide perfluorooctanesulfonique (C8F17SO3H ou C8F17SO3–).
+    description sur la page web:
+    liens de la pages source: https://vds.hypotheses.org/6348
+    ou ajoute: I.2.1.3. Groupes fonctionnels, tensioactivité et rétention dans les sols en lieux et place de  \begin{figure}[h!]
+                                                                                                                            \centering
+                                                                                                                            \includegraphics[width=0.72\linewidth]{Chap1/images/fig-pfas-amphiphile.pdf}
+                                                                                                                            \caption{Repr\'esentation sch\'ematique d'un PFAS : cha\^ine perfluor\'ee hydrophobe et groupe fonctionnel polaire.}
+                                                                                                                            \label{fig:pfas-amphiphile}
+                                                                                                                        \end{figure}
+
+voie_contamination_pfas.jpg: 
+    link: https://ars.els-cdn.com/content/image/1-s2.0-S0007996024001639-gr5.jpg
+    titre: Représentation schématique des différentes voies possibles de contamination humaine aux PFAS en fonction de leur production et utilisation. Rouge : sources de contamination directe. Bleu : sources de contamination indirecte via une pollution environnementale (sol/eau). Violet : voies d’exposition humaine.
+    description: 
+    liens de la pages source: https://www.sciencedirect.com/science/article/pii/S0007996024001639
+    ou ajouter: I.2.3.3. Le schéma source, voie et récepteur
+
+I.3. Apprentissage automatique et méthodes d’ensemble
+random-forest.png:
+    link: https://tikz.net/janosh/random-forest.png
+    liens de la pages source: https://tikz.net/random-forest/
+    ou ajouter:I.3.2.1. Bagging
+boosting.webp:
+    link: https://miro.medium.com/v2/resize:fit:720/format:webp/1*etquzYCBh3v58rcsXjDsyw.png
+    liens de la pages source: https://medium.com/sfu-cspmp/xgboost-a-deep-dive-into-boosting-f06c9c41349
+    ou ajouter:I.3.2.2. Boosting

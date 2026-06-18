@@ -1,0 +1,13 @@
+Chapitre II ▶ État de l'art sur la prédiction des contaminants émergents de l'eau par intelligence artificielle
+II.1 - Introduction
+II.2 - Modèles statistiques et machine learning classiques pour les PFAS
+II.2.1 - Modèles basés sur les réseaux bayésiens
+II.2.2 - Forêts aléatoires et gradient boosting
+II.3 - Approches basées sur l'apprentissage profond et les graphes
+II.3.1 - Réseaux de neurones pour la prédiction d'occurrence des PFAS
+II.3.2 - Approches semi-supervisées multi-étiquettes
+II.3.3 - Réseaux de neurones sur graphes hétérogènes pour les PFAS
+II.4 - Analyse comparative des approches existantes
+II.4.1 - Mode confirmatoire vs mode prédictif
+II.4.2 - Lacunes identifiées dans la littérature
+II.5 - Synthèse

@@ -1,0 +1,226 @@
+Chapitre I : Généralités sur les PFAS et l'intelligence artificielle
+I.1 - Introduction
+La gestion durable des ressources en eau douce constitue l'un des défis les plus critiques du XXIe siècle, une problématique exacerbée par l'émergence de contaminants dont la complexité et la persistance défient les cadres classiques de la surveillance environnementale.1 Au cœur de cette préoccupation se trouve une vaste famille de substances chimiques synthétiques connues sous l'acronyme de PFAS (substances per- et polyfluoroalkylées), souvent surnommées « polluants éternels » en raison de leur incapacité quasi totale à se dégrader dans les conditions naturelles.2 Depuis leur introduction dans les processus industriels au milieu du siècle dernier, ces molécules ont infiltré chaque compartiment de la biosphère, des nappes phréatiques les plus profondes aux organismes vivants des régions polaires, créant une empreinte chimique anthropogénique dont les conséquences sanitaires sont aujourd'hui jugées alarmantes.4
+La surveillance traditionnelle de ces substances repose sur des campagnes de prélèvement et d'analyses en laboratoire qui, bien que précises, s'avèrent extrêmement coûteuses et logistiquement complexes.6 L'immensité des réseaux de surveillance, combinée à la diversité structurelle des PFAS, crée un dilemme économique pour les autorités publiques et les gestionnaires de l'eau : comment allouer des budgets limités pour maximiser la détection des zones à risque.6 Face à l'impossibilité de réaliser un dépistage exhaustif et continu, l'émergence de l'intelligence artificielle (IA) et plus spécifiquement de l'apprentissage automatique (Machine Learning) offre un changement de paradigme fondamental.6
+L'utilisation de modèles prédictifs permet désormais de transformer les données environnementales, géospatiales et hydrogéologiques en outils de priorisation stratégique.6 En apprenant des relations complexes entre la proximité des sources de pollution, les caractéristiques des sols et les dynamiques de transport des contaminants, les algorithmes peuvent identifier avec une grande précision les puits de surveillance les plus susceptibles d'être contaminés avant même l'intervention humaine sur le terrain.6 Les avancées récentes, notamment dans le domaine des réseaux de neurones sur graphes hétérogènes, permettent d'aller au-delà de l'analyse tabulaire classique pour capturer la structure relationnelle intrinsèque des systèmes environnementaux, où chaque point de mesure est lié à son contexte par des liens de connectivité hydrogéologique et de cooccurrence chimique.6
+Ce premier chapitre dresse le cadre théorique et technique indispensable à la compréhension des enjeux de cette recherche. Il s'articule autour de deux axes majeurs : la chimie et le devenir des PFAS d'une part, et les fondements de l'apprentissage automatique et des graphes d'autre part. L'analyse des propriétés physicochimiques de ces substances permettra de justifier la nécessité de méthodes d'IA robustes, capables de gérer des données asymétriques et de fournir des explications transparentes pour soutenir les décisions réglementaires. L'objectif final est de poser les bases d'un système intelligent de priorisation des risques, alliant rigueur scientifique et efficacité opérationnelle.
+I.2 - Les substances per- et polyfluoroalkylées (PFAS)
+I.2.1 - Définition et propriétés physicochimiques
+Les substances per- et polyfluoroalkylées (PFAS) représentent l'une des familles de composés organiques les plus complexes et les plus diversifiées jamais créées par la chimie de synthèse. Bien que les estimations varient, la littérature académique s'accorde sur l'existence de plusieurs milliers de composés, allant de 4 000 à plus de 15 000 molécules distinctes selon les critères d'inclusion adoptés par les organismes de régulation comme l'OCDE ou l'EPA.8
+La fondation structurale de tous les PFAS est une chaîne aliphatique de carbone où les atomes d'hydrogène ont été remplacés par des atomes de fluor.8 Cette substitution n'est pas anodine : la liaison carbone-fluor (C-F) est la plus forte et la plus courte de la chimie organique, dotée d'une énergie de liaison exceptionnelle d'environ 485 kJ/mol.2 Cette caractéristique confère aux molécules une inertie chimique, thermique et biologique hors du commun. Le fluor, étant l'élément le plus électronégatif, attire fortement les électrons vers lui, créant une barrière protectrice autour du squelette carboné qui empêche toute attaque par des agents oxydants ou des enzymes microbiennes.4
+Historiquement, la définition proposée par Buck et al. (2011) a servi de référence mondiale, stipulant que les PFAS sont des substances aliphatiques contenant le groupement perfluoroalkylé .11 Cependant, avec l'évolution des connaissances et la découverte de nouveaux précurseurs, l'OCDE a affiné cette définition en 2021 pour englober toute substance contenant au moins un groupement méthyle () ou méthylène () entièrement fluoré.8 Cette définition plus large permet d'intégrer des molécules complexes utilisées dans des secteurs de pointe comme les semi-conducteurs ou les matériaux hautes performances.8
+La classification des PFAS repose sur plusieurs critères, notamment la longueur de la chaîne carbonée et la nature du groupe fonctionnel terminal. On distingue deux grandes familles :
+    1. Les substances perfluoroalkylées : Dans ces composés, tous les atomes d'hydrogène du squelette carboné (à l'exception de ceux présents dans les groupes fonctionnels) ont été substitués par du fluor.8 Les exemples les plus célèbres sont l'acide perfluorooctanoïque (PFOA) et le sulfonate de perfluorooctane (PFOS).
+    2. Les substances polyfluoroalkylées : Ces molécules possèdent une chaîne carbonée partiellement fluorée, où au moins un atome de carbone est lié à un hydrogène.8 Bien que moins stables, ces molécules peuvent subir une dégradation partielle dans l'environnement pour se transformer en substances perfluoroalkylées plus persistantes, agissant ainsi comme des « précurseurs ».8
+Classe de PFAS
+Groupe Fonctionnel
+Exemple Typique
+Propriété Dominante
+Acides perfluorocarboxyliques (PFCA)
+Carboxylate ()
+PFOA (C8)
+Bioaccumulable, persistant
+Acides perfluorosulfoniques (PFSA)
+Sulfonate ()
+PFOS (C8)
+Tensioactif, stable
+Fluorotélomères
+Alcools, Sulfonates
+6:2 FTS
+Précurseur de PFCA
+Perfluoropolyéthers (PFPE)
+Éther ()
+Lubrifiants
+Haute résistance thermique
+Tableau 5 : Taxonomie et caractéristiques des principales classes de PFAS 8
+Les propriétés tensioactives des PFAS découlent de leur structure amphiphile unique. La chaîne perfluorée est à la fois hydrophobe (repousse l'eau) et lipophobe (repousse les graisses), tandis que le groupe fonctionnel terminal (acide, sulfonate, etc.) est hydrophile.2 Cette double nature permet aux PFAS de réduire la tension superficielle des liquides de manière plus efficace que n'importe quel autre tensioactif hydrocarboné, expliquant leur efficacité inégalée dans les mousses anti-incendie de type AFFF (Aqueous Film Forming Foams).3
+La longueur de la chaîne est un déterminant majeur de leur comportement. Les PFAS à « chaîne longue » (généralement  carbones pour les PFCA et  pour les PFSA) présentent une solubilité moindre dans l'eau mais une affinité élevée pour les protéines, ce qui favorise leur bioaccumulation dans les tissus vivants.8 À l'inverse, les PFAS à « chaîne courte » sont plus solubles et extrêmement mobiles, leur permettant de voyager sur de très longues distances dans les eaux souterraines et de traverser facilement les barrières de filtration classiques.8
+I.2.2 - Sources, transport et devenir environnemental
+Le devenir environnemental des PFAS est dicté par une combinaison de stabilité intrinsèque et de mobilité spatiale, créant une pollution ubiquitaire qui s'étend des zones industrielles aux écosystèmes les plus isolés. L'analyse des sources de contamination révèle un modèle « source-voie-récepteur » complexe que les outils d'IA s'efforcent aujourd'hui de modéliser.6
+Les sources de pollution sont généralement classées en fonction de l'intensité et de la nature de leurs rejets. Les sites de production primaire, où les PFAS sont synthétisés, constituent les sources les plus concentrées, libérant des quantités massives de polymères et de monomères dans l'air et l'eau.4 Les sites de production secondaire (usines de textiles, de papier, d'emballages) utilisent ces substances comme intrants et rejettent des sous-produits de traitement.3 Cependant, les sources les plus critiques pour la contamination des nappes phréatiques sont les installations militaires et les aéroports.3 L'utilisation répétée de mousses AFFF lors d'exercices d'entraînement a entraîné l'infiltration directe de mélanges complexes de PFAS dans le sol, créant des panaches de pollution qui s'étendent sur plusieurs kilomètres.3 Les stations d'épuration des eaux usées (STEP) et les sites d'enfouissement technique constituent également des sources diffuses majeures, car les procédés de traitement conventionnels sont inefficaces pour détruire la liaison C-F, transformant ces sites en vecteurs de redistribution des PFAS vers le milieu naturel.1
+Une fois introduits dans l'environnement, les PFAS suivent des trajectoires de transport gouvernées par des processus physiques et chimiques distincts :
+    • Advection et Dispersion dans les aquifères : Dans les eaux souterraines, les PFAS se déplacent avec le flux hydraulique. Leur vitesse dépend de la conductivité hydraulique du milieu et de leur coefficient de sorption ().2 Les composés à chaîne courte, moins hydrophobes, se déplacent à une vitesse proche de celle de l'eau, tandis que les composés à chaîne longue sont retardés par leur affinité avec la matière organique du sol.2
+    • Comportement aux interfaces : En raison de leur nature tensioactive, les PFAS ont tendance à s'accumuler aux interfaces air-eau dans la zone vadose (non saturée) des sols.2 Ce phénomène peut créer un réservoir de contaminants qui se libère progressivement lors des épisodes de précipitations, prolongeant la pollution des nappes pendant des décennies même après l'arrêt des émissions à la source.2
+    • Transport atmosphérique : Les PFAS volatils (comme les alcools de fluorotélomères) peuvent être transportés sur des milliers de kilomètres avant d'être déposés par voie sèche ou humide (pluie, neige).2 Ce mécanisme explique la présence de PFAS dans le sang des ours polaires et dans les neiges de haute altitude, soulignant le caractère global de cette menace.3
+Le devenir final des PFAS est marqué par une absence quasi totale de dégradation. Contrairement aux hydrocarbures classiques qui sont métabolisés par les bactéries, la liaison C-F est thermodynamiquement trop stable pour offrir un bénéfice énergétique aux micro-organismes.4 La persistance environnementale se compte donc en siècles, faisant de chaque milligramme rejeté aujourd'hui un héritage pour les générations futures.1
+I.2.3 - Impacts sanitaires et cadre réglementaire
+L'inquiétude croissante entourant les PFAS ne provient pas seulement de leur omniprésence, mais surtout des preuves scientifiques de plus en plus robustes liant l'exposition chronique à des effets néfastes profonds sur la santé humaine. Les voies d'exposition sont multiples : ingestion d'eau contaminée, consommation d'aliments bioaccumulateurs (poissons, produits laitiers) et, dans une moindre mesure, inhalation de poussières chargées de PFAS provenant des produits de consommation.17
+L'un des impacts les plus préoccupants identifiés par l'Autorité européenne de sécurité des aliments (EFSA) est l'immunotoxicité.18 Des études cliniques ont démontré que des niveaux élevés de PFAS dans le sérum sanguin réduisent la capacité du système immunitaire à produire des anticorps après une vaccination, augmentant ainsi la vulnérabilité des populations, en particulier des enfants, aux maladies infectieuses.18 Au niveau métabolique, les PFAS interfèrent avec les récepteurs activés par les proliférateurs de peroxysomes (PPAR), perturbant le métabolisme des lipides et augmentant le taux de cholestérol sanguin.19
+La liste des pathologies associées est vaste et inclut :
+    • Perturbations endocriniennes : Atteintes à la fonction thyroïdienne et retards de développement pubertaire.1
+    • Toxicité pour la reproduction : Diminution du poids à la naissance, pré-éclampsie chez les femmes enceintes et baisse de la fertilité.1
+    • Cancérogénicité : Le PFOA a été classé comme cancérogène certain (Groupe 1) par le CIRC, avec des risques accrus de cancers du rein et des testicules documentés chez les travailleurs exposés et les populations vivant à proximité de sites industriels.19
+Organe / Système
+Effets documentés
+Population vulnérable
+Système immunitaire
+Baisse de réponse vaccinale
+Nourrissons et enfants
+Système endocrinien
+Maladies thyroïdiennes
+Adultes
+Foie
+Augmentation du cholestérol, lésions
+Adultes
+Appareil reproducteur
+Faible poids à la naissance, infertilité
+Femmes enceintes
+Rein / Testicules
+Risque accru de tumeurs malignes
+Travailleurs exposés
+Tableau 6 : Synthèse des risques sanitaires liés à l'exposition aux PFAS 1
+Face à cette menace de santé publique, le paysage réglementaire a connu une accélération sans précédent en 2024. Aux États-Unis, l'EPA a franchi une étape historique en publiant la réglementation nationale primaire sur l'eau potable (NPDWR), instaurant des limites contraignantes (MCL) de 4 parties par billion (ng/L) pour le PFOA et le PFOS.21 Ces seuils sont parmi les plus bas jamais fixés pour des contaminants chimiques, reflétant la volonté de l'administration américaine de réduire l'exposition de 100 millions de citoyens.21
+En Europe, la stratégie est double. D'une part, la directive sur l'eau potable impose une limite de 0,5 µg/L pour le total des PFAS et de 0,1 µg/L pour une somme de 20 PFAS spécifiques à partir de 2026.1 D'autre part, une proposition de restriction universelle au titre du règlement REACH vise à interdire l'utilisation de plus de 10 000 PFAS dans toutes les applications non essentielles, une mesure radicale destinée à prévenir toute nouvelle émission.1 En France, la loi du 27 février 2025 marque une avancée majeure en interdisant la fabrication et la vente de cosmétiques, de produits de fartage et de certains textiles contenant des PFAS dès 2026, tout en instaurant une redevance sur les rejets industriels basée sur le principe « pollueur-payeur ».25
+Cette pression réglementaire croissante impose aux acteurs de l'eau une obligation de surveillance sans précédent, rendant le développement d'outils d'intelligence artificielle non plus optionnel, mais stratégique pour la conformité et la protection des populations.6
+I.3 - Apprentissage automatique et méthodes d'ensemble
+I.3.1 - Panorama des paradigmes d'apprentissage
+L'apprentissage automatique (Machine Learning) s'est imposé comme le pilier central de l'intelligence artificielle moderne, offrant la capacité de traiter des volumes de données que les méthodes statistiques traditionnelles ne pourraient appréhender avec la même efficacité.6 Ce domaine repose sur la conception d'algorithmes capables d'identifier de manière autonome des motifs (patterns) au sein des données pour réaliser des prédictions ou automatiser des prises de décision.6
+Le paradigme de l'apprentissage supervisé est le plus pertinent pour la problématique de la contamination des eaux souterraines traitée dans ce mémoire.6 Dans ce cadre, l'algorithme apprend à partir d'un ensemble de données étiquetées, c'est-à-dire un jeu de données où chaque exemple d'entrée (caractéristiques hydrogéologiques, proximité industrielle) est associé à une réponse connue (concentration en PFAS, statut de contamination).29 Le processus consiste à ajuster les poids internes du modèle pour minimiser l'écart entre la prédiction et la valeur réelle, un principe connu sous le nom de minimisation du risque empirique.28 L'objectif ultime est la généralisation : le modèle doit être capable de prédire correctement le statut de nouveaux puits jamais vus durant la phase d'entraînement.6
+À l'opposé, l'apprentissage non supervisé travaille sur des données sans étiquettes préalables. Son rôle principal est l'exploration et la découverte de structures cachées.29 Les techniques de partitionnement (clustering), comme les -moyennes, sont essentielles pour regrouper les sites de surveillance ayant des profils géochimiques similaires, tandis que la réduction de dimensionnalité permet de simplifier des vecteurs de caractéristiques complexes sans perdre l'information critique.29 L'apprentissage semi-supervisé, qui combine une petite quantité de données étiquetées avec une vaste quantité de données non étiquetées, gagne en importance dans le domaine des PFAS où le coût de l'étiquetage (l'analyse chimique) est élevé.6
+I.3.2 - Méthodes d'ensemble
+Les méthodes d'ensemble reposent sur une intuition simple mais puissante : la combinaison des avis de plusieurs experts est généralement plus fiable que l'avis d'un seul expert, aussi brillant soit-il.32 En apprentissage automatique, cela se traduit par l'agrégation de plusieurs modèles individuels, appelés « apprenants faibles », pour construire un « apprenant fort » doté d'une meilleure capacité de généralisation et d'une plus grande stabilité face au bruit des données.32
+On distingue trois stratégies majeures : le boosting, qui réduit le biais en apprenant séquentiellement des erreurs passées ; le bagging, qui réduit la variance en parallélisant des modèles indépendants ; et le stacking, qui optimise la combinaison des modèles par un méta-apprenant.32
+I.3.2.1 - Gradient boosting (XGBoost, LightGBM)
+Le boosting de gradient est aujourd'hui considéré comme l'état de l'art pour les données tabulaires structurées.6 Le principe est itératif : on commence par un modèle très simple, puis on ajoute successivement des arbres de décision, chacun étant entraîné pour prédire le résidu (l'erreur) du modèle global précédent.33 L'optimisation se fait par descente de gradient sur une fonction de perte spécifique, permettant une grande flexibilité selon que l'on traite un problème de classification binaire ou de régression.33
+XGBoost (eXtreme Gradient Boosting), introduit par Chen et Guestrin en 2016, a révolutionné ce domaine en proposant une implémentation parallélisée et hautement optimisée.37 Ses points forts incluent :
+    • Régularisation structurée : L'utilisation de pénalités  et  au niveau des feuilles des arbres limite la complexité du modèle et prévient le surapprentissage.35
+    • Gestion des données manquantes : L'algorithme apprend une direction par défaut pour chaque nœud de l'arbre, permettant de traiter les valeurs nulles sans imputation préalable.35
+    • Algorithme de découpage : XGBoost utilise un algorithme de recherche par histogrammes ou de découpage pondéré pour trouver les seuils optimaux, garantissant une efficacité computationnelle même sur de grands volumes de données.35
+LightGBM, développé par Microsoft, pousse l'optimisation encore plus loin en adoptant une stratégie de croissance des arbres par feuilles (leaf-wise) plutôt que par niveaux (level-wise).35 Cette approche permet de réduire davantage la perte, au prix d'un risque de surapprentissage plus élevé sur les petits jeux de données.41 Deux innovations majeures le distinguent : le GOSS (Gradient-based One-Side Sampling), qui ignore les données ayant de petits gradients pour se focaliser sur les instances les plus instructives, et l'EFB (Exclusive Feature Bundling), qui fusionne les variables rares pour réduire la dimensionnalité de manière quasi-indolore.43
+I.3.2.2 - Random Forest
+Le Random Forest (forêt aléatoire) est le représentant emblématique du bagging.6 Contrairement au boosting, il construit un grand nombre d'arbres de décision profonds de manière totalement indépendante et parallèle.33 Pour assurer la diversité de la forêt et éviter que tous les arbres ne se ressemblent, deux mécanismes de randomisation sont introduits :
+    • Bootstrapping : Chaque arbre est entraîné sur un échantillon aléatoire tiré avec remplacement à partir du jeu de données original.32
+    • Feature Subsampling : À chaque division (split) d'un nœud, l'algorithme ne choisit la meilleure variable que parmi un sous-ensemble aléatoire de caractéristiques.32
+Le résultat final est une moyenne (pour la régression) ou un vote majoritaire (pour la classification).36 Le Random Forest est particulièrement apprécié pour sa robustesse face aux valeurs aberrantes et sa capacité à fournir une mesure naturelle de l'importance des variables, ce qui s'avère précieux pour identifier les facteurs environnementaux prédominants dans la dispersion des PFAS.6
+I.3.2.3 - Stacking
+Le stacking (ou généralisation empilée) représente le sommet de la hiérarchie des méthodes d'ensemble.6 L'idée centrale est que différents modèles (ex. un XGBoost, un Random Forest et un réseau de neurones) peuvent commettre des erreurs sur des types d'instances différents.6 Au lieu de simplement voter, le stacking entraîne un méta-modèle pour apprendre à pondérer les sorties de ces modèles de base.32
+Dans le cadre du projet de recherche sur les PFAS, une architecture de stacking hybride a été privilégiée pour combiner l'expressivité spatiale d'un modèle de graphe (HGT) avec la rigueur tabulaire de XGBoost.6 Le méta-apprenant reçoit les probabilités de contamination prédites par chaque modèle, ainsi que des indicateurs de confiance et d'accord entre modèles, permettant de corriger les faux négatifs et de stabiliser les prédictions dans les zones géographiques incertaines.6
+Paramètre
+Random Forest
+XGBoost
+Stacking
+Unité de base
+Arbres profonds
+Arbres peu profonds
+Modèles hétérogènes
+Construction
+Parallèle
+Séquentielle
+Hiérarchique
+Objectif principal
+Réduction de variance
+Réduction de biais
+Optimisation globale
+Sensibilité aux hyperparamètres
+Faible
+Élevée
+Modérée
+Tableau 7 : Comparaison conceptuelle des méthodes d'ensemble 32
+I.3.3 - Gestion du déséquilibre de classes (SMOTE, ADASYN)
+Le succès d'un modèle d'apprentissage automatique dépend crucialement de la qualité et de la distribution des données d'entraînement. Or, les données de surveillance des PFAS souffrent d'un déséquilibre de classes sévère : dans de nombreux réseaux, moins de 10 % des puits testés dépassent les seuils réglementaires, tandis que la grande majorité des résultats sont des non-détections.6 Sans correction, un modèle tendrait à prédire systématiquement « non contaminé », obtenant une précision flatteuse de 90 % tout en échouant totalement à identifier les risques sanitaires réels.47
+Pour rééquilibrer le jeu de données, deux approches algorithmiques majeures sont utilisées au niveau du pré-traitement :
+    1. SMOTE (Synthetic Minority Over-sampling Technique) : Au lieu de simplement copier les instances minoritaires (suréchantillonnage aléatoire), SMOTE crée de nouvelles données synthétiques crédibles.6 Pour chaque point de la classe minoritaire, l'algorithme sélectionne ses  plus proches voisins, choisit l'un d'entre eux, et génère un nouveau point situé aléatoirement sur le segment reliant ces deux voisins dans l'espace des caractéristiques.47 Cela permet d'étendre la région de décision de la classe minoritaire de manière continue.46
+    2. ADASYN (Adaptive Synthetic Sampling) : Cette technique va plus loin en introduisant une notion de difficulté d'apprentissage.6 ADASYN calcule, pour chaque exemple minoritaire, le ratio d'exemples de la classe majoritaire dans son voisinage immédiat. Plus ce ratio est élevé (indiquant que l'exemple est situé près de la frontière de décision ou dans une zone bruyante), plus l'algorithme générera d'échantillons synthétiques autour de lui.47 Cette approche adaptative focalise l'apprentissage sur les cas les plus ambigus, forçant le modèle à mieux distinguer les zones de transition entre sols sains et pollués.47
+L'utilisation de ces techniques, combinée à des métriques d'évaluation robustes comme le score F1 ou l'aire sous la courbe Précision-Rappel (PRC), garantit que le modèle de priorisation reste protecteur pour la santé publique en minimisant les faux négatifs.6
+I.4 - Généralités sur les graphes et l'apprentissage profond
+I.4.1 - Réseaux de neurones sur graphes (GNN)
+L'apprentissage profond sur graphes (Graph Neural Networks - GNN) représente une rupture technologique majeure pour la modélisation environnementale. Alors que les réseaux de neurones classiques traitent les données comme des instances indépendantes et identiquement distribuées, les GNN partent du principe que les données sont interconnectées.6 Dans le contexte des eaux souterraines, un puit de surveillance n'est pas qu'un simple vecteur de coordonnées et de mesures ; il est un nœud au sein d'un réseau complexe de flux hydrauliques et de proximités industrielles.6
+Le mécanisme central des GNN est le passage de messages (Message Passing). À chaque couche du réseau, chaque nœud  collecte les informations provenant de ses voisins immédiats .50 Ce processus se décline en trois étapes mathématiques :
+    1. Agrégation : Les caractéristiques des voisins sont combinées via une fonction invariante par permutation (comme la somme, la moyenne ou le maximum).51
+    2. Mise à jour (Update) : L'information agrégée est fusionnée avec les propres caractéristiques du nœud  via une transformation non linéaire (souvent un perceptron multicouche) pour générer une nouvelle représentation vectorielle, appelée embedding.50
+    3. Propagation : Après  couches, l'embedding d'un nœud contient des informations provenant de son voisinage à  sauts, capturant ainsi des dépendances spatiales et structurelles à longue distance.51
+I.4.2 - Graphes hétérogènes
+La réalité physique de la contamination par les PFAS ne peut être fidèlement représentée par un graphe simple où tous les nœuds et toutes les arêtes sont de même nature. Il est nécessaire d'utiliser des graphes hétérogènes, capables de distinguer différents types d'entités et de relations.6
+Dans le cadre de cette étude, le graphe a été conçu pour encoder le modèle conceptuel source-voie-récepteur.6 On y retrouve six types de nœuds :
+    • Échantillons (Samples) : Les nœuds récepteurs portant les caractéristiques complètes du site de surveillance.6
+    • Installations (Facilities) : Représentant les sources potentielles (usines, bases militaires) avec leurs distances respectives.6
+    • Variables Environnementales : Encodant le contexte hydrogéologique (recharge des nappes, type de sol).6
+    • Indicateurs de Qualité de l'Eau : Paramètres physicochimiques globaux influençant la mobilité (pH, conductivité).6
+    • Composés PFAS : Permettant de modéliser les relations de cooccurrence entre les différentes molécules chimiques.6
+    • Clusters Géographiques : Capturant l'autocorrélation spatiale à l'échelle régionale.6
+Les arêtes reliant ces nœuds portent également des significations sémantiques différentes. Un lien entre un puit et une base militaire indique un risque de transport advectif, tandis qu'un lien entre deux puits au sein d'un même cluster géologique suggère des propriétés de transport similaires.6 Les GNN homogènes classiques échouent à traiter cette diversité car ils appliquent la même transformation à toutes les connexions, écrasant ainsi la richesse sémantique du réseau.51
+I.4.3 - Heterogeneous Graph Transformer (HGT)
+L'architecture HGT (Heterogeneous Graph Transformer), introduite par Hu et al. (2020), constitue le moteur analytique du pipeline hybride présenté dans ce travail.6 Elle transpose le mécanisme d'attention des transformateurs (utilisé avec succès dans le traitement du langage naturel) à l'espace des graphes hétérogènes.52
+L'innovation majeure de l'HGT réside dans sa capacité à paramétrer l'attention de manière spécifique à chaque méta-relation, définie par le triplet .51 Pour une arête , le modèle calcule un score d'attention qui détermine l'importance relative du voisin  pour la mise à jour du nœud cible .51
+Le calcul repose sur trois matrices de projection spécifiques au type de nœud  : ,  et  (Query, Key, Value).51 La similarité entre la requête du nœud cible et la clé du nœud source est modulée par une matrice  propre au type de relation .51 Cette architecture permet au modèle d'apprendre, par exemple, que les informations provenant d'une installation militaire doivent être traitées différemment des mesures de pH lors de l'estimation du risque de contamination d'un puit.6
+L'HGT génère in fine des embeddings hétérogènes de 64 dimensions pour chaque échantillon.6 Ces vecteurs compressent toute la complexité relationnelle et spatiale du réseau de surveillance. Dans notre pipeline hybride, ces embeddings sont ensuite fusionnés avec les données tabulaires classiques pour alimenter les modèles de boosting, créant une synergie entre mesures directes et contexte structurel.6
+I.5 - Interprétabilité des modèles
+Dans le domaine de la santé environnementale et de la réglementation, la performance d'un modèle d'IA n'est pas suffisante si elle n'est pas accompagnée d'une capacité explicative.59 Pour qu'une agence de protection de l'environnement puisse justifier la fermeture d'un puit ou le lancement d'une enquête industrielle coûteuse, elle doit comprendre les ressorts de la prédiction algorithmique.6 C'est ici qu'interviennent les méthodes d'interprétabilité post-hoc, dont la plus aboutie est SHAP (SHapley Additive exPlanations).61
+SHAP trouve ses racines dans la théorie des jeux coopératifs de Lloyd Shapley (Prix Nobel d'économie).59 Le problème est modélisé comme suit : chaque variable d'entrée (caractéristique) est un « joueur » participant à un jeu dont le « gain » est la prédiction du modèle.59 La valeur de Shapley d'une variable représente sa contribution marginale moyenne à la prédiction, calculée sur toutes les combinaisons possibles de variables (coalitions).61
+Mathématiquement, la valeur SHAP  pour la variable  est définie par :
+
+Où  est l'ensemble total des variables et  est l'espérance de la prédiction sachant les variables du sous-ensemble .61
+L'utilisation de SHAP dans notre étude offre plusieurs avantages critiques :
+    • Interprétabilité Globale : Elle permet de classer les variables par importance moyenne sur l'ensemble du territoire.6 On découvre ainsi que les concentrations de PFOS et de PFOA dominent les prédictions lorsqu'elles sont disponibles, mais que les embeddings de graphes prennent le relais en mode prédictif.6
+    • Interprétabilité Locale : Pour un puit spécifique, SHAP génère un « graphique de force » (Force Plot) montrant quelles variables poussent la prédiction vers la contamination (en rouge) et lesquelles la tirent vers la sécurité (en bleu).6
+    • Validation Scientifique : L'analyse SHAP confirme que les modèles « apprennent » des relations physiquement cohérentes, comme la décroissance de la contamination avec la distance aux sources AFFF, renforçant la confiance des experts du domaine.6
+L'interprétabilité transforme ainsi l'IA d'une « boîte noire » opaque en un outil de dialogue transparent entre la science des données et la gestion des risques environnementaux.60
+I.6 - Synthèse
+Ce premier chapitre a permis de poser les fondations multidimensionnelles nécessaires à la conduite de nos travaux sur la priorisation des risques liés aux PFAS. L'analyse chimique a mis en lumière l'exceptionnelle stabilité de la liaison carbone-fluor, faisant de ces substances un défi permanent pour la santé publique et une priorité absolue pour les organismes de régulation mondiaux comme l'EPA et l'EFSA.1
+L'exploration des paradigmes de l'apprentissage automatique a démontré que les méthodes d'ensemble, telles que XGBoost et Random Forest, offrent la robustesse nécessaire pour traiter l'hétérogénéité des données environnementales.32 L'intégration des graphes hétérogènes et de l'architecture HGT représente l'innovation majeure de ce cadre théorique, permettant de modéliser explicitement le cycle de contamination « source-voie-récepteur » au sein d'un réseau de neurones.6
+Enfin, l'importance accordée à l'interprétabilité via la méthode SHAP assure que les résultats de cette recherche ne seront pas seulement performants statistiquement, mais également exploitables et défendables dans un contexte réglementaire et social exigeant.59 Le chapitre suivant détaillera la méthodologie expérimentale, les caractéristiques du jeu de données californien CA-PFAS-ASGWS et la conception précise du pipeline hybride dont nous avons ici tracé les contours théoriques.
+Sources des citations
+    1. PFAS pollution - European Commission - EU Environment, consulté le mai 14, 2026, https://environment.ec.europa.eu/topics/chemicals/pfas-pollution_en
+    2. Fate and Transport of Per- and Polyfluoroalkyl Substances (PFAS), consulté le mai 14, 2026, https://pfas-1.itrcweb.org/wp-content/uploads/2023/10/FT_PFAS_FactSheet_Sept2023_final.pdf
+    3. Issue Brief | The State of PFAS Forever Chemicals in America (2024) | White Papers | EESI, consulté le mai 14, 2026, https://www.eesi.org/papers/view/issue-brief-the-state-of-pfas-forever-chemicals-in-america-2024
+    4. Les molécules et matériaux per- et polyfluoroalkylés (PFAS) - Importance industrielle et gestion des crises environnementales - Académie des technologies, consulté le mai 14, 2026, https://www.academie-technologies.fr/wp-content/uploads/2025/10/202510_PFAS.pdf
+    5. Interactive Map: PFAS Contamination Crisis: New Data Show 9,728 Sites in 50 States, consulté le mai 14, 2026, https://www.ewg.org/interactive-maps/pfas_contamination/
+    6. main.pdf
+    7. PFAS - Wikipédia, consulté le mai 14, 2026, https://fr.wikipedia.org/wiki/PFAS
+    8. Les substances per- et polyfluoroalkylées (Pfas) : enjeux en santé au travail - INRS, consulté le mai 14, 2026, https://www.inrs.fr/dam/inrs/CataloguePapier/HST/TI-DC-47.pdf
+    9. Les PFAS - Les politiques publiques de santé environnementale, consulté le mai 14, 2026, https://www.strategie-plan.gouv.fr/files/files/Publications/2025/2025-10-29%20-%20Sant%C3%A9%20environnementale/HCSP-2025-Sant%C3%A9-environnementale_PFAS-30octobre17h-FINAL-COUV.pdf
+    10. Identification and classification of commercially relevant per‐ and poly‐fluoroalkyl substances (PFAS) | Integrated Environmental Assessment and Management | Oxford Academic, consulté le mai 14, 2026, https://academic.oup.com/ieam/article/17/5/1045/7726990
+    11. Assembly and Curation of Lists of Per- and Polyfluoroalkyl Substances (PFAS) to Support Environmental Science Research - PMC, consulté le mai 14, 2026, https://pmc.ncbi.nlm.nih.gov/articles/PMC9350880/
+    12. PFAS Definition Classification Sources and Impact - MilliporeSigma, consulté le mai 14, 2026, https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/analytical-chemistry/small-molecule-hplc/pfas-definition-classification-sources-and-impact
+    13. Buck et al. (2011)definition of - perfluoroalkyl and polyfluoroalkyl substances (PFASs) - Biomonitoring California, consulté le mai 14, 2026, https://biomonitoring.ca.gov/sites/default/files/downloads/BuckDefinPFASs032522.pdf
+    14. PFAS : définition et utilisation | Institut national de santé publique du Québec, consulté le mai 14, 2026, https://www.inspq.qc.ca/pfas/pfas-definition-et-utilisation
+    15. Fate and transport of per- and polyfluoroalkyl substances (PFAS) across the groundwater-to-estuary continuum in an aqueous film forming foam (AFFF)-impacted watershed - PubMed, consulté le mai 14, 2026, https://pubmed.ncbi.nlm.nih.gov/41349945/
+    16. Environmental and Health Impacts of PFAS - Wisconsin DNR, consulté le mai 14, 2026, https://dnr.wisconsin.gov/topic/PFAS/Impacts.html
+    17. Polluants éternels (PFAS) : s'informer et réduire son exposition - Ministère de la Santé, consulté le mai 14, 2026, https://sante.gouv.fr/sante-et-environnement/substances-chimiques/les-pfas/article/polluants-eternels-pfas-s-informer-et-reduire-son-exposition
+    18. Substances per- et polyfluoroalkylées (PFAS) - EFSA, consulté le mai 14, 2026, https://www.efsa.europa.eu/fr/topics/per-and-polyfluoroalkyl-substances-pfas
+    19. Overview of Per- and Polyfluoroalkyl Substances (PFAS), Their Applications, Sources, and Potential Impacts on Human Health - MDPI, consulté le mai 14, 2026, https://www.mdpi.com/2673-4672/4/1/9
+    20. PFAS Regulations Update: Key Developments and Impacts for 2025 - ALS Global, consulté le mai 14, 2026, https://www.alsglobal.com/en/news-and-publications/2024/12/update-on-key-pfas-regulations-what-you-need-to-know-for-2025
+    21. Questions & Answers: PFAS National Primary Drinking Water Regulation (April 2024) - EPA, consulté le mai 14, 2026, https://www.epa.gov/system/files/documents/2024-04/pfas-npdwr_qa_general_4.9.24v1.pdf
+    22. Per- and Polyfluoroalkyl Substances (PFAS) | US EPA, consulté le mai 14, 2026, https://www.epa.gov/sdwa/and-polyfluoroalkyl-substances-pfas
+    23. Key EPA Actions to Address PFAS | US EPA, consulté le mai 14, 2026, https://www.epa.gov/pfas/key-epa-actions-address-pfas
+    24. Gestion des Risques Environnementaux & Sanitaires Management of Environmental & Health Risks, consulté le mai 14, 2026, https://www.webs-event.com/stock/archives/PFAS24_ABSTRACTS_PG.pdf
+    25. 2025 PFAS Regulations: A Year of Rapid Change in Europe, consulté le mai 14, 2026, https://sustainabilityservices.eurofins.com/news/2025-pfas-regulations-in-europe/
+    26. PFAS : le point sur les textes et la jurisprudence relatifs aux substances per- et polyfluoroalkylées - Cabinet Gossement AVOCATS, consulté le mai 14, 2026, https://www.gossement-avocats.com/blog/pfas-le-point-sur-le-droit-et-la-jurisprudence-applicables-en-france/
+    27. EPA's PFAS Strategic Roadmap: Three Years of Progress, consulté le mai 14, 2026, https://www.epa.gov/system/files/documents/2024-11/epas-pfas-strategic-roadmap-2024_508.pdf
+    28. Apprentissage supervisé vs. non supervisé : Comprendre les différences et les capacités de chaque approche d'apprentissage automatique - Databricks, consulté le mai 14, 2026, https://www.databricks.com/fr/blog/supervised-vs-unsupervised-learning
+    29. Apprentissage supervisé et non supervisé : quelle est la différence ? | IBM, consulté le mai 14, 2026, https://www.ibm.com/fr-fr/think/topics/supervised-vs-unsupervised-learning
+    30. Quelle est la différence entre le machine learning supervisé et non supervisé - AWS, consulté le mai 14, 2026, https://aws.amazon.com/fr/compare/the-difference-between-machine-learning-supervised-and-unsupervised/
+    31. Apprentissage non supervisé : concepts, méthodes et applications - Nexa Digital School, consulté le mai 14, 2026, https://www.nexa.fr/blog/apprentissage-non-supervise-concept
+    32. Bagging vs Boosting vs Stacking: Which Ensemble Method Wins in 2025? - MachineLearningMastery.com, consulté le mai 14, 2026, https://machinelearningmastery.com/bagging-vs-boosting-vs-stacking-which-ensemble-method-wins-in-2025/
+    33. Battle of the Ensemble - Random Forest vs Gradient Boosting - Towards Data Science, consulté le mai 14, 2026, https://towardsdatascience.com/battle-of-the-ensemble-random-forest-vs-gradient-boosting-6fbfed14cb7/
+    34. 1.11. Ensembles: Gradient boosting, random forests, bagging, voting, stacking - Scikit-learn, consulté le mai 14, 2026, https://scikit-learn.org/stable/modules/ensemble.html
+    35. Gradient Boosting Variants - Sklearn vs. XGBoost vs. LightGBM vs. CatBoost |, consulté le mai 14, 2026, https://datamapu.com/posts/classical_ml/gradient_boosting_variants/
+    36. Gradient Boosting vs. Random Forest: Which Ensemble Method Should You Use? - Medium, consulté le mai 14, 2026, https://medium.com/@hassaanidrees7/gradient-boosting-vs-random-forest-which-ensemble-method-should-you-use-9f2ee294d9c6
+    37. [1603.02754] XGBoost: A Scalable Tree Boosting System - arXiv, consulté le mai 14, 2026, https://arxiv.org/abs/1603.02754
+    38. XGBoost: A Scalable Tree Boosting System. - DBLP, consulté le mai 14, 2026, https://dblp.org/rec/conf/kdd/ChenG16
+    39. citation - databricks/xgboost-linux64 - GitHub, consulté le mai 14, 2026, https://github.com/databricks/xgboost-linux64/blob/master/CITATION
+    40. Chen, T. and Guestrin, C. (2016) XGBoost A Scalable Tree Boosting System. Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, San Francisco, 13-17 August 2016, 785-794. - References - Scientific Research Publishing, consulté le mai 14, 2026, https://www.scirp.org/reference/referencespapers?referenceid=4017160
+    41. Which algorithm takes the crown: Light GBM vs XGBOOST? - Analytics Vidhya, consulté le mai 14, 2026, https://www.analyticsvidhya.com/blog/2017/06/which-algorithm-takes-the-crown-light-gbm-vs-xgboost/
+    42. LightGBM and XGBoost Explained - Medium, consulté le mai 14, 2026, https://medium.com/@AI_MLwithJonny/lightgbm-and-xgboost-explained-f974e9c175dd
+    43. LightGBM : mieux que XGBoost ? | Blent.ai, consulté le mai 14, 2026, https://blent.ai/blog/a/lightgbm-mieux-que-xgboost
+    44. Random Forests | BibSonomy, consulté le mai 14, 2026, https://www.bibsonomy.org/bibtex/2b8187107bf870043f2f93669958858f1/kdepublication
+    45. Classification and interaction in random forests - PMC - NIH, consulté le mai 14, 2026, https://pmc.ncbi.nlm.nih.gov/articles/PMC5828645/
+    46. Class Imbalance Strategies — A Visual Guide with Code | by Travis Tang - Medium, consulté le mai 14, 2026, https://medium.com/data-science/class-imbalance-strategies-a-visual-guide-with-code-8bc8fae71e1a
+    47. SMOTE for Imbalanced Classification with Python - GeeksforGeeks, consulté le mai 14, 2026, https://www.geeksforgeeks.org/machine-learning/smote-for-imbalanced-classification-with-python/
+    48. Class Imbalance, SMOTE, Borderline SMOTE, ADASYN - Towards Data Science, consulté le mai 14, 2026, https://towardsdatascience.com/class-imbalance-smote-borderline-smote-adasyn-6e36c78d804/
+    49. Data Imbalance: How is ADASYN different from SMOTE? | by Vijay M - Medium, consulté le mai 14, 2026, https://medium.com/@penpencil.blr/data-imbalance-how-is-adasyn-different-from-smote-f4eba54867ab
+    50. Heterogeneous Graph Transformers - Through a Research Ecosystem | by Rajeev Chandran | Medium, consulté le mai 14, 2026, https://medium.com/@rajeev.chandran_61731/heterogeneous-graph-transformers-through-a-research-ecosystem-cf9b6ea6e7e3
+    51. (PDF) Heterogeneous Graph Transformer - ResearchGate, consulté le mai 14, 2026, https://www.researchgate.net/publication/339675193_Heterogeneous_Graph_Transformer
+    52. Heterogeneous Graph Transformer (HGT) - Emergent Mind, consulté le mai 14, 2026, https://www.emergentmind.com/topics/heterogeneous-graph-transformer-hgt
+    53. [Literature Review] HHGT: Hierarchical Heterogeneous Graph Transformer for Heterogeneous Graph Representation Learning - Moonlight, consulté le mai 14, 2026, https://www.themoonlight.io/en/review/hhgt-hierarchical-heterogeneous-graph-transformer-for-heterogeneous-graph-representation-learning
+    54. HHGT: Hierarchical Heterogeneous Graph Transformer for Heterogeneous Graph Representation Learning - arXiv, consulté le mai 14, 2026, https://arxiv.org/html/2407.13158v1
+    55. Graph Transformer & Heterogeneous Models - Emergent Mind, consulté le mai 14, 2026, https://www.emergentmind.com/topics/graph-transformer-and-heterogeneous-models
+    56. [2003.01332] Heterogeneous Graph Transformer - arXiv, consulté le mai 14, 2026, https://arxiv.org/abs/2003.01332
+    57. Heterogeneous Graph Transformer with Poly-Tokenization - IJCAI, consulté le mai 14, 2026, https://www.ijcai.org/proceedings/2024/0247.pdf
+    58. [PDF] Heterogeneous Graph Transformer - Semantic Scholar, consulté le mai 14, 2026, https://www.semanticscholar.org/paper/Heterogeneous-Graph-Transformer-Hu-Dong/0ca7d8c3250d43d14fdde46bf6fc299654d861ef
+    59. SHapley Additive exPlanations or SHAP : What is it ? - Liora, consulté le mai 14, 2026, https://liora.io/en/shap-what-is-it
+    60. SHAP : A Comprehensive Guide to SHapley Additive exPlanations - GeeksforGeeks, consulté le mai 14, 2026, https://www.geeksforgeeks.org/machine-learning/shap-a-comprehensive-guide-to-shapley-additive-explanations/
+    61. 18 SHAP – Interpretable Machine Learning, consulté le mai 14, 2026, https://christophm.github.io/interpretable-ml-book/shap.html
+    62. SHAP-Based Explanation Methods: A Review for NLP Interpretability - ACL Anthology, consulté le mai 14, 2026, https://aclanthology.org/2022.coling-1.406.pdf
+    63. Lundberg, S.M. and Lee, S.-I. (2017) A Unified Approach to Interpreting Model Predictions. Proceedings of the 31st International Conference on Neural Information Processing Systems, Long Beach, 4-9 December 2017, 4768-4777. - References - Scientific Research Publishing, consulté le mai 14, 2026, https://www.scirp.org/reference/referencespapers?referenceid=3862505
+    64. Practical guide to SHAP analysis: Explaining supervised machine learning model predictions in drug development - PMC, consulté le mai 14, 2026, https://pmc.ncbi.nlm.nih.gov/articles/PMC11513550/

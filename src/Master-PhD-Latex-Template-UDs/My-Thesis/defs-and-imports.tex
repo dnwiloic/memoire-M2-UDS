@@ -1,32 +1,35 @@
-% Un template bilingue pour la production des mémoires et thèses dans le département de Mathématiques-Informatique.
-% Ce template est conforme aux recommandations de l'école doctorale
+% Un template bilingue pour la production des mï¿½moires et thï¿½ses dans le dï¿½partement de Mathï¿½matiques-Informatique.
+% Ce template est conforme aux recommandations de l'ï¿½cole doctorale
 %
-% Ce fichier est conçu pour accueillir vos imports (\usepackage) et vos propres définitions d'environnements latex et/ou de style
-% Consulter le fichier style.tex pour savoir ce qui a déja été importé
+% Ce fichier est conï¿½u pour accueillir vos imports (\usepackage) et vos propres dï¿½finitions d'environnements latex et/ou de style
+% Consulter le fichier style.tex pour savoir ce qui a dï¿½ja ï¿½tï¿½ importï¿½
 %
 % @author Zekeng Ndadji Milliam Maxime
 
-\usepackage[english]{algorithm2e} %Pour écrire des algorithmes
+% Mï¿½tadonnï¿½es mï¿½moire (auteur, titre, encadreur)
+\input{other-pages/thesis-metadata}
+
+\usepackage[english]{algorithm2e} %Pour ï¿½crire des algorithmes
 %\SetKwIF{Si}{SinonSi}{Sinon}{si}{alors}{sinon si}{sinon}{finsi} %pour franciser le If
 %\SetKw{Debut}{Fin}
 \SetKwFor{For}{for}{do}{endfor}
 %\SetKwFor{PourTout}{pourTout}{faire}{finPour}%pour franciser le pour (on a remplacer ''pour'' par ''pourTout'' 
 %\SetKwForAll{PourTout}{pourTout}{faire}{finPour}
 \SetKwRepeat{Repeat}{repeat}{until}
-%\SetKwRepeat{Repeter}{repeter}{jusqu'à}%pour franciser le ''repeter''
-%\restylealgo{boxed}\linesnumbered %pour encader les algorithmes et numéroter ses lignes
+%\SetKwRepeat{Repeter}{repeter}{jusqu'ï¿½}%pour franciser le ''repeter''
+%\restylealgo{boxed}\linesnumbered %pour encader les algorithmes et numï¿½roter ses lignes
 %\SetKwFor{Tantque}{tantque}{faire}{fintq}%pour franciser le tant que
 
 
-%Définition de nouveaux environnements de type théorème
-\newtheorem{theorem}{Théorème}
-\newtheorem{definition}[theorem]{Définition}
+%Dï¿½finition de nouveaux environnements de type thï¿½orï¿½me
+\newtheorem{theorem}{Thï¿½orï¿½me}
+\newtheorem{definition}[theorem]{Dï¿½finition}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{lemma}[theorem]{Lemme}
 \newtheorem{example}[theorem]{Exemple}
 \newtheorem{remark}[theorem]{Remarque}
 \newtheorem{corollary}[theorem]{Corollaire}
-\newtheorem{problem}[theorem]{Problème}
+\newtheorem{problem}[theorem]{Problï¿½me}
 
 %Environnements de preuve
 \newenvironment{proof}[1][{\textbf{Proof}}]{
@@ -47,6 +50,10 @@
 }{%
 	\qed\endtrivlist
 }
+
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit}
 
 %\usepackage{geometry}
 %\geometry{hmargin={4.5cm,-1cm},vmargin={5.5cm,0.25cm}}

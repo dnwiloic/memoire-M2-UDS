@@ -1,0 +1,21 @@
+Chapitre I ▶ Généralités sur les PFAS et l'intelligence artificielle
+I.1 - Introduction
+I.2 - Les substances per- et polyfluoroalkylées (PFAS)
+I.2.1 - Définition et propriétés physicochimiques
+I.2.2 - Sources, transport et devenir environnemental
+I.2.3 - Impacts sanitaires et cadre réglementaire
+I.3 - Apprentissage automatique et méthodes d'ensemble
+I.3.1 - Panorama des paradigmes d'apprentissage
+I.3.2 - Méthodes d'ensemble : 
+I.3.2.1 - gradient boosting (XGBoost, LightGBM)
+I.3.2.2 - Random Forest
+I.3.2.3 - stacking
+		I.3.3 - Gestion du déséquilibre de classes (SMOTE, ADASYN)
+		
+I.4 - Généralités sur les graphes et l'apprentissage profond
+I.4.1 - Réseaux de neurones sur graphes (GNN)
+I.4.2 - Graphes hétérogènes
+I.4.3 - Heterogeneous Graph Transformer (HGT)
+I.5 - Interprétabilité des modèles 
+I.6 - Synthèse
+
