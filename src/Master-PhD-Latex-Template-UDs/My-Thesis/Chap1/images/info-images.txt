@@ -32,3 +32,8 @@ boosting.webp:
     link: https://miro.medium.com/v2/resize:fit:720/format:webp/1*etquzYCBh3v58rcsXjDsyw.png
     liens de la pages source: https://medium.com/sfu-cspmp/xgboost-a-deep-dive-into-boosting-f06c9c41349
     ou ajouter:I.3.2.2. Boosting
+
+I.4.4. Heterogeneous Graph Transformer (HGT)
+    HGT.png :
+        chemin: Master-PhD-Latex-Template-UDs/src/Master-PhD-Latex-Template-UDs/My-Thesis/Chap1/images/HGT.png
+        source: Z. Hu, Y. Dong, K. Wang and Y. Sun, "Heterogeneous Graph Transformer," Proceedings of The Web Conference 2020 (WWW '20), Taipei, Taiwan, 2020, pp. 2704–2710, doi: 10.1145/3366423.3380027.

@@ -9,12 +9,12 @@ La surveillance de la qualit\'e des eaux souterraines est confront\'ee \`a l'\'e
 Dans le m\^eme temps, le d\'eveloppement de l'\textbf{intelligence artificielle} et de l'\textbf{apprentissage automatique} (\emph{machine learning}, ML) fournit des outils puissants pour analyser des volumes importants de donn\'ees environnementales, combiner des sources d'information h\'et\'erog\`enes et appuyer la prise de d\'ecision.
 Ce premier chapitre a pour objectif de r\'eunir les \textbf{notions fondamentales} qui seront mobilis\'ees dans la suite du m\'emoire.
 Nous y pr\'esentons d'abord le contexte des PFAS : d\'efinition, propri\'et\'es physicochimiques, principaux usages, sources de contamination, devenir environnemental, enjeux de surveillance des eaux souterraines et cadre r\'eglementaire (section~\ref{sec:pfas}).
-Nous introduisons ensuite les paradigmes de l'apprentissage automatique, l'\'evaluation des classifieurs, le bagging, le boosting, le stacking et la gestion du d\'es\'equilibre de classes (section~\ref{sec:ml-ensemble}), puis les \textbf{graphes} et les r\'eseaux de neurones sur graphes, en particulier les graphes h\'et\'erog\`enes et le Heterogeneous Graph Transformer (section~\ref{sec:graphes-gnn}).
+Nous introduisons ensuite les paradigmes de l'apprentissage automatique, le bagging, le boosting et le stacking (section~\ref{sec:ml-ensemble}), puis les \textbf{graphes} et les r\'eseaux de neurones sur graphes, en particulier les graphes h\'et\'erog\`enes et le Transformeur de Graphe h\'et\'erog\`enes (section~\ref{sec:graphes-gnn}).
 Enfin, nous pr\'esentons les principaux outils d'\textbf{interpr\'etabilit\'e} des mod\`eles, avec un accent sur l'approche SHAP (section~\ref{sec:interpretabilite}), afin de pr\'eparer l'analyse des r\'esultats qui sera men\'ee dans les chapitres suivants.
 
 
 
-\mySection{Les substances per- et polyfluoroalkyl\'ees (PFAS)}{}
+\mySection{Substances per- et polyfluoroalkyl\'ees (PFAS)}{}
 \label{sec:pfas}
 
 Les PFAS occupent une place \`a part parmi les contaminants de l'eau : leur persistance, leur mobilit\'e et le nombre tr\`es \'elev\'e de compos\'es potentiels compliquent la surveillance classique.
@@ -68,8 +68,8 @@ Le tableau~\ref{tab:classes-pfas} illustre d'autres familles courantes.
         \hline
         Classe & Groupe & Exemple & Propri\'et\'e dominante \\
         \hline
-        PFCA & Carboxylate & PFOA (C8) & Persistance, adsorption sur sols \\
-        PFSA & Sulfonate & PFOS (C8) & Tensioactivit\'e, stabilit\'e \\
+        PFCA & Carboxylate & PFOA (C8) & Persistance, adsorption, bioaccumulation \\
+        PFSA & Sulfonate & PFOS (C8) & Tensioactivit\'e, bioaccumulation, stabilit\'e \\
         Fluorot\'elom\`eres & Alcools, sulfonates & 6:2 FTS & Pr\'ecurseur de PFCA \\
         PFPE & \'Ether perfluor\'e & Lubrifiants & R\'esistance thermique \\
         \hline
@@ -87,13 +87,21 @@ La figure~\ref{fig:pfos-structure} illustre la structure d'un PFAS non polym\'er
     \caption{Repr\'esentation sch\'ematique du PFOS (acide perfluorooctanesulfonique, C$_8$F$_{17}$SO$_3$H ou C$_8$F$_{17}$SO$_3^-$). Source : adapt\'e de~\cite{vds2025pfas}.}
     \label{fig:pfos-structure}
 \end{figure}
-On observe que la cha\^ine perfluor\'ee (queue) et le groupe sulfonate (t\^ete polaire) mat\'erialisent la structure amphiphile \'evoqu\'ee ci-dessus et expliquent la persistance ainsi que la tensioactivit\'e du compos\'e.
+La structure illustr\'ee met en \'evidence la dualit\'e de la cha\^ine perfluor\'ee (queue) et du groupe sulfonate (t\^ete polaire), qui fonde \`a la fois la persistance et la tensioactivit\'e du compos\'e.
 
 La \textbf{longueur de cha\^ine} modifie la solubilit\'e, la mobilit\'e et la bioaccumulation : les cha\^ines courtes se d\'eplacent plus facilement dans l'eau ; les cha\^ines longues sont davantage retenues par les mati\`eres organiques du sol et les prot\'eines.
 
 
-\mySubSection{Usages industriels et voies de rejet}{}
+\mySubSection{Usages, sources et devenir environnemental}{}
+\label{sec:pfas-usages-sources}
 \label{sec:pfas-usages}
+\label{sec:pfas-transport}
+
+La pr\'esence des PFAS dans l'environnement d\'ecoule d'une cha\^ine causale continue : des choix industriels engendrent des rejets, qui alimentent des sources de contamination, lesquelles propagent les compos\'es vers les milieux r\'ecepteurs selon des m\'ecanismes physiques bien document\'es.
+Cette sous-section d\'etaille successivement les usages \`a l'origine des \'emissions, la nature des sources, les voies de dispersion, et le mod\`ele conceptuel source-voie-r\'ecepteur qui en synth\'etise la logique.
+
+
+\mySubSubSection{Usages industriels}{}
 
 Les PFAS ne sont pas des polluants accidentels ponctuels : ils r\'esultent de \textbf{choix industriels} r\'ep\'et\'es sur plus de soixante ans.
 Leur combinaison de r\'epellence (eau, graisses), de stabilit\'e thermique et de faible friction a conduit \`a de nombreuses applications~\cite{gluge2020pfas} :
@@ -108,9 +116,6 @@ Leur combinaison de r\'epellence (eau, graisses), de stabilit\'e thermique et de
 \`A chaque \textbf{cycle de vie} (fabrication, utilisation, traitement des d\'echets), une fraction des PFAS peut \^etre rejet\'ee dans l'air, l'eau ou les sols.
 Les proc\'ed\'es de traitement classiques des eaux us\'ees ou des lixiviats de d\'echarges ne sont g\'en\'eralement pas con\c{c}us pour \textbf{casser} la liaison C--F : une partie des compos\'es traverse les stations et retourne vers les milieux naturels~\cite{hu2016pfas,prevedouros2006pfas}.
 
-
-\mySubSection{Sources, transport et devenir environnemental}{}
-\label{sec:pfas-transport}
 
 \mySubSubSection{Typologie des sources de contamination}{}
 
@@ -141,7 +146,7 @@ Le comportement ne se r\'eduit donc pas \`a une dilution imm\'ediate : la persis
 \mySubSubSection{Le sch\'ema source, voie et r\'ecepteur}{}
 \label{sec:pfas-svr}
 
-En \'evaluation des risques environnementaux, le devenir des PFAS est souvent repr\'esent\'e par le mod\`ele \textbf{source, voie et r\'ecepteur} :
+En \'evaluation des risques environnementaux, le devenir des PFAS est souvent repr\'esent\'e par le mod\`ele \textbf{source, voie et r\'ecepteur}~\cite{brusseau2019pfas,guelfo2021pfas} :
 \begin{itemize}
     \item \textbf{Source} : activit\'e humaine qui \'emet les PFAS (usine, base militaire, rejet urbain) ;
     \item \textbf{Voie} : milieu qui transporte le polluant (sol, eau souterraine, eau de surface, air) ;
@@ -149,16 +154,16 @@ En \'evaluation des risques environnementaux, le devenir des PFAS est souvent re
 \end{itemize}
 
 Ce sch\'ema aide \`a structurer la pens\'ee, ind\'ependamment des outils math\'ematiques utilis\'es ensuite pour l'analyse des donn\'ees.
+La figure~\ref{fig:voies-contamination-pfas} en illustre la d\'eclinaison concr\`ete pour les PFAS.
 
-La figure~\ref{fig:voies-contamination-pfas} pr\'esente les principales voies de contamination humaine aux PFAS selon leur production, leur utilisation et la pollution des milieux.
-
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.92\linewidth]{Chap1/images/voie_contamination_pfas.jpg}
     \caption{Voies possibles de contamination humaine aux PFAS (sources directes en rouge, contamination indirecte via sol ou eau en bleu, voies d'exposition en violet). Source : adapt\'e de~\cite{fct2024pfasfigures}.}
     \label{fig:voies-contamination-pfas}
 \end{figure}
-On observe que les rejets industriels ou l'usage de produits de consommation alimentent d'abord les milieux (sol, eau), avant d'atteindre l'homme par l'eau potable, l'alimentation ou d'autres voies d'exposition.
+
+La figure met en \'evidence que les rejets industriels ou l'usage de produits de consommation alimentent d'abord les milieux (sol, eau), avant d'atteindre l'homme par l'eau potable, l'alimentation ou d'autres voies d'exposition.
 On observe par ailleurs une \textbf{co-occurrence} fr\'equente avec d'autres polluants organiques sur les m\^emes sites : solvants chlor\'es (TCE, PCE), hydrocarbures, additifs (MTBE).
 Ces co-contaminants partagent souvent une histoire industrielle commune, m\^eme si leurs propri\'et\'es de transport diff\`erent.
 
@@ -167,7 +172,7 @@ Ces co-contaminants partagent souvent une histoire industrielle commune, m\^eme 
 \label{sec:pfas-surveillance}
 
 Les \textbf{eaux souterraines} constituent un enjeu majeur car elles alimentent une part importante de l'eau potable et de l'irrigation.
-Les PFAS y sont d'autant plus pr\'eoccupants qu'ils peuvent migrer \textbf{loin} de la source visible et demeurer longtemps \`a des concentrations tr\`es faibles mais significatives sur le plan sanitaire.
+Les PFAS y sont d'autant plus pr\'eoccupants qu'ils peuvent migrer \textbf{loin} de la source visible et demeurer longtemps \`a des concentrations tr\`es faibles mais significatives sur le plan sanitaire~\cite{hu2016pfas}.
 
 La \textbf{surveillance} repose classiquement sur :
 \begin{itemize}
@@ -180,11 +185,11 @@ Plusieurs limites structurelles expliquent la difficult\'e d'un suivi exhaustif 
 \begin{itemize}
     \item \textbf{Co\^ut} \'elev\'e d'une analyse multi-compos\'es ;
     \item \textbf{Couverture spatiale} incompl\`ete (impossible de mesurer tous les puits d'une r\'egion) ;
-    \item \textbf{Non-d\'etection} fr\'equente : une valeur nulle ne signifie pas toujours l'absence de PFAS, mais parfois une concentration sous le seuil de d\'etection de la m\'ethode ;
+    \item \textbf{Non-d\'etection} fr\'equente : une valeur nulle ne signifie pas toujours l'absence de PFAS, mais parfois une concentration sous le seuil de d\'etection de la m\'ethode~\cite{guelfo2021pfas} ;
     \item \textbf{H\'et\'erog\'en\'eit\'e} des protocoles entre r\'egions et campagnes.
 \end{itemize}
 
-Ces contraintes expliquent l'int\'er\^et, dans la litt\'erature r\'ecente, pour des approches de \textbf{priorisation} fond\'ees sur des donn\'ees d\'ej\`a disponibles (contexte g\'eologique, proximit\'e d'activit\'es, qualit\'e de l'eau).
+Ces contraintes expliquent l'int\'er\^et, dans la litt\'erature r\'ecente, pour des approches de \textbf{priorisation} fond\'ees sur des donn\'ees d\'ej\`a disponibles (contexte g\'eologique, proximit\'e d'activit\'es, qualit\'e de l'eau)~\cite{dong2024pfas}.
 
 
 \mySubSection{Impacts sanitaires et cadre r\'eglementaire}{}
@@ -202,9 +207,9 @@ L'exposition humaine aux PFAS peut intervenir par plusieurs \textbf{voies}~\cite
 
 Les effets sanitaires \'etudi\'es \`a des doses environnementales tr\`es basses (ng/L dans l'eau) incluent notamment :
 \begin{itemize}
-    \item des effets sur le \textbf{syst\`eme immunitaire} (r\'eponse vaccinale) ;
-    \item des perturbations \textbf{thyro\"idiennes} et m\'etaboliques (lipides) ;
-    \item des impacts sur le \textbf{d\'eveloppement f\oe tal} (poids \`a la naissance, pr\'e\'eclampsie) ;
+    \item des effets sur le \textbf{syst\`eme immunitaire} (r\'eponse vaccinale);
+    \item des perturbations \textbf{thyro\"idiennes} et m\'etaboliques (lipides);
+    \item des impacts sur le \textbf{d\'eveloppement f\oe tal} (poids \`a la naissance, pr\'e\'eclampsie);
     \item pour certains compos\'es, des associations avec des \textbf{cancers} (rein, testicules) dans les cohortes les plus expos\'ees.
 \end{itemize}
 
@@ -216,7 +221,7 @@ La figure~\ref{fig:pfas-pathologies} synth\'etise les pathologies suspect\'ees d
     \caption{Pathologies suspect\'ees d'\^etre induites par la toxicit\'e des PFAS (effets \'epid\'emiologiques corrobor\'es au centre ; autres effets document\'es en gris ; effets reprotoxiques sur les c\^ot\'es). Source : adapt\'e de~\cite{fct2024pfasfigures}.}
     \label{fig:pfas-pathologies}
 \end{figure}
-On observe que plusieurs organes et fonctions (immunit\'e, thyro\"ide, d\'eveloppement f\oe tal, reproduction) figurent parmi les effets les plus document\'es, ce qui justifie le renforcement des seuils et des programmes de surveillance.
+Cette synth\`ese illustre que plusieurs organes et fonctions (immunit\'e, thyro\"ide, d\'eveloppement f\oe tal, reproduction) figurent parmi les effets les plus document\'es, justifiant le renforcement des seuils r\'eglementaires et des programmes de surveillance.
 
 Le tableau~\ref{tab:pfas-sante} en donne une vue synth\'etique tabulaire ; il ne remplace pas une analyse toxicologique d\'etaill\'ee.
 
@@ -255,23 +260,25 @@ En France, des textes r\'ecents visent \`a restreindre certains usages non essen
 
 Quelle que soit la juridiction, le message commun est le suivant : les concentrations d'int\'er\^et sont \textbf{tr\`es faibles}, la liste des compos\'es \`a suivre \textbf{change}, et la surveillance doit \^etre \textbf{\'etendue} dans le temps et dans l'espace, ce qui pose un d\'efi logistique consid\'erable pour les gestionnaires de l'eau.
 
+Sur le continent africain, les r\'eglementations nationales sp\'ecifiques aux PFAS font encore largement d\'efaut.
+Les lignes directrices de l'Organisation mondiale de la sant\'e pour la qualit\'e de l'eau potable~\cite{who2022drinking} constituent, dans ce contexte, la r\'ef\'erence disponible pour les pays d'Afrique subsaharienne.
+Au Cameroun en particulier, aucune norme nationale d\'edi\'ee aux PFAS n'est actuellement en vigueur ; la surveillance s'appuie sur des valeurs guides internationales, rendant d'autant plus pertinentes les approches fond\'ees sur des donn\'ees contextuelles disponibles pour estimer le risque sans analyse cibl\'ee syst\'ematique.
+
+L'ensemble de ces contraintes (analytiques, logistiques et r\'eglementaires) motive le recours \`a des outils d'apprentissage automatique capables d'extraire un signal utile \`a partir des donn\'ees existantes.
+La section suivante introduit les m\'ethodes et paradigmes de l'apprentissage automatique qui seront mobilis\'es dans cette \'etude.
+
 \mySection{Apprentissage automatique et m\'ethodes d'ensemble}{}
 \label{sec:ml-ensemble}
 
 L'\textbf{apprentissage automatique} (\emph{machine learning}, ML) regroupe les m\'ethodes qui permettent \`a un syst\`eme informatique d'am\'eliorer une t\^ache \`a partir de donn\'ees, sans que chaque r\`egle de d\'ecision soit cod\'ee explicitement.
 En sciences de l'environnement, ces approches servent notamment \`a exploiter des tableaux de mesures et de variables contextuelles (g\'eologie, hydrologie, proximit\'e d'activit\'es) pour estimer un risque ou prioriser des sites \`a contr\^oler.
-Cette section pr\'esente d'abord les principaux \textbf{paradigmes} d'apprentissage, les \textbf{principes des m\'ethodes d'ensemble} illustr\'es par des exemples courants, l'\textbf{\'evaluation des classificateurs}, enfin la \textbf{gestion du d\'es\'equilibre} entre classes.
+Cette section pr\'esente d'abord les principaux \textbf{paradigmes} d'apprentissage, puis les \textbf{principes des m\'ethodes d'ensemble} illustr\'es par des exemples courants.
 
 
-\mySubSection{D\'efinition et principes g\'en\'eraux}{}
+\mySubSection{Paradigmes de l'apprentissage automatique}{}
 \label{sec:ml-definition}
 
-L'apprentissage automatique peut se d\'efinir, suivant Mitchell~\cite{mitchell1997ml}, comme l'am\'elioration d'une performance $P$ sur une t\^ache $T$ gr\^ace \`a l'exp\'erience $E$.
-Formellement, on cherche un programme $f$ tel que la performance sur $T$ s'am\'eliore lorsque l'exp\'erience $E$ augmente :
-\begin{equation}
-    \mathcal{L}(f) \downarrow \quad \text{ lorsque } \quad P(T, f, E) \uparrow .
-    \label{eq:mitchell}
-\end{equation}
+L'apprentissage automatique peut se d\'efinir, suivant Mitchell~\cite{mitchell1997ml}, comme suit : un programme \textbf{apprend} \`a partir de l'exp\'erience $E$ par rapport \`a une classe de t\^aches $T$ et une mesure de performance $P$ si sa performance sur $T$, mesur\'ee par $P$, s'am\'eliore avec l'accumulation de l'exp\'erience $E$.
 En pratique, un \textbf{algorithme} ajuste des param\`etres \`a partir d'exemples pour produire des pr\'edictions ou des d\'ecisions.
 On distingue ensuite plusieurs paradigmes selon la nature des donn\'ees disponibles et l'objectif vis\'e.
 
@@ -289,13 +296,13 @@ Deux t\^aches principales en d\'ecoulent :
 \end{itemize}
 
 Le protocole habituel consiste \`a s\'eparer les donn\'ees en un jeu d'\textbf{entra\^inement} (pour ajuster $f$), un jeu de \textbf{validation} (pour choisir les hyperparam\`etres) et un jeu de \textbf{test} (pour estimer la performance en conditions ind\'ependantes).
-En surveillance environnementale, la classification binaire (d\'epassement ou non d'un seuil, pr\'esence ou absence d'un signal) est fr\'equente lorsque l'on cherche \`a orienter des campagnes de mesure.
+En surveillance environnementale, la classification binaire (d\'epassement ou non d'un seuil, pr\'esence ou absence d'un signal) est fr\'equente lorsque l'on cherche \`a orienter des campagnes de mesure~\cite{hastie2009elements}.
 
 
 \mySubSubSection{Apprentissage non supervis\'e}{}
 \label{sec:ml-non-supervise}
 
-En \textbf{apprentissage non supervis\'e}, les donn\'ees ne sont pas \'etiquet\'ees : l'algorithme cherche \`a mettre en \'evidence des \textbf{structures} sans cible explicite.
+En \textbf{apprentissage non supervis\'e}, les donn\'ees ne sont pas \'etiquet\'ees : l'algorithme cherche \`a mettre en \'evidence des \textbf{structures} sans cible explicite~\cite{hastie2009elements}.
 Les objectifs typiques sont :
 \begin{itemize}
     \item le \textbf{regroupement} (\emph{clustering}), par exemple regrouper des sites aux profils hydrog\'eologiques voisins ;
@@ -310,7 +317,7 @@ Ces m\'ethodes ne produisent pas directement une pr\'ediction de contamination, 
 \label{sec:ml-semi-supervise}
 
 L'\textbf{apprentissage semi-supervis\'e} combine un nombre limit\'e d'exemples \textbf{\'etiquet\'es} et un volume plus important de donn\'ees \textbf{non \'etiquet\'ees}.
-Il est particuli\`erement utile lorsque l'\'etiquetage est \textbf{co\^uteux} ou \textbf{lent}, ce qui est le cas en environnement lorsque chaque \'etiquette correspond \`a une analyse de laboratoire.
+Il est particuli\`erement utile lorsque l'\'etiquetage est \textbf{co\^uteux} ou \textbf{lent}, ce qui est souvent le cas en environnement lorsque chaque \'etiquette correspond \`a une analyse de laboratoire.
 
 L'id\'ee g\'en\'erale est d'exploiter la structure des donn\'ees non \'etiquet\'ees (similarit\'e entre sites, continuit\'e spatiale) pour renforcer un mod\`ele entra\^in\'e sur le sous-ensemble \'etiquet\'e.
 Des travaux r\'ecents sur les PFAS en eaux souterraines ont mobilis\'e cette logique lorsque les mesures cibl\'ees restent rares par rapport au nombre de points \`a \'evaluer~\cite{dong2024pfas}.
@@ -322,11 +329,10 @@ Des travaux r\'ecents sur les PFAS en eaux souterraines ont mobilis\'e cette log
 En \textbf{apprentissage par renforcement}, un \textbf{agent} interagit avec un \textbf{environnement} et apprend une politique de d\'ecision \`a partir de \textbf{r\'ecompenses} ou de \textbf{p\'enalit\'es} re\c{c}ues au fil du temps.
 Contrairement au cadre supervis\'e, il n'existe pas d'\'etiquette correcte pour chaque action : l'agent doit \textbf{explorer} et \textbf{exploiter} ses choix pour maximiser un gain cumul\'e.
 
-Ce paradigme est central en robotique, en jeux ou en recommandation dynamique.
-Pour la surveillance tabulaire des eaux souterraines, il intervient moins directement que l'apprentissage supervis\'e ; nous le mentionnons ici pour situer le panorama des approches d'apprentissage automatique.
+Ce paradigme trouve ses principales applications en robotique, dans les jeux \`a information incompl\`ete et dans les syst\`emes de recommandation dynamique~\cite{sutton2018rl}.
 
 
-\mySubSection{Les m\'ethodes d'ensemble}{}
+\mySubSection{M\'ethodes d'ensemble}{}
 \label{sec:ensemble}
 
 Une \textbf{m\'ethode d'ensemble} combine plusieurs \textbf{apprenants} pour former un pr\'edicteur plus stable ou plus pr\'ecis qu'un mod\`ele isol\'e.
@@ -376,7 +382,7 @@ La figure~\ref{fig:random-forest-schema} illustre le principe d'une for\^et al\'
     \caption{Sch\'ema d'une for\^et al\'eatoire (bagging d'arbres de d\'ecision avec sous-\'echantillonnage des observations et des variables). Source : adapt\'e de~\cite{janosh2024randomforest}.}
     \label{fig:random-forest-schema}
 \end{figure}
-On observe que chaque arbre voit un sous-jeu de donn\'ees diff\'erent et ne retient qu'une fraction des variables \`a chaque scission, ce qui diversifie les pr\'edictions avant agr\'egation.
+Chaque arbre voit un sous-jeu de donn\'ees diff\'erent et ne retient qu'une fraction des variables \`a chaque scission, ce qui diversifie les pr\'edictions avant leur agr\'egation finale.
 
 \mySubSubSection{Boosting}{}
 \label{sec:boosting}
@@ -390,7 +396,7 @@ La figure~\ref{fig:boosting-schema} r\'esume cette logique additive : le mod\`el
     \caption{Principe du boosting : ajout s\'equentiel d'arbres pour corriger les erreurs du mod\`ele courant. Source : illustration p\'edagogique adapt\'ee de~\cite{verma2020xgboostillustration}.}
     \label{fig:boosting-schema}
 \end{figure}
-On observe que les pr\'edictions s'am\'eliorent progressivement en cumulant de petits correctifs, plut\^ot qu'en moyennant des mod\`eles parall\`eles ind\'ependants comme en bagging.
+Il ressort de cette repr\'esentation que les pr\'edictions s'am\'eliorent progressivement en cumulant de petits correctifs, plut\^ot qu'en moyennant des mod\`eles parall\`eles ind\'ependants comme en bagging.
 
 Le \textbf{gradient boosting}~\cite{friedman2001gbm} met cette id\'ee en \oe uvre en ajoutant, \`a chaque it\'eration, un arbre qui corrige les r\'esidus selon le gradient d'une fonction de perte diff\'erentiable.
 On \'ecrit souvent la pr\'ediction additive sous la forme
@@ -435,7 +441,7 @@ Dans un cadre appliqu\'e, XGBoost est souvent mobilis\'e comme mod\`ele de r\'ef
 \mySubSubSection{Stacking}{}
 \label{sec:stacking}
 
-Le \textbf{stacking} (\emph{stacked generalization}) place un \textbf{m\'eta-classifieur} (ou m\'eta-r\'egresseur) au-dessus de plusieurs \textbf{mod\`eles de base} de natures \'eventuellement diff\'erentes.
+Le \textbf{stacking} (\emph{stacked generalization}) place un \textbf{m\'eta-classifieur} (ou m\'eta r\'egresseur) au-dessus de plusieurs \textbf{mod\`eles de base} de natures \'eventuellement diff\'erentes.
 Chaque mod\`ele de base produit une pr\'ediction (ou une probabilit\'e) ; le m\'eta-mod\`ele apprend \`a les combiner de mani\`ere optimale, au lieu de se limiter \`a un vote fixe comme en bagging.
 L'id\'ee centrale est que des mod\`eles diff\'erents capturent des \textbf{signaux compl\'ementaires} : un mod\`ele peut mieux exploiter les interactions non lin\'eaires tabulaires, un autre la structure relationnelle, un autre encore des effets locaux.
 Le stacking apprend donc une \textbf{fonction de fusion} des sorties de base plut\^ot qu'une r\`egle de combinaison fix\'ee a priori.
@@ -458,7 +464,7 @@ La figure~\ref{fig:stacking} r\'esume l'architecture hi\'erarchique du stacking.
     \caption{Principe du stacking : plusieurs mod\`eles de base alimentent un m\'eta-classifieur.}
     \label{fig:stacking}
 \end{figure}
-On observe que le m\'eta-mod\`ele ne re\c{c}oit pas les variables brutes mais les sorties des apprenants de base, ce qui permet de combiner des mod\`eles de natures diff\'erentes.
+La figure souligne que le m\'eta-mod\`ele ne re\c{c}oit pas les variables brutes mais les sorties des apprenants de base, permettant ainsi de combiner des mod\`eles de natures diff\'erentes.
 
 Pour \'eviter le surapprentissage, les entr\'ees du m\'eta-classifieur doivent provenir de \textbf{pr\'edictions hors \'echantillon} : les mod\`eles de base ne doivent pas avoir vu les exemples utilis\'es pour entra\^iner le m\'eta-mod\`ele.
 La proc\'edure usuelle repose sur une validation crois\'ee en deux niveaux :
@@ -488,28 +494,21 @@ Le tableau~\ref{tab:ensemble-comparaison} pr\'esente les trois familles d'ensemb
     \end{tabular}
 \end{table}
 
-\mySubSection{\'Evaluation de classificateur et gestion du d\'es\'equilibre}{}
-\label{sec:eval-classificateur}
-
-Les m\'etriques d'\'evaluation des classifieurs de contamination PFAS (F1, AUC-ROC, matrice de confusion) et les techniques de gestion du d\'es\'equilibre de classes (SMOTE, ADASYN) sont pr\'esent\'ees au chapitre~\ref{chap:etat-art}, section~\ref{sec:chap2-cadre}, o\`u elles servent de cadre conceptuel commun \`a la lecture de l'\'etat de l'art.
-Les d\'efinitions formelles et les protocoles d'application figurent dans cette section~; on s'y r\'ef\`erera syst\'ematiquement lors des comparaisons inter-\'etudes du chapitre~\ref{chap:etat-art}.
 
 
-\mySection{G\'en\'eralit\'es sur les graphes et l'apprentissage profond}{}
+\mySection{Graphes et r\'eseaux de neurones sur graphes}{}
 \label{sec:graphes-gnn}
 
 Les donn\'ees de surveillance des eaux souterraines sont souvent stock\'ees sous forme \textbf{tabulaire} (une ligne par puits, une colonne par variable).
 Or, un site de pr\'el\`evement n'est pas isol\'e : il partage un contexte g\'eologique, une proximit\'e d'installations, des co-contaminants et une position g\'eographique avec d'autres sites.
 Les \textbf{graphes} offrent un langage naturel pour repr\'esenter ces d\'ependances et les exploiter par apprentissage profond, en compl\'ement des mod\`eles tabulaires (for\^ets al\'eatoires, XGBoost) pr\'esent\'es en section~\ref{sec:bagging}--\ref{sec:stacking}.
-Des travaux r\'ecents sur les PFAS mobilisent d\'ej\`a des graphes pour la pr\'ediction spatio-chimique~\cite{george2021pfas,dong2024pfas}.
-
 
 \mySubSection{Repr\'esentation des donn\'ees par graphe}{}
 \label{sec:graphe-basics}
 
-Un \textbf{graphe} $G = (V, E)$ mod\'elise des entit\'es par des \textbf{n\oe uds} $v \in V$ et des liens par des \textbf{ar\^etes} $e \in E$.
+Un \textbf{graphe} $G = (V, E)$ mod\'elise des entit\'es par des \textbf{n\oe uds} $v \in V$ et des liens par des \textbf{ar\^etes} $e \in E$~\cite{hamilton2017inductive}.
 Chaque n\oe ud peut porter un vecteur de caract\'eristiques $\mathbf{x}_v \in \mathbb{R}^{d_v}$.
-En classification de sites, on associe en g\'en\'eral \`a chaque n\oe ud \textbf{sample} (\'echillon) une \textbf{\'etiquette} $y_v$ (par exemple contamination oui/non).
+En classification de sites, on associe en g\'en\'eral \`a chaque n\oe ud \textbf{sample} (\'echantillon) une \textbf{\'etiquette} $y_v$ (par exemple contamination oui/non).
 
 Contrairement \`a une image (grille r\'eguli\`ere) ou \`a une s\'equence (cha\^ene), un graphe autorise des connexions \textbf{irr\'eguli\`eres} : le voisinage d'un site n'est pas impos\'e par la position dans un tableau, mais par la structure relationnelle choisie.
 Cette flexibilit\'e est utile lorsque l'on veut relier explicitement un puits \`a des variables de contexte (environnement, installations, qualit\'e de l'eau, regroupement g\'eographique).
@@ -539,75 +538,38 @@ La figure~\ref{fig:message-passing} illustre ce m\'ecanisme sur un n\oe ud centr
     \caption{Message passing : agr\'egation des repr\'esentations des voisins $\mathcal{N}(v)$ vers le n\oe ud $v$.}
     \label{fig:message-passing}
 \end{figure}
-On observe que l'information locale se propage par couches successives : apr\`es $\ell$ it\'erations, $\mathbf{h}_v^{(\ell)}$ encode un voisinage \`a $\ell$ sauts~\cite{kipf2017gcn,fey2019pyg}.
+L'information locale se propage ainsi par couches successives : apr\`es $\ell$ it\'erations, $\mathbf{h}_v^{(\ell)}$ encode un voisinage \`a $\ell$ sauts~\cite{kipf2017gcn,fey2019pyg}.
 
 Des variantes historiques incluent les \textbf{GCN} (\emph{Graph Convolutional Networks}), les \textbf{GAT} (\emph{Graph Attention Networks}) et \textbf{GraphSAGE}, qui diff\`erent par la fonction d'agr\'egation et la pond\'eration des voisins.
 En pratique, ces mod\`eles sont souvent impl\'ement\'es avec des biblioth\`eques sp\'ecialis\'ees telles que \textbf{PyTorch Geometric} (PyG), qui fournit des structures de donn\'ees et des couches convolutives sur graphe~\cite{fey2019pyg}.
 
 
-\mySubSection{Graphes h\'et\'erog\`enes pour la mod\'elisation environnementale}{}
-\label{sec:graphe-heterogene}
+\mySubSection{Graphes h\'et\'erog\`enes}{}
+\label{sec:graphes-heterogenes}
 
-Un graphe h\'et\'erog\`ene $G = (V, E, \tau, \phi)$ associe \`a chaque n\oe ud un type $\tau(v) \in \mathcal{T}_V$ et \`a chaque ar\^ete un type $\phi(e) \in \mathcal{T}_E$.
-Formellement, une ar\^ete typ\'ee est un triplet $(s, r, t)$ : une relation $r$ relie un n\oe ud de type $s$ \`a un n\oe ud de type $t$.
-Cette formalisation \'evite de fusionner dans une seule matrice d'adjacence des relations de nature diff\'erente (g\'eographie, chimie, proximit\'e d'installation).
+Un \textbf{graphe h\'et\'erog\`ene} (ou \emph{graphe typ\'e}) \'etend la d\'efinition \'el\'ementaire $G=(V,E)$ en associant un type \`a chaque n\oe ud et \`a chaque ar\^ete~\cite{hu2020hgt} :
+\[
+G = (V,\, E,\, \tau,\, \phi),
+\]
+o\`u $\tau : V \to \mathcal{T}$ est la fonction de typage des n\oe uds ($|\mathcal{T}| \geq 2$) et $\phi : E \to \mathcal{R}$ celle des ar\^etes ($|\mathcal{R}| \geq 2$).
+Chaque type de n\oe ud $A \in \mathcal{T}$ dispose de son propre espace de caract\'eristiques $\mathbb{R}^{d_A}$, ce qui autorise des entit\'es de natures radicalement diff\'erentes (auteurs, articles, lieux de publication, th\`emes de recherche) \`a cohabiter dans la m\^eme structure relationnelle.
 
-Dans les approches hybrides tabulaire-graphe appliqu\'ees aux PFAS, on construit couramment un graphe \`a \textbf{cinq types de n\oe uds} (tableau~\ref{tab:node-types-graph}) :
-\begin{itemize}
-    \item \texttt{sample} : point de pr\'el\`evement (vecteur de variables contextuelles et \'etiquette de contamination) ;
-    \item \texttt{env} : descripteurs environnementaux (pr\'ecipitations, recharge, propri\'et\'es de sol) ;
-    \item \texttt{facility} : indicateurs de proximit\'e d'activit\'es humaines (distances, densit\'es d'installations) ;
-    \item \texttt{water} : variables de qualit\'e de l'eau et co-contaminants (TDS, nitrates, solvants chlor\'es, etc.) ;
-    \item \texttt{geo\_cluster} : regroupement g\'eographique de sites voisins.
-\end{itemize}
+Une \textbf{m\'eta-relation} est un triplet $\langle A, r, B \rangle \in \mathcal{T} \times \mathcal{R} \times \mathcal{T}$ d\'ecrivant un lien de type $r$ entre un n\oe ud source de type $A$ et un n\oe ud cible de type $B$.
+Deux n\oe uds peuvent ainsi \^etre reli\'es par des ar\^etes de s\'emantiques distinctes (co-autorat, citation, appartenance \`a un m\^eme domaine) ; le mod\`ele peut apprendre des param\`etres d'agr\'egation distincts pour chaque m\'eta-relation plut\^ot qu'un seul ensemble de param\`etres partag\'e.
 
-\begin{table}[h!]
-    \centering
-    \caption{Types de n\oe uds usuels dans un graphe h\'et\'erog\`ene de surveillance des PFAS (vue p\'edagogique).}
-    \label{tab:node-types-graph}
-    \begin{tabular}{lp{5.2cm}p{4.5cm}}
-        \hline
-        Type & R\^ole & Exemples de signaux \\
-        \hline
-        \texttt{sample} & Site \`a pr\'edire & Variables tabulaires, \'etiquette \\
-        \texttt{env} & Contexte naturel & Sol, recharge, pr\'ecipitations \\
-        \texttt{facility} & Pression anthropique & Distances, comptages d'usines \\
-        \texttt{water} & Chimie associ\'ee & Co-contaminants, conductivit\'e \\
-        \texttt{geo\_cluster} & Structure spatiale & Cluster g\'eographique \\
-        \hline
-    \end{tabular}
-\end{table}
+Une \textbf{m\'eta-chemin} d\'esigne une s\'equence ordonn\'ee de types de n\oe uds reli\'es par des types de relations :
+\[
+\mathcal{P} :\ A_0 \xrightarrow{r_1} A_1 \xrightarrow{r_2} A_2 \;\cdots\; \xrightarrow{r_\ell} A_\ell.
+\]
+Les m\'eta-chemins capturent des d\'ependances s\'emantiques compos\'ees qui ne sont pas visibles dans le voisinage imm\'ediat.
+Par exemple, dans un r\'eseau acad\'emique, le m\'eta-chemin $\texttt{Auteur} \xrightarrow{\text{\'ecrit}} \texttt{Article} \xrightarrow{\text{\'ecrit\_par}} \texttt{Auteur}$ identifie deux chercheurs ayant co-publi\'e sans qu'une ar\^ete directe entre eux soit pr\'esente dans le graphe.
 
-Les \textbf{ar\^etes typ\'ees} relient ces entit\'es selon des relations s\'emantiques distinctes (tableau~\ref{tab:edge-types-graph}).
-Les relations sont en pratique \textbf{bidirectionnelles} : par exemple \texttt{has\_env} / \texttt{affects}, \texttt{near} / \texttt{near\_to}, \texttt{quality} / \texttt{measured\_in}, \texttt{located\_in} / \texttt{contains}.
+Ce formalisme s'applique dans de nombreux domaines o\`u les entit\'es et leurs relations sont intrins\`equement h\'et\'erog\`enes : r\'eseaux acad\'emiques (auteurs, articles, lieux, domaines)~\cite{hu2020hgt}, graphes biom\'edicaux associant g\`enes, maladies et m\'edicaments, graphes de connaissance \`a large \'echelle, ou encore r\'eseaux de surveillance environnementale o\`u plusieurs cat\'egories d'entit\'es sont reli\'ees par des liens typ\'es.
+La conception du graphe h\'et\'erog\`ene utilis\'e dans cette \'etude est d\'etaill\'ee au chapitre~3.
 
-\begin{table}[h!]
-    \centering
-    \caption{Exemples de relations typ\'ees dans un graphe h\'et\'erog\`ene de surveillance (paires directes/inverses).}
-    \label{tab:edge-types-graph}
-    \begin{tabular}{llp{5.5cm}}
-        \hline
-        Relation & Sens & Interpr\'etation \\
-        \hline
-        \texttt{has\_env} / \texttt{affects} & sample $\leftrightarrow$ env & Contexte environnemental du site \\
-        \texttt{near} / \texttt{near\_to} & sample $\leftrightarrow$ facility & Proximit\'e d'installations \\
-        \texttt{quality} / \texttt{measured\_in} & sample $\leftrightarrow$ water & Qualit\'e de l'eau au site \\
-        \texttt{located\_in} / \texttt{contains} & sample $\leftrightarrow$ geo\_cluster & Appartenance g\'eographique \\
-        \hline
-    \end{tabular}
-\end{table}
-
-\mySubSubSection{Principes de construction d'un graphe de surveillance}{}
-\label{sec:construction-graphe}
-
-La construction du graphe repose sur une \textbf{cat\'egorisation m\'etier} des variables : chaque famille de descripteurs devient un type de n\oe ud, ce qui permet au mod\`ele de traiter s\'epar\'ement les signaux environnementaux, industriels et hydrog\'eochimiques.
-Pour chaque observation \texttt{sample}, les ar\^etes vers \texttt{env}, \texttt{facility} et \texttt{water} encodent le fait que le site poss\`ede ces attributs ; les vecteurs port\'es par ces n\oe uds reprennent les variables correspondantes.
-
-La dimension \textbf{g\'eographique} est introduite par des n\oe uds \texttt{geo\_cluster} : les coordonn\'ees des sites sont regroup\'ees par un algorithme de partitionnement (par exemple K-means sur la latitude et la longitude), puis chaque site est reli\'e au cluster auquel il appartient.
-Cette structure favorise le partage d'information entre sites proches dans l'espace, ce qui est pertinent pour des panaches de contamination \`a l'\'echelle r\'egionale.
-
-Enfin, la structure est stock\'ee sous forme de \textbf{graphe h\'et\'erog\`ene} dans un objet du type \texttt{HeteroData} (PyTorch Geometric), qui maintient s\'epar\'ement les matrices de features par type de n\oe ud et les index d'ar\^etes par relation typ\'ee.
-Comme pour toute \'etape d'apprentissage, les transformateurs de structure (normalisation, clustering g\'eographique) doivent \^etre ajust\'es \textbf{sans fuite de donn\'ees} : seul le jeu d'entra\^inement sert \`a apprendre la structure, puis celle-ci est appliqu\'ee aux jeux de validation et de test.
+Contrairement aux GNN homog\`enes, les GNN h\'et\'erog\`enes doivent g\'erer simultan\'ement des espaces de caract\'eristiques de dimensions diff\'erentes selon le type de n\oe ud.
+La solution usuelle est de projeter les vecteurs de chaque type dans un espace latent commun de dimension $d$ avant les op\'erations d'agr\'egation, puis de sp\'ecialiser les param\`etres d'attention selon la m\'eta-relation.
+C'est pr\'ecis\'ement ce m\'ecanisme que le \textbf{HGT} (section~\ref{sec:hgt}) formalise par des matrices de cl\'e ($\mathbf{K}$), de requ\^ete ($\mathbf{Q}$) et de valeur ($\mathbf{V}$) propres \`a chaque type de n\oe ud et de relation.
 
 
 \mySubSection{Heterogeneous Graph Transformer (HGT)}{}
@@ -619,12 +581,22 @@ Chaque type dispose de projections sp\'ecifiques (matrices requ\^ete, cl\'e, val
 
 Pour un message envoy\'e d'un voisin $u$ vers un n\oe ud cible $v$, l'attention peut s'\'ecrire sch\'ematiquement :
 \[
-\alpha_{uv} = \mathrm{softmax}\!\left(\frac{\mathbf{Q}_{\tau(v)} \mathbf{h}_u \cdot \mathbf{K}_{\tau(u)} \mathbf{h}_v}{\sqrt{d}}\right),
+\alpha_{uv} = \mathrm{softmax}\!\left(\frac{(\mathbf{K}_{\tau(u)}\,\mathbf{h}_u)^{\top}(\mathbf{Q}_{\tau(v)}\,\mathbf{h}_v)}{\sqrt{d}}\right),
 \qquad
 \mathbf{h}_v' = \sum_{u \in \mathcal{N}(v)} \alpha_{uv}\, \mathbf{V}_{\phi(u,v)} \mathbf{h}_u,
 \]
-o\`u $\mathbf{Q}$, $\mathbf{K}$ et $\mathbf{V}$ d\'ependent des types de n\oe uds et de la relation.
+o\`u $\mathbf{K}_{\tau(u)}$ (cl\'e, type source) et $\mathbf{Q}_{\tau(v)}$ (requ\^ete, type cible) sont des projections sp\'ecifiques au type, et $\mathbf{V}$ d\'epend du type de relation~\cite{hu2020hgt}.
 Des couches \texttt{HGTConv} sont empil\'ees pour produire, en sortie, un \textbf{embedding} de dimension fixe pour chaque n\oe ud \texttt{sample}.
+
+La figure~\ref{fig:hgt-architecture} illustre le m\'ecanisme d'attention h\'et\'erog\`ene du HGT : les n\oe uds sources projettent leurs repr\'esentations via les matrices cl\'e ($\mathbf{K}$), les n\oe uds cibles via les matrices requ\^ete ($\mathbf{Q}$), et les valeurs ($\mathbf{V}$) sont pond\'er\'ees par les scores d'attention avant agr\'egation.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.90\linewidth]{Chap1/images/HGT.png}
+    \caption{Architecture du Heterogeneous Graph Transformer (HGT) : attention typ\'ee par m\'eta-relation pour la propagation de l'information dans un graphe h\'et\'erog\`ene. Source : adapt\'e de~\cite{hu2020hgt}.}
+    \label{fig:hgt-architecture}
+\end{figure}
+La figure souligne que chaque m\'eta-relation $(\tau_s, \phi, \tau_t)$ dispose de ses propres param\`etres de projection, ce qui permet au mod\`ele d'apprendre des interactions s\'emantiquement diff\'erentes selon la nature des n\oe uds et des liens connect\'es.
 
 Cet embedding r\'esume l'information relationnelle diffus\'ee dans le graphe (contexte environnemental, proximit\'e d'installations, co-contaminants, voisinage g\'eographique).
 Il peut ensuite \^etre exploit\'e de deux mani\`eres compl\'ementaires, au coeur des approches hybrides :
@@ -632,7 +604,7 @@ Il peut ensuite \^etre exploit\'e de deux mani\`eres compl\'ementaires, au coeur
     \item \textbf{Fusion par embeddings} : concat\'enation des embeddings HGT avec les variables tabulaires d'origine, puis apprentissage d'un classifieur XGBoost sur l'espace enrichi ;
     \item \textbf{Stacking} : utilisation des probabilit\'es ou embeddings HGT comme entr\'ees d'un m\'eta-classifieur, aux c\^ot\'es d'autres mod\`eles tabulaires (section~\ref{sec:stacking}).
 \end{itemize}
-On observe ainsi un pont entre \textbf{donn\'ees relationnelles} (graphe) et \textbf{mod\`eles tabulaires} (boosting), utile lorsque la structure spatiale et contextuelle apporte un signal que les seules colonnes isol\'ees ne capturent pas enti\`erement.
+Cette dualit\'e r\'ev\`ele un pont entre \textbf{donn\'ees relationnelles} (graphe) et \textbf{mod\`eles tabulaires} (boosting), utile lorsque la structure spatiale et contextuelle apporte un signal que les seules colonnes isol\'ees ne capturent pas enti\`erement.
 
 
 \mySection{Interpr\'etabilit\'e des mod\`eles}{}
@@ -650,6 +622,10 @@ On distingue en pratique deux familles d'approches.
 L'interpr\'etabilit\'e \textbf{intrins\`eque} repose sur des mod\`eles structurellement lisibles (arbres de d\'ecision peu profonds, r\'egressions lin\'eaires avec coefficients explicites).
 L'interpr\'etabilit\'e \textbf{a posteriori} (\emph{post-hoc}) applique, apr\`es entra\^inement, des m\'ethodes qui expliquent les pr\'edictions d'un mod\`ele potentiellement complexe (for\^et al\'eatoire, gradient boosting, r\'eseau sur graphe).
 Les importances par impuret\'e des for\^ets al\'eatoires (section~\ref{sec:bagging}) donnent un ordre de grandeur global, mais elles ne d\'ecrivent pas la contribution \`a une pr\'ediction individuelle ni ne satisfont des axiomes de r\'epartition \'equitable entre variables corr\'el\'ees.
+Les importances par permutation~\cite{breiman2001rf} corrigent partiellement ce biais en mesurant la d\'egradation de performance lorsqu'une variable est m\'elang\'ee al\'eatoirement sur l'\'echantillon de validation ; elles s'appliquent \`a tout type de mod\`ele mais restent globales, insensibles \`a la direction de l'effet et co\^uteuses \`a calculer quand le nombre de variables est \'elev\'e.
+
+\textbf{LIME} (\emph{Local Interpretable Model-agnostic Explanations})~\cite{ribeiro2016lime} adopte une logique locale : pour chaque observation, un mod\`ele lin\'eaire interpr\'etable est ajust\'e sur des perturbations de l'entr\'ee pond\'er\'ees par leur proximit\'e au point d'int\'er\^et.
+La flexibilit\'e de LIME est un atout, mais la stabilit\'e des explications d\'epend fortement du protocole d'\'echantillonnage et peut varier d'une ex\'ecution \`a l'autre, ce qui limite son usage dans des contextes r\'eglementaires exigeant la reproductibilit\'e.
 
 L'approche \textbf{SHAP} (\emph{SHapley Additive exPlanations})~\cite{lundberg2017shap} fournit un cadre unifi\'e : chaque variable re\c{c}oit une contribution additive \`a la pr\'ediction, fond\'ee sur la th\'eorie des jeux coop\'eratifs.
 Elle s'applique naturellement aux mod\`eles \`a arbres mobilis\'es dans ce m\'emoire (XGBoost, LightGBM) via l'algorithme \textbf{TreeSHAP}, et se prolonge aux espaces de features enrichis (fusion d'embeddings, m\'eta-caract\'eristiques de stacking).
@@ -700,7 +676,7 @@ Les sorties SHAP se lisent \`a deux \'echelles compl\'ementaires.
 On agr\`ege typiquement les valeurs absolues $|\phi_i|$ sur un jeu d'observations (souvent l'\'echantillon de test) pour obtenir une \textbf{importance moyenne} par variable.
 Le graphique en barres (\emph{bar plot}) classe les variables par ordre d\'ecroissant de cette importance.
 Le graphique en nuage (\emph{beeswarm}, ou \emph{summary plot}) repr\'esente, pour chaque variable, la distribution des $\phi_i$ : la position horizontale indique l'ampleur et le signe de l'effet, la couleur le niveau de la variable (faible ou \'elev\'e).
-On observe ainsi non seulement \emph{quelles} variables comptent le plus, mais aussi si une valeur \'elev\'ee de la variable pousse g\'en\'eralement vers la classe positive ou n\'egative.
+On observe ainsi non seulement \emph{quelles} variables comptent le plus, mais aussi si une valeur \'elev\'ee de la variable pousse g\'en\'eralement vers la classe positive ou n\'egative~\cite{lundberg2017shap}.
 
 \paragraph{Niveau local.}
 Pour une observation $\mathbf{x}^{(j)}$ (un puits, un point de surveillance), les $\phi_i^{(j)}$ d\'ecrivent la pr\'ediction individuelle.
@@ -712,41 +688,6 @@ Ces vues sont utiles pour expliquer \`a un expert pourquoi un site pr\'ecis a \'
 Les \textbf{graphiques de d\'ependance} (\emph{dependence plots}) repr\'esentent, pour une variable $i$, la valeur de $x_i$ en abscisse et $\phi_i$ en ordonn\'ee.
 Ils mettent en \'evidence des effets \`a seuil, des saturations ou des interactions (en colorant les points selon une deuxi\`eme variable corr\'el\'ee).
 Pour des classifieurs par arbres, on peut y v\'erifier que le mod\`ele reproduit des comportements plausibles (par exemple une influence accrue de la proximit\'e d'une source industrielle au-del\`a d'un certain rayon), sans confondre cette coh\'erence avec une preuve causale.
-
-
-\mySubSection{Interpr\'etabilit\'e d'un pipeline hybride}{}
-\label{sec:interpretabilite-pipeline}
-
-La contribution de ce m\'emoire combine plusieurs briques dont l'explicabilit\'e ne se lit pas de la m\^eme mani\`ere.
-Nous en donnons ici le vocabulaire ; les figures et chiffres d\'etaill\'es rel\`event du chapitre consacr\'e au protocole exp\'erimental, dans le \textbf{mode pr\'edictif} (variables contextuelles et structurelles, \textbf{sans} concentrations mesur\'ees de PFAS comme entr\'ees du mod\`ele).
-
-\paragraph{Mod\`ele tabulaire de r\'ef\'erence (XGBoost seul).}
-Sur les variables contextuelles standardis\'ees (g\'eologie, usages, co-contaminants, indicateurs de qualit\'e d'eau, etc.), TreeSHAP fournit l'importance globale et des explications locales pour des cas repr\'esentatifs (sites fortement class\'es positifs ou n\'egatifs).
-Cette ligne de base permet de v\'erifier quels signaux tabulaires portent la pr\'ediction avant tout enrichissement par le graphe.
-
-\paragraph{Fusion embeddings--tabulaire.}
-Lorsque les embeddings produits par le HGT (section~\ref{sec:hgt}) sont concat\'en\'es aux variables d'origine puis appris par un XGBoost de fusion, chaque dimension d'embedding devient une \textbf{pseudo-variable} (par exemple \texttt{HGT\_emb\_$j$} ou, apr\`es r\'eduction de dimension, \texttt{PCA\_emb\_$j$}).
-TreeSHAP s'applique alors sur l'espace joint.
-Deux lectures se compl\`etent :
-\begin{itemize}
-    \item \textbf{Locale} : une composante d'embedding peut dominer pour un site donn\'e, traduisant l'effet du voisinage dans le graphe (installations proches, cluster g\'eographique, co-contaminants li\'es) ;
-    \item \textbf{Globale} : la somme des $|\phi_i|$ sur le bloc tabulaire, compar\'ee \`a celle sur le bloc embeddings, indique la part relative de la \textbf{couche de mesure directe} et de la \textbf{couche contextuelle relationnelle} dans les d\'ecisions du mod\`ele fusionn\'e.
-\end{itemize}
-On observe souvent une dualit\'e : quelques dimensions d'embedding peuvent figurer parmi les variables les plus influentes prises une \`a une, tandis que l'ensemble des variables tabulaires conserve une masse SHAP agr\'eg\'ee majoritaire lorsque les mesures contextuelles sont riches.
-
-\paragraph{Mod\`ele HGT seul.}
-Les r\'eseaux sur graphe ne disposent pas, \`a ce jour, d'un TreeSHAP standard aussi mature que pour les arbres.
-Pour le HGT, une \textbf{sensibilit\'e locale} par gradient ($\partial f / \partial x_i \times x_i$ sur les features du n\oe ud \texttt{sample}) indique quelles entr\'ees tabulaires du n\oe ud influencent le logit de la classe positive pour une observation donn\'ee.
-Cette quantit\'e n'est pas une valeur de Shapley sur le graphe entier (les messages entre n\oe uds ne sont pas d\'ecompos\'es variable par variable), mais elle permet une comparaison qualitative avec les profils SHAP du XGBoost sur le m\^eme site.
-
-\paragraph{Stacking.}
-Le m\'eta-classifieur (souvent un XGBoost) re\c{c}oit des \textbf{m\'eta-caract\'eristiques} : probabilit\'es des mod\`eles de base (HGT, XGBoost, LightGBM), statistiques d\'eriv\'ees (entropie, \'ecarts), indicateurs d'accord entre mod\`eles, et parfois un sous-vecteur d'embeddings r\'eduit.
-TreeSHAP sur ces m\'eta-features r\'epond \`a une question diff\'erente : \emph{quel mod\`ele de base (ou quelle sortie agr\'eg\'ee) a pes\'e dans la d\'ecision finale ?}
-Un cas d'\'etude sur un m\^eme \'echantillon de test (entr\'ees brutes, pr\'edictions des quatre pipelines, barres SHAP locales) synth\'etise ces points de vue et aide \`a comprendre les d\'esaccords entre mod\`eles.
-
-\paragraph{Lien avec la performance.}
-L'interpr\'etabilit\'e ne remplace pas les m\'etriques de la section~\ref{sec:metriques} : un mod\`ele peut \^etre explicable mais moins performant qu'un empilement opaque.
-Dans la contribution, l'analyse SHAP accompagne surtout le \textbf{compromis interpr\'etabilit\'e--performance} (fusion pour un bon compromis, stacking pour le gain maximal) et la validation face aux experts.
 
 
 \mySubSection{Limites et recul \'epist\'emologique}{}
@@ -765,9 +706,7 @@ Enfin, l'usage op\'erationnel suppose une \textbf{lecture conjointe} avec des hy
 
 Ce chapitre a introduit, de mani\`ere autonome et progressive, les concepts mobilis\'es dans la suite du m\'emoire.
 Les \textbf{PFAS} ont \'et\'e pr\'esent\'es comme polluants persistants, soumis \`a un encadrement r\'eglementaire de plus en plus strict.
-Les paradigmes de l'\textbf{apprentissage automatique} (supervis\'e, non supervis\'e, semi-supervis\'e et par renforcement), les m\'etriques F1 et ROC-AUC, les m\'ethodes d'ensemble par \textbf{bagging} (for\^et al\'eatoire), \textbf{boosting} (XGBoost, LightGBM) et \textbf{stacking} (m\'eta-classifieur), ainsi que le traitement du \textbf{d\'es\'equilibre} par SMOTE et ADASYN, constituent le socle des m\'ethodes pr\'edictives en donn\'ees tabulaires.
-Les \textbf{graphes h\'et\'erog\`enes} (n\oe uds \texttt{sample}, \texttt{env}, \texttt{facility}, \texttt{water}, \texttt{geo\_cluster}), les GNN, le \textbf{HGT} et les sch\'emas de fusion ou de stacking entre embeddings graphiques et mod\`eles tabulaires, pr\'eparent la lecture des approches hybrides d\'evelopp\'ees dans la suite du m\'emoire.
+Les paradigmes de l'\textbf{apprentissage automatique} (supervis\'e, non supervis\'e, semi-supervis\'e et par renforcement), les m\'ethodes d'ensemble par \textbf{bagging} (for\^et al\'eatoire), \textbf{boosting} (XGBoost, LightGBM) et \textbf{stacking} (m\'eta-classifieur) constituent le socle des m\'ethodes pr\'edictives en donn\'ees tabulaires.
+Les \textbf{graphes h\'et\'erog\`enes}, les GNN, le \textbf{HGT} et les sch\'emas de fusion ou de stacking entre embeddings graphiques et mod\`eles tabulaires, pr\'eparent la lecture des approches hybrides d\'evelopp\'ees dans la suite du m\'emoire.
 Enfin, \textbf{SHAP} et TreeSHAP (analyses globale et locale, graphiques de d\'ependance) permettent d'expliquer les mod\`eles tabulaires, la fusion embeddings--XGBoost, le stacking sur m\'eta-caract\'eristiques et, partiellement, le HGT par sensibilit\'e au gradient ; cette interpr\'etabilit\'e conditionne une utilisation responsable en sant\'e environnementale, sous r\'eserve d'un recul sur la causalit\'e.
 
-Le chapitre~\ref{chap:etat-art} examine comment ces outils ont \'et\'e appliqu\'es \`a la pr\'ediction des PFAS et des contaminants en eaux souterraines.
-Le chapitre consacr\'e \`a la contribution pr\'esente, quant \`a lui, le protocole exp\'erimental, les choix d'impl\'ementation et les r\'esultats obtenus dans le cadre de ce m\'emoire.
