@@ -1,21 +1,69 @@
-%\myChapterStar{Titre}{Titre court}{Ajouter à la table des matières? (false|true|chapter|section|subsection|subsubsection -chapter par défaut-)}
-\myChapterStar{Introduction}{}{true}
+%\myChapterStar{Titre}{Titre court}{Ajouter a la table des matieres? (false|true|chapter|section|subsection|subsubsection -chapter par defaut-)}
+\myChapterStar{Introduction g\'en\'erale}{}{true}
+\label{chap:introduction}
 %\myMinitoc{Profondeur de la minitoc (section|subsection|subsubsection)}{Titre de la minitoc}
-\myMiniToc{}{Contents}
+\myMiniToc{section}{Sommaire}
 
-%\mySectionStar{Titre}{Titre court}{Ajouter à la table des matières? (false|true|chapter|section|subsection|subsubsection -section par défaut-)}
-\mySectionStar{Le contexte du travail}{}{true}
-La coopération et la collaboration ...
+%\mySectionStar{Titre}{Titre court}{Ajouter a la table des matieres? (false|true|chapter|section|subsection|subsubsection -section par defaut-)}
+\mySectionStar{Contexte du travail}{}{true}
+\label{sec:intro-contexte}
 
-\mySubSectionStar{Les documents structurés}{}{true}
-gjfjh...
+La surveillance de la qualit\'e des eaux souterraines constitue un d\'efi sanitaire croissant \`a l'\'echelle mondiale. Parmi les contaminants accumul\'es dans les aquif\`eres depuis plusieurs d\'ecennies, les substances per- et polyfluoroalkyl\'ees (PFAS) occupent une place particuli\`ere. Synth\'etis\'ees \`a partir des ann\'ees 1950 et d\'eploy\'ees dans d'innombrables applications industrielles et militaires, notamment dans les mousses anti-incendie \`a film aqueux (AFFF), elles poss\`edent une stabilit\'e chimique exceptionnelle qui les rend r\'esistantes \`a la d\'egradation naturelle. Cette propri\'et\'e tient \`a la liaison carbone-fluor, l'une des plus \'energ\'etiques de la chimie organique~: elle confine leur pr\'esence dans les milieux aquatiques pendant des d\'ecennies apr\`es l'arr\^et des \'emissions~\cite{prevedouros2006pfas}. La communaut\'e internationale recense aujourd'hui entre 4\,000 et plus de 10\,000 mol\'ecules distinctes selon les crit\`eres d'inclusion retenus~\cite{gluge2020pfas}, et les donn\'ees \'epid\'emiologiques associent l'exposition chronique \`a ces compos\'es \`a des effets immunotoxiques, endocriniens et canc\'erog\`enes~\cite{sunderland2019pfas}.
 
-\mySubSectionStar{L'édition coopérative des documents structurés}{}{true}
-Le processus \cite{badouelTchoupeCmcs} consiste...
+La r\'eglementation a r\'eagi \`a ce constat de mani\`ere significative. En 2024, l'Agence am\'ericaine de protection de l'environnement (EPA) a adopt\'e les premi\`eres limites maximales de contaminants (MCL) obligatoires pour six mol\'ecules, assorties d'un indice de risque pour les m\'elanges~\cite{epa2023npdwr}. Ces seuils sont tr\`es bas (jusqu'\`a 4~ng/L pour le PFOA et le PFOS), et une analyse par chromatographie liquide coupl\'ee \`a la spectrom\'etrie de masse co\^ute plusieurs centaines d'euros par \'echantillon. Un r\'eseau r\'egional de surveillance comprend des milliers de points de pr\'el\`evement~: un contr\^ole exhaustif de l'ensemble du parc de puits d\'epasse les capacit\'es budg\'etaires et op\'erationnelles de la quasi-totalit\'e des gestionnaires. La priorisation des campagnes vers les sites \`a plus forte probabilit\'e de d\'epassement constitue donc un besoin op\'erationnel direct.
 
-\mySectionStar{La problématique étudiée}{}{true}
-Pendant la...
+La Californie se pr\^ete particuli\`erement bien \`a cette probl\'ematique. Son r\'eseau de suivi des eaux souterraines est parmi les plus denses du monde, et un jeu de donn\'ees publi\'e par Dong et al.~\cite{dong2024pfas} rassemble 26\,000 mesures de PFAS couvrant l'ensemble de l'\'Etat. La Californie documente des zones fortement contamin\'ees, en proximit\'e de bases militaires et de sites industriels, ainsi que des zones faiblement expos\'ees, offrant la diversit\'e de situations n\'ecessaire \`a l'entra\^inement et \`a l'\'evaluation de mod\`eles pr\'edictifs. La contamination d'un forage ne s'explique pas par la seule mesure ponctuelle~: elle d\'epend du contexte (proximit\'e des sources, nature du sol, hydrog\'eologie locale, co-polluants pr\'esents). Exploiter ce contexte suppose d'enrichir les observations brutes par des variables environnementales g\'eor\'ef\'erenc\'ees avant toute mod\'elisation.
 
+L'apprentissage automatique a \'et\'e mobilis\'e pour cette t\^ache dans de nombreux travaux r\'ecents~\cite{bomgni2025pfas}. Les m\'ethodes tabulaires classiques, telles que la for\^et al\'eatoire~\cite{breiman2001rf} et XGBoost~\cite{chen2016xgboost}, affichent des performances solides sur des descripteurs de contexte. Des architectures plus r\'ecentes, les transformeurs de graphes h\'et\'erog\`enes (HGT~\cite{hu2020hgt}), permettent en outre d'encoder la structure relationnelle entre forages voisins, panaches de contamination et sources partag\'ees, une dimension que les mod\`eles tabulaires n'int\`egrent pas explicitement. Ce travail prend place dans cette intersection entre surveillance environnementale et apprentissage automatique, avec pour ambition de combiner enrichissement g\'eospatial rigoureux et comparaison syst\'ematique de familles de mod\`eles.
+
+
+\mySectionStar{Probl\'ematique \'etudi\'ee}{}{true}
+\label{sec:intro-problematique}
+
+Pr\'edire le d\'epassement du seuil r\'eglementaire PFAS \`a partir de variables contextuelles, sans mesure pr\'ealable des concentrations, soul\`eve deux verrous que la litt\'erature existante n'adresse pas simultan\'ement.
+
+Le premier est d'ordre m\'ethodologique et logiciel. Toute approche d'apprentissage automatique g\'eospatial suppose d'enrichir les observations brutes par des variables de contexte~: distance aux sources de contamination potentielle, propri\'et\'es des sols, hydrog\'eologie locale, co-polluants mesur\'es \`a proximit\'e. La plupart des jeux de donn\'ees PFAS ne contiennent initialement que les informations relatives aux puits (localisation, profondeur), la date de pr\'el\`evement et les r\'esultats d'analyse de laboratoire~: les caract\'eristiques contextuelles en sont absentes. Or la litt\'erature a montr\'e qu'elles jouent un r\^ole d\'eterminant dans la pr\'ediction du risque par apprentissage automatique~\cite{dong2024pfas,george2021pfas}~; leur ajout automatique \`a partir de la seule localisation et de la date de chaque puits est donc une \'etape pr\'ealable indispensable. Cette op\'eration d'enrichissement est aujourd'hui assur\'ee, dans la plupart des projets, par des scripts ad~hoc \'etroitement li\'es \`a un jeu de donn\'ees particulier et difficilement transf\'erables \`a d'autres polluants ou r\'egions. Le code initial de ce projet illustrait ce travers~: la logique de jointure tenait dans un module de pr\`es de mille lignes, o\`u la m\'ecanique g\'en\'erique d'appariement spatio-temporel \'etait indissociable des sp\'ecificit\'es du programme californien GAMA. Ce verrou pose une question pr\'ecise~: comment s\'eparer la m\'ecanique g\'en\'erique d'enrichissement des sp\'ecificit\'es d'une \'etude, de fa\c{c}on \`a produire un composant r\'eutilisable, testable et auditable ind\'ependamment du jeu de donn\'ees cible~?
+
+Le second est d'ordre scientifique et tient \`a l'\'evaluation des mod\`eles. La contamination PFAS est fortement auto-corr\'el\'ee dans l'espace~: deux forages proches se ressemblent parce qu'ils partagent la m\^eme hydrog\'eologie locale et la m\^eme proximit\'e aux sources~\cite{guelfo2021pfas}. Un d\'ecoupage al\'eatoire des donn\'ees laisse des forages spatialement voisins de part et d'autre de la fronti\`ere entra\^inement-test, ce qui permet \`a un mod\`ele de m\'emoriser la g\'eographie plut\^ot que d'apprendre des m\'ecanismes transf\'erables. Les performances rapport\'ees dans ce r\'egime d'\'evaluation constituent une borne sup\'erieure optimiste de la capacit\'e r\'eelle de g\'en\'eralisation. Ce second verrou soul\`eve deux questions li\'ees~: des variables de contexte enrichies, priv\'ees de toute coordonn\'ee, suffisent-elles \`a un niveau de performance op\'erationnel~? Et le signal spatial, lorsqu'il est structur\'e dans la topologie d'un graphe reliant les forages \`a leurs sources et voisins, apporte-t-il un compl\'ement mesurable par rapport aux seules variables tabulaires~?
+
+
+\mySectionStar{Objectifs}{}{true}
+\label{sec:intro-objectifs}
+
+L'objectif g\'en\'eral de ce travail est de contribuer \`a la pr\'ediction du risque de d\'epassement r\'eglementaire PFAS dans les eaux souterraines californiennes, en mode pr\'edictif strict, \`a partir de variables contextuelles g\'eospatiales seules et sans recours \`a des concentrations PFAS pr\'ealablement mesur\'ees.
+
+Quatre objectifs sp\'ecifiques concourent \`a cet objectif g\'en\'eral~:
+
+\begin{itemize}
+    \item Concevoir un outil d'enrichissement g\'eospatial g\'en\'erique, ind\'ependant du jeu de donn\'ees PFAS californien, fond\'e sur un contrat d'entr\'ee minimal qui s\'epare la m\'ecanique de jointure universelle des sp\'ecificit\'es de chaque \'etude.
+    \item Construire un banc de cinq mod\`eles compar\'es \`a protocole identique~: deux mod\`eles tabulaires de r\'ef\'erence (for\^et al\'eatoire et XGBoost), un transformeur de graphe h\'et\'erog\`ene exploitant la structure relationnelle entre forages, sources de contamination et unit\'es hydrog\'eologiques, ainsi que deux mod\`eles hybrides combinant ces approches.
+    \item \'Evaluer empiriquement si le signal spatial doit \^etre m\'emoris\'e comme variable d'entr\'ee ou structur\'e dans la topologie du graphe, en retirant toute information de localisation des variables d'entr\'ee et en ne laissant intervenir la g\'eographie que par les ar\^etes du graphe relationnel.
+    \item Garantir l'interpr\'etabilit\'e des pr\'edictions au niveau global et au niveau de chaque pr\'el\`evement individuel, afin que les r\'esultats restent exploitables dans un contexte de prise de d\'ecision environnementale.
+\end{itemize}
+
+
+\mySectionStar{Contribution}{}{true}
+\label{sec:intro-contribution}
+
+Ce travail pr\'esente deux contributions compl\'ementaires.
+
+La premi\`ere est un outil logiciel, \texttt{geoenrich}, moteur d'enrichissement g\'eospatial organis\'e en trois couches~: une couche \emph{contrat}, agnostique, qui normalise tout jeu d'observations en quatre champs canoniques (identifiant, latitude, longitude, date)~; une couche \emph{op\'erateurs}, rassemblant des primitives de jointure param\'etrables et r\'eutilisables (jointure polygonale, proximit\'e au site le plus proche, appariement temporel)~; une couche \emph{configuration}, qui concentre les choix propres \`a une r\'egion ou \`a une \'etude dans un fichier d\'eclaratif externe. Aucune r\'ef\'erence fonctionnelle au programme GAMA ni \`a la nature du polluant n'appara\^it dans le moteur~: son ind\'ependance vis-\`a-vis du cas PFAS a \'et\'e \'etablie par inspection du code. Sa correction a \'et\'e valid\'ee par un test de parit\'e avec le pipeline d'origine~: sur 94 colonnes d'enrichissement produites sur le dataset californien, 77 sont strictement identiques, 17 sont mieux renseign\'ees et aucune ne r\'egresse.
+
+La seconde est un banc de cinq mod\`eles de classification binaire, entra\^in\'es en mode pr\'edictif strict sur les 46\,338 pr\'el\`evements de notre corpus californien constitu\'e \`a partir des donn\'ees ouvertes du programme GAMA, avec pour cible le d\'epassement des MCL fix\'ees par l'EPA en 2024~\cite{epa2023npdwr}. Toute variable de localisation (latitude, longitude, d\'ecoupage administratif) a \'et\'e retir\'ee des entr\'ees~; la g\'eographie n'intervient que par la topologie du graphe relationnel construit pour le HGT. La for\^et al\'eatoire et le stacking atteignent tous deux un score F1 de 0,925 (AUC 0,979 et 0,977)~; XGBoost suit de tr\`es pr\`es (F1 0,923, AUC 0,977)~; le HGT relationnel reste en retrait (F1 0,825, AUC 0,906). Ces r\'esultats montrent que les variables de contexte produites par \texttt{geoenrich}, m\^eme priv\'ees de coordonn\'ees, portent l'essentiel du signal pr\'edictif~: le graphe relationnel capte un signal r\'eel mais reste en retrait des mod\`eles tabulaires. Chaque mod\`ele est accompagn\'e d'analyses d'importance des variables et d'explications locales par valeurs de Shapley~\cite{lundberg2017shap}.
+
+
+\mySectionStar{Organisation du manuscrit}{}{true}
+\label{sec:intro-organisation}
+
+Le manuscrit s'organise en trois chapitres et une conclusion g\'en\'erale.
+
+\textbf{Chapitre~\ref{chap:generalites}.} Ce premier chapitre pose les bases conceptuelles mobilis\'ees dans la suite du m\'emoire. Nous y pr\'esentons d'abord les PFAS~: d\'efinition chimique, propri\'et\'es physicochimiques, principales sources et voies de transport, effets sanitaires et cadre r\'eglementaire. Nous y introduisons ensuite les m\'ethodes d'apprentissage automatique retenues (for\^et al\'eatoire, XGBoost, stacking), les r\'eseaux de neurones sur graphes et le transformeur de graphe h\'et\'erog\`ene (HGT), ainsi que les outils d'interpr\'etabilit\'e centr\'es sur les valeurs de Shapley.
+
+\textbf{Chapitre~\ref{chap:etat-art}.} Ce deuxi\`eme chapitre passe en revue les travaux publi\'es sur la pr\'ediction des contaminants \'emergents de l'eau par intelligence artificielle. Nous y \'etablissons un cadre conceptuel (formalisation du probl\`eme, distinction fondamentale entre mode pr\'edictif et mode confirmatoire, m\'etriques d'\'evaluation et gestion du d\'es\'equilibre de classes), avant de parcourir les m\'ethodes tabulaires, les architectures profondes et les approches relationnelles. Nous identifions quatre lacunes structurelles que la contribution du chapitre suivant adresse directement.
+
+\textbf{Chapitre~\ref{chap:contribution}.} Ce troisi\`eme chapitre constitue le c{\oe}ur exp\'erimental du m\'emoire. Il d\'ecrit la conception, l'architecture en trois couches et la validation de l'outil \texttt{geoenrich}, puis son instanciation sur le dataset californien. Il expose ensuite le banc de cinq mod\`eles (donn\'ees et cible, pr\'etraitement, architecture de chaque mod\`ele, protocole d'\'evaluation), les r\'esultats de leurs performances compar\'ees et l'analyse de leur interpr\'etabilit\'e globale et locale.
+
+\textbf{Conclusion g\'en\'erale.} Nous y rappelons la probl\'ematique et les choix m\'ethodologiques, soumettons les r\'esultats \`a une analyse critique tenant compte des limites d'\'evaluation, et tra\c{c}ons plusieurs perspectives~: la validation crois\'ee spatiale par blocs, la d\'emonstration empirique de la g\'en\'ericit\'e de \texttt{geoenrich} sur un autre polluant ou une autre r\'egion, l'int\'egration de l'interpr\'etabilit\'e dans des outils d'aide \`a la d\'ecision, et l'applicabilit\'e de la d\'emarche \`a d'autres contextes g\'eographiques.
 
 
 \myCleanStarChapterEnd
