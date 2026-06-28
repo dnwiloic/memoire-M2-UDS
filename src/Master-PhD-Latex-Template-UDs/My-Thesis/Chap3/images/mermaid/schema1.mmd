@@ -1,0 +1,9 @@
+flowchart LR
+  A["<b>Observations ponctuelles</b><br/>id · lat · lon · date<br/><i>+ charge utile</i>"]
+  B["<b>1. Enrichissement</b><br/>geoenrich<br/><i>contexte géospatial</i>"]
+  C["<b>2. Prétraitement</b><br/>cible EPA 2024 NPDWR<br/>sélection · anti-fuite<br/>split 60/20/20"]
+  D["<b>3. Modélisation</b><br/>banc de 5 modèles<br/>tabulaires · graphe · hybrides"]
+  E["<b>4. Évaluation & interprétation</b><br/>CV spatiale (k=8)<br/>SHAP global/local · carte"]
+  A --> B --> C --> D --> E
+  classDef core fill:#eef5ff,stroke:#3b6fb6,stroke-width:2px;
+  class B,D core;

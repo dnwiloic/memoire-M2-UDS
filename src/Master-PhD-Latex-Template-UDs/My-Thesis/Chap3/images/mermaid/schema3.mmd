@@ -1,0 +1,16 @@
+flowchart TB
+  DS["<b>Dataset enrichi</b><br/>(sortie geoenrich)"]
+  SP["<b>Split stratifié 60/20/20</b><br/>identique pour les 5 modèles"]
+  DS --> SP
+  SP --> RF["<b>M2 · Random Forest</b><br/>tabulaire (bagging)"]
+  SP --> XGB["<b>M3 · XGBoost</b><br/>tabulaire (boosting)"]
+  SP --> HGT["<b>M1 · HGT</b><br/>graphe hétérogène"]
+  RF -- "probas" --> STK["<b>M5 · Stacking</b><br/>méta-classifieur"]
+  XGB -- "probas" --> STK
+  HGT -- "probas" --> STK
+  HGT -- "embeddings (PCA)" --> FUS["<b>M4 · Embedding Fusion</b><br/>embeddings + features → XGBoost"]
+  SP -. "features tabulaires" .-> FUS
+  classDef base fill:#eef5ff,stroke:#3b6fb6;
+  classDef hyb fill:#f5eef8,stroke:#7d3c98;
+  class RF,XGB,HGT base;
+  class FUS,STK hyb;

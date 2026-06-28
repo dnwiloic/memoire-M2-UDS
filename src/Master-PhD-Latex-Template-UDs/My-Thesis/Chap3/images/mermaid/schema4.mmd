@@ -1,0 +1,22 @@
+flowchart TB
+  subgraph HUBS["Entités partagées (hubs)"]
+    SRC(["source<br/>site GeoTracker"])
+    SUB(["subbasin<br/>sous-bassin SGMA"])
+    CLU(["geo_cluster<br/>KMeans spatial"])
+  end
+  S1(("sample<br/>puits A"))
+  S2(("sample<br/>puits B"))
+  S3(("sample<br/>puits C"))
+  S1 -- belongs --> SRC
+  S2 -- belongs --> SRC
+  S1 -- belongs --> SUB
+  S2 -- belongs --> SUB
+  S3 -- belongs --> SUB
+  S2 -- belongs --> CLU
+  S3 -- belongs --> CLU
+  S1 -- "near_geo (KNN)" --- S2
+  S2 -- "near_geo (KNN)" --- S3
+  classDef hub fill:#fdf2e9,stroke:#b9770e,stroke-width:2px;
+  classDef smp fill:#eef5ff,stroke:#3b6fb6,stroke-width:2px;
+  class SRC,SUB,CLU hub;
+  class S1,S2,S3 smp;

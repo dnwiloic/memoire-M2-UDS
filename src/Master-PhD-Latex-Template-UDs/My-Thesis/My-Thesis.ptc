@@ -2,13 +2,13 @@
 \babel@toc {english}{}\relax
 \contentsline {section}{ \hspace {-0.55cm}D\'edicace }{ii}{chapter*.2}%
 \contentsline {section}{ \hspace {-0.55cm}Remerciements }{iii}{chapter*.3}%
-\contentsline {section}{ \hspace {-0.55cm}Table des mati\`eres }{iv}{chapter*.3}%
-\contentsline {section}{ \hspace {-0.55cm}List of Symbols }{vii}{chapter*.5}%
-\contentsline {section}{ \hspace {-0.55cm}List of Acronyms }{ix}{chapter*.6}%
-\contentsline {section}{ \hspace {-0.55cm}List of Tables }{xi}{chapter*.6}%
-\contentsline {section}{ \hspace {-0.55cm}List of Figures }{xii}{section*.7}%
-\contentsline {section}{ \hspace {-0.55cm}R\'esum\'e }{xiii}{chapter*.9}%
-\contentsline {section}{ \hspace {-0.55cm}Abstract }{xv}{chapter*.11}%
+\contentsline {section}{ \hspace {-0.55cm}Table des mati\`eres }{v}{chapter*.3}%
+\contentsline {section}{ \hspace {-0.55cm}Listes des symboles }{ix}{chapter*.5}%
+\contentsline {section}{ \hspace {-0.55cm}Liste des acronymes }{x}{chapter*.6}%
+\contentsline {section}{ \hspace {-0.55cm}Liste des Tableaux }{xii}{table.0.1}%
+\contentsline {section}{ \hspace {-0.55cm}Liste des Figures }{xiv}{section*.7}%
+\contentsline {section}{ \hspace {-0.55cm}R\'esum\'e }{xvi}{chapter*.9}%
+\contentsline {section}{ \hspace {-0.55cm}Abstract }{xviii}{chapter*.11}%
 \contentsline {chapter}{ \hspace {-0.25cm}Introduction }{1}{chapter*.12}%
 \ttl@starttoc {chapters@1}
 \ttl@starttoc {chapters@1}
@@ -118,23 +118,23 @@
 \ttl@stoptoc {chapters@3}
 \contentsline {subsection}{\numberline {II.2.2}M\'ecanismes de transport des PFAS et pertinence des variables contextuelles}{31}{subsection.2.2.2}%
 \ttl@stoptoc {chapters@3}
-\contentsline {paragraph}{Advection et att\'enuation en fonction de la distance.}{31}{subsection.2.2.2}%
+\contentsline {paragraph}{Advection et att\'enuation en fonction de la distance.}{32}{subsection.2.2.2}%
 \contentsline {paragraph}{R\'etention sur la matrice solide.}{32}{subsection.2.2.2}%
 \contentsline {paragraph}{D\'eposition atmosph\'erique.}{32}{subsection.2.2.2}%
 \contentsline {paragraph}{Cons\'equences pour la mod\'elisation par graphes.}{32}{subsection.2.2.2}%
 \contentsline {subsection}{\numberline {II.2.3}M\'etriques d'\'evaluation des classifieurs de contamination PFAS}{33}{subsection.2.2.3}%
 \ttl@stoptoc {chapters@3}
 \contentsline {paragraph}{Exactitude.}{33}{table.caption.28}%
-\contentsline {paragraph}{Pr\'ecision, rappel et sp\'ecificit\'e.}{33}{table.caption.28}%
+\contentsline {paragraph}{Pr\'ecision, rappel et sp\'ecificit\'e.}{34}{table.caption.28}%
 \contentsline {paragraph}{Score F1 et $F_\beta $.}{34}{equation.2.2.1}%
 \contentsline {paragraph}{Coefficient de corr\'elation de Matthews.}{34}{equation.2.2.2}%
 \contentsline {paragraph}{Courbes ROC et pr\'ecision-rappel.}{34}{equation.2.2.3}%
-\contentsline {paragraph}{Choix retenu pour la revue.}{34}{equation.2.2.3}%
+\contentsline {paragraph}{Choix retenu pour la revue.}{35}{equation.2.2.3}%
 \contentsline {subsection}{\numberline {II.2.4}D\'es\'equilibre de classes et r\'e\'echantillonnage synth\'etique}{35}{subsection.2.2.4}%
 \ttl@stoptoc {chapters@3}
 \contentsline {paragraph}{R\'e\'echantillonnage.}{35}{subsection.2.2.4}%
 \contentsline {paragraph}{Pond\'eration du co\^ut.}{35}{equation.2.2.4}%
-\contentsline {paragraph}{Ajustement du seuil et m\'etriques adapt\'ees.}{35}{equation.2.2.4}%
+\contentsline {paragraph}{Ajustement du seuil et m\'etriques adapt\'ees.}{36}{equation.2.2.4}%
 \contentsline {paragraph}{R\`egle m\'ethodologique commune.}{36}{equation.2.2.4}%
 \contentsline {subsection}{\numberline {II.2.5}Mode pr\'edictif et mode confirmatoire}{36}{subsection.2.2.5}%
 \ttl@stoptoc {chapters@3}
@@ -143,7 +143,7 @@
 \ttl@stoptoc {chapters@3}
 \contentsline {subsection}{\numberline {II.3.1}Approches probabilistes et cartographie pr\'ecoce de la vuln\'erabilit\'e}{37}{subsection.2.3.1}%
 \ttl@stoptoc {chapters@3}
-\contentsline {subsubsection}{\numberline {II.3.1.1}Travaux de Li et MacDonald Gibson (2022)}{37}{subsubsection.2.3.1.1}%
+\contentsline {subsubsection}{\numberline {II.3.1.1}Travaux de Li et MacDonald Gibson (2022)}{38}{subsubsection.2.3.1.1}%
 \ttl@stoptoc {chapters@3}
 \contentsline {subsubsection}{\numberline {II.3.1.2}Travaux de McMahon et al.\ (2022)}{38}{subsubsection.2.3.1.2}%
 \ttl@stoptoc {chapters@3}
@@ -155,7 +155,7 @@
 \ttl@stoptoc {chapters@3}
 \contentsline {subsubsection}{\numberline {II.3.2.2}Travaux de Tokranov et al.\ (2024)}{40}{subsubsection.2.3.2.2}%
 \ttl@stoptoc {chapters@3}
-\contentsline {subsection}{\numberline {II.3.3}Attribution des sources~: une t\^ache diagnostique en aval de l'analyse}{41}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {II.3.3}Attribution des sources~: une t\^ache diagnostique en aval de l'analyse}{42}{subsection.2.3.3}%
 \ttl@stoptoc {chapters@3}
 \contentsline {subsubsection}{\numberline {II.3.3.1}Travaux de Kibbey et al.\ (2020)}{42}{subsubsection.2.3.3.1}%
 \ttl@stoptoc {chapters@3}
@@ -175,7 +175,7 @@
 \ttl@starttoc {chapters@3}
 \contentsline {section}{\numberline {II.5}Discussion}{47}{section.2.5}%
 \ttl@stoptoc {chapters@3}
-\contentsline {subsection}{\numberline {II.5.1}Tableau comparatif synth\'etique}{47}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {II.5.1}Tableau comparatif synth\'etique}{48}{subsection.2.5.1}%
 \ttl@stoptoc {chapters@3}
 \contentsline {subsection}{\numberline {II.5.2}Lecture transversale~: convergences et enseignements}{48}{subsection.2.5.2}%
 \ttl@stoptoc {chapters@3}
@@ -183,30 +183,105 @@
 \ttl@stoptoc {chapters@3}
 \contentsline {paragraph}{L1 -- Structure relationnelle sous-exploit\'ee.}{49}{subsection.2.5.3}%
 \contentsline {paragraph}{L2 -- Biais d'\'evaluation circulaire.}{49}{subsection.2.5.3}%
-\contentsline {paragraph}{L3 -- Transf\'erabilit\'e g\'eographique non valid\'ee.}{49}{subsection.2.5.3}%
+\contentsline {paragraph}{L3 -- Transf\'erabilit\'e g\'eographique non valid\'ee.}{50}{subsection.2.5.3}%
 \contentsline {paragraph}{L4 -- Interpr\'etabilit\'e insuffisamment standardis\'ee.}{50}{subsection.2.5.3}%
 \contentsline {paragraph}{Remarque sur le p\'erim\`etre g\'eographique de la revue.}{50}{subsection.2.5.3}%
 \ttl@starttoc {chapters@3}
-\contentsline {section}{\numberline {II.6}Synth\`ese}{50}{section.2.6}%
+\contentsline {section}{\numberline {II.6}Synth\`ese}{51}{section.2.6}%
 \ttl@stoptoc {chapters@3}
-\contentsline {chapter}{\chapternumberline {III}Fusion consensuelle des mises \`a jour des r\'epliques partielles}{52}{chapter.3}%
-\contentsline {chapter}{ \hspace {-0.25cm}Conclusion g\'en\'erale }{53}{chapter*.33}%
+\contentsline {chapter}{\chapternumberline {III}Contribution}{52}{chapter.3}%
 \ttl@stoptoc {chapters@3}
 \ttl@starttoc {chapters@4}
 \ttl@starttoc {chapters@4}
-\contentsline {section}{ \hspace {-0.55cm}La probl\'ematique \'etudi\'ee et les choix m\'ethodologiques }{53}{section*.34}%
+\contentsline {section}{\numberline {III.1}Introduction}{52}{section.3.1}%
 \ttl@stoptoc {chapters@4}
 \ttl@starttoc {chapters@4}
-\contentsline {section}{ \hspace {-0.55cm}Analyse critique des r\'esultats obtenus }{53}{section*.35}%
+\contentsline {section}{\numberline {III.2}Vue d'ensemble de l'approche}{53}{section.3.2}%
+\ttl@stoptoc {chapters@4}
+\contentsline {subsection}{\numberline {III.2.1}Pipeline de traitement de bout en bout}{53}{subsection.3.2.1}%
+\ttl@stoptoc {chapters@4}
+\contentsline {subsection}{\numberline {III.2.2}Du jeu d'observations au dataset enrichi}{55}{subsection.3.2.2}%
+\ttl@stoptoc {chapters@4}
+\contentsline {subsection}{\numberline {III.2.3}De l'enrichissement \`a la pr\'ediction}{56}{subsection.3.2.3}%
+\ttl@stoptoc {chapters@4}
+\contentsline {subsection}{\numberline {III.2.4}Principes directeurs}{56}{subsection.3.2.4}%
 \ttl@stoptoc {chapters@4}
 \ttl@starttoc {chapters@4}
-\contentsline {section}{ \hspace {-0.55cm}Quelques perspectives }{53}{section*.36}%
+\contentsline {section}{\numberline {III.3}\texttt {geoenrich}~: un moteur d'enrichissement g\'eospatial g\'en\'erique}{56}{section.3.3}%
 \ttl@stoptoc {chapters@4}
-\contentsline {chapter}{Bibliography}{54}{chapter*.37}%
-\contentsline {appendix}{\chapternumberline {A}Un autre exemple complet de fusion consensuelle}{59}{appendix.A}%
+\contentsline {subsection}{\numberline {III.3.1}Motivation}{57}{subsection.3.3.1}%
+\ttl@stoptoc {chapters@4}
+\contentsline {subsection}{\numberline {III.3.2}Contrat d'entr\'ee}{57}{subsection.3.3.2}%
+\ttl@stoptoc {chapters@4}
+\contentsline {subsection}{\numberline {III.3.3}Architecture en trois couches}{57}{subsection.3.3.3}%
+\ttl@stoptoc {chapters@4}
+\contentsline {subsection}{\numberline {III.3.4}Biblioth\`eque d'op\'erateurs}{58}{subsection.3.3.4}%
+\ttl@stoptoc {chapters@4}
+\contentsline {subsection}{\numberline {III.3.5}Entr\'ees, sorties et instanciation californienne}{59}{subsection.3.3.5}%
+\ttl@stoptoc {chapters@4}
+\contentsline {subsection}{\numberline {III.3.6}Le jeu de donn\'ees d'application~: de la base GAMA au dataset enrichi}{59}{subsection.3.3.6}%
+\ttl@stoptoc {chapters@4}
+\contentsline {subsubsection}{\numberline {III.3.6.1}Origine et reconstruction de la base}{59}{subsubsection.3.3.6.1}%
+\ttl@stoptoc {chapters@4}
+\contentsline {subsubsection}{\numberline {III.3.6.2}Le jeu enrichi~: structure et familles de colonnes}{60}{subsubsection.3.3.6.2}%
+\ttl@stoptoc {chapters@4}
+\contentsline {subsubsection}{\numberline {III.3.6.3}Remplissage des colonnes}{60}{subsubsection.3.3.6.3}%
+\ttl@stoptoc {chapters@4}
 \ttl@starttoc {chapters@4}
+\contentsline {section}{\numberline {III.4}Mod\`eles de pr\'ediction de la contamination}{61}{section.3.4}%
 \ttl@stoptoc {chapters@4}
-\contentsline {appendix}{\chapternumberline {B}Quelques fonctions Haskell pour le calcul des consensus}{60}{appendix.B}%
+\contentsline {subsection}{\numberline {III.4.1}Donn\'ees et cible}{62}{subsection.3.4.1}%
+\ttl@stoptoc {chapters@4}
+\contentsline {paragraph}{Construction de la cible}{63}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {III.4.2}Pr\'etraitement et ing\'enierie des variables}{64}{subsection.3.4.2}%
+\ttl@stoptoc {chapters@4}
+\contentsline {subsection}{\numberline {III.4.3}Mod\`eles tabulaires de r\'ef\'erence}{65}{subsection.3.4.3}%
+\ttl@stoptoc {chapters@4}
+\contentsline {subsection}{\numberline {III.4.4}Mod\`ele relationnel~: HGT}{66}{subsection.3.4.4}%
+\ttl@stoptoc {chapters@4}
+\contentsline {subsection}{\numberline {III.4.5}Mod\`eles hybrides}{68}{subsection.3.4.5}%
+\ttl@stoptoc {chapters@4}
+\contentsline {subsection}{\numberline {III.4.6}Protocole exp\'erimental}{68}{subsection.3.4.6}%
+\ttl@stoptoc {chapters@4}
 \ttl@starttoc {chapters@4}
+\contentsline {section}{\numberline {III.5}R\'esultats, interpr\'etabilit\'e et discussion}{68}{section.3.5}%
 \ttl@stoptoc {chapters@4}
+\contentsline {subsection}{\numberline {III.5.1}Performances compar\'ees}{69}{subsection.3.5.1}%
+\ttl@stoptoc {chapters@4}
+\contentsline {subsection}{\numberline {III.5.2}Interpr\'etabilit\'e globale~: importance et concordance}{70}{subsection.3.5.2}%
+\ttl@stoptoc {chapters@4}
+\contentsline {subsection}{\numberline {III.5.3}Interpr\'etabilit\'e locale}{72}{subsection.3.5.3}%
+\ttl@stoptoc {chapters@4}
+\contentsline {subsection}{\numberline {III.5.4}Sous le capot du HGT}{72}{subsection.3.5.4}%
+\ttl@stoptoc {chapters@4}
+\contentsline {subsection}{\numberline {III.5.5}Cartographie des pr\'edictions}{74}{subsection.3.5.5}%
+\ttl@stoptoc {chapters@4}
+\contentsline {subsection}{\numberline {III.5.6}Discussion}{74}{subsection.3.5.6}%
+\ttl@stoptoc {chapters@4}
+\ttl@starttoc {chapters@4}
+\contentsline {section}{\numberline {III.6}Synth\`ese}{75}{section.3.6}%
+\ttl@stoptoc {chapters@4}
+\contentsline {chapter}{ \hspace {-0.25cm}Conclusion g\'en\'erale }{76}{chapter*.54}%
+\ttl@stoptoc {chapters@4}
+\ttl@starttoc {chapters@5}
+\ttl@starttoc {chapters@5}
+\contentsline {section}{ \hspace {-0.55cm}La probl\'ematique \'etudi\'ee et les choix m\'ethodologiques }{76}{section*.55}%
+\ttl@stoptoc {chapters@5}
+\ttl@starttoc {chapters@5}
+\contentsline {section}{ \hspace {-0.55cm}Analyse critique des r\'esultats obtenus }{76}{section*.56}%
+\ttl@stoptoc {chapters@5}
+\ttl@starttoc {chapters@5}
+\contentsline {section}{ \hspace {-0.55cm}Quelques perspectives }{76}{section*.57}%
+\ttl@stoptoc {chapters@5}
+\contentsline {chapter}{Bibliography}{77}{chapter*.58}%
+\contentsline {appendix}{\chapternumberline {A}Hyperparam\`etres}{82}{appendix.A}%
+\ttl@starttoc {chapters@5}
+\ttl@stoptoc {chapters@5}
+\ttl@starttoc {chapters@5}
+\ttl@stoptoc {chapters@5}
+\ttl@starttoc {chapters@5}
+\ttl@stoptoc {chapters@5}
+\contentsline {appendix}{\chapternumberline {B}Quelques fonctions Haskell pour le calcul des consensus}{84}{appendix.B}%
+\ttl@starttoc {chapters@5}
+\ttl@stoptoc {chapters@5}
 \contentsfinish

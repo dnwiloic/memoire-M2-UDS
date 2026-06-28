@@ -1,0 +1,28 @@
+\documentclass[border=6pt]{standalone}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, fit, backgrounds, calc}
+\tikzset{stage/.style={draw, rounded corners, align=center, font=\small, minimum height=1.0cm, minimum width=2.6cm, thick},
+layer/.style={draw, dashed, rounded corners, inner sep=10pt},
+node_t/.style={draw, circle, align=center, font=\scriptsize, minimum size=1.0cm, thick},
+flow/.style={-{Stealth[length=2.5mm]}, thick},
+edge_t/.style={-{Stealth[length=2mm]}, font=\scriptsize}}
+\begin{document}
+\begin{tikzpicture}[node distance=0.8cm and 1.1cm]
+  \node[stage] (ds) {\textbf{Dataset enrichi}\\{\scriptsize sortie \texttt{geoenrich}}};
+  \node[stage, below=of ds] (sp) {\textbf{Split 60/20/20}\\{\scriptsize identique aux 5 modèles}};
+  \node[stage, below left=1.4cm and 1.6cm of sp, fill=blue!6] (rf) {\textbf{M2} Random Forest};
+  \node[stage, below=1.4cm of sp, fill=blue!6] (xgb) {\textbf{M3} XGBoost};
+  \node[stage, below right=1.4cm and 1.6cm of sp, fill=blue!6] (hgt) {\textbf{M1} HGT (graphe)};
+  \node[stage, below=2.6cm of xgb, fill=purple!8] (stk) {\textbf{M5} Stacking\\{\scriptsize méta-classifieur}};
+  \node[stage, right=2.2cm of stk, fill=purple!8] (fus) {\textbf{M4} Embedding Fusion};
+  \draw[flow] (ds) -- (sp);
+  \draw[flow] (sp) -- (rf); \draw[flow] (sp) -- (xgb); \draw[flow] (sp) -- (hgt);
+  \draw[flow] (rf) -- node[left,font=\scriptsize]{probas} (stk);
+  \draw[flow] (xgb) -- (stk);
+  \draw[flow] (hgt) -- (stk);
+  \draw[flow] (hgt) -- node[right,font=\scriptsize]{embeddings} (fus);
+  \draw[flow, dashed] (sp.east) to[out=0,in=90] (fus.north);
+\end{tikzpicture}
+
+\end{document}

@@ -1,0 +1,13 @@
+flowchart LR
+  subgraph N["Voisinage du puits cible"]
+    direction TB
+    V1["voisin source"]
+    V2["voisin subbasin"]
+    V3["voisin sample (near_geo)"]
+  end
+  V1 -- "α₁ · W_source" --> AGG
+  V2 -- "α₂ · W_subbasin" --> AGG
+  V3 -- "α₃ · W_near" --> AGG
+  AGG["Σ attention par type<br/>(message passing)"] --> H["h'(puits)<br/>nouvel embedding"]
+  classDef m fill:#eef5ff,stroke:#3b6fb6;
+  class AGG,H m;

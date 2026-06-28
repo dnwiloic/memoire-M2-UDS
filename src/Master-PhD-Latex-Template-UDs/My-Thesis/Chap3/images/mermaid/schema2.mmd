@@ -1,0 +1,23 @@
+flowchart TB
+  subgraph L1["COUCHE 1"]
+    C1["<b>CONTRAT</b> · <i>générique, agnostique</i><br/>entity_id · latitude · longitude · date<br/><i>(+ charge utile, jamais lue)</i>"]
+    C2["to_contract(df, mapping) → validate()"]
+    C1 --- C2
+  end
+  subgraph L2["COUCHE 2"]
+    direction TB
+    P1["Primitive spatiale<br/>k-d tree grand-cercle"]
+    P2["Primitive temporelle<br/>merge_asof + repli spatial"]
+    OPS["<b>OPÉRATEURS</b> · <i>génériques, paramétrés</i><br/>polygon_join · proximity · nearest_point<br/>nearest_by_group · temporal_asof<br/><i>apply(df) → df, n'ajoute que des colonnes</i>"]
+    P1 --- OPS
+    P2 --- OPS
+  end
+  subgraph L3["COUCHE 3"]
+    CFG["<b>CONFIGURATION</b> · <i>spécifique région/étude</i><br/>california.yaml<br/>data_root + liste ordonnée d'opérateurs<br/>→ SGMA · GeoTracker · SSURGO · GLDAS · AQS ..."]
+  end
+  L1 -- "validate()" --> L2
+  L3 -. "REGISTRY {type → classe}" .-> L2
+  classDef l1 fill:#e9f7ef,stroke:#2e8b57;
+  classDef l3 fill:#fdf2e9,stroke:#b9770e;
+  class C1,C2 l1;
+  class CFG l3;

@@ -1,0 +1,46 @@
+flowchart TB
+  OBS["<b>Observations ponctuelles</b><br/>id · lat · lon · date · <i>+ charge utile</i>"]
+
+  subgraph S1["1 · ENRICHISSEMENT (geoenrich)"]
+    direction LR
+    REF["Couches de référence<br/>SGMA · GeoTracker · SSURGO<br/>GLDAS · AQS · STEP · DoD"]
+    OPER["Opérateurs<br/>spatial (k-d tree)<br/>temporel (merge_asof)"]
+    ENR["Dataset enrichi<br/><i>~200 variables de contexte</i>"]
+    REF --> OPER --> ENR
+  end
+
+  subgraph S2["2 · PRÉTRAITEMENT"]
+    direction LR
+    TGT["Cible EPA 2024<br/>MCL individuel OU HI > 1"]
+    LEAK["Anti-fuite<br/>drop _ngL · _detected · label_"]
+    NA["Drop > 40% manquants<br/>imputation médiane / Unknown"]
+    SPL["Split stratifié<br/>60 / 20 / 20"]
+    TGT --> LEAK --> NA --> SPL
+  end
+
+  subgraph S3["3 · MODÉLISATION (banc de 5 modèles)"]
+    direction LR
+    RF["M2 · RF"]
+    XGB["M3 · XGBoost"]
+    HGT["M1 · HGT<br/>graphe hétérogène"]
+    FUS["M4 · Fusion"]
+    STK["M5 · Stacking"]
+    RF --> STK
+    XGB --> STK
+    HGT --> STK
+    HGT --> FUS
+  end
+
+  EVAL["<b>4 · Évaluation &amp; interprétation</b><br/>comparaison ROC/PR · calibration<br/>SHAP global &amp; local · carte des prédictions"]
+
+  OBS --> S1
+  S1 --> S2
+  S2 --> S3
+  S3 --> EVAL
+
+  classDef enr fill:#eef5ff,stroke:#3b6fb6;
+  classDef pre fill:#fdf2e9,stroke:#b9770e;
+  classDef mod fill:#f5eef8,stroke:#7d3c98;
+  class REF,OPER,ENR enr;
+  class TGT,LEAK,NA,SPL pre;
+  class RF,XGB,HGT,FUS,STK mod;
