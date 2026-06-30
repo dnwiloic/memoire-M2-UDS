@@ -1,40 +1,32 @@
 % Page de garde redessinee — format UDS (bilingue, logo, encadrement, titre majuscule)
 \thispagestyle{empty}
-\enlargethispage{2.5cm}
+\enlargethispage{4cm}
 
 % Couleurs de la page de garde
 \definecolor{udsTealDark}{cmyk}{0.85,0.15,0.28,0.12}
 \definecolor{udsTealLight}{cmyk}{0.50,0.00,0.15,0.00}
 \definecolor{udsAuthorBlue}{cmyk}{0.88,0.30,0.00,0.12}
 
-% ---- Encadrement double ancre sur le centre de la page ----
-% Fiable avec memoir : symetrique autour de current page.center
-% (necessite 2 compilations pour que remember picture soit actif)
-\begin{tikzpicture}[remember picture, overlay]
-  % Cadre epais exterieur : 5.5 mm de chaque bord du papier
-  \node[
-    draw            = udsTealDark,
-    line width      = 4pt,
-    inner sep       = 0pt,
-    minimum width   = \dimexpr\paperwidth  - 11mm\relax,
-    minimum height  = \dimexpr\paperheight - 11mm\relax
-  ] at (current page.center) {};
-  % Filet fin interieur : 7.5 mm de chaque bord du papier
-  \node[
-    draw            = udsTealDark,
-    line width      = 1pt,
-    inner sep       = 0pt,
-    minimum width   = \dimexpr\paperwidth  - 15mm\relax,
-    minimum height  = \dimexpr\paperheight - 15mm\relax
-  ] at (current page.center) {};
-\end{tikzpicture}
+% ---- Encadrement double par commandes PDF brutes (\pdfliteral page) ----
+% Coordonnees absolues en pts PDF (1pt = 1/72 in) : A4 = 595.276 x 841.89 pt
+%   Cadre ext. 4pt, marge 5.5mm=15.59pt : rect(15.59, 15.59, 564.10, 810.71)
+%   Cadre int. 1pt, marge 7.5mm=21.26pt : rect(21.26, 21.26, 552.76, 799.37)
+%   Couleur udsTealDark CMYK(0.85,0.15,0.28,0.12) -> operateur K (stroke CMYK)
+\pdfliteral page{%
+  q
+  0.85 0.15 0.28 0.12 K
+  4 w
+  15.59 15.59 564.10 810.71 re S
+  1 w
+  21.26 21.26 552.76 799.37 re S
+  Q
+}
 
-% Remontee du contenu pour coller au cadre superieur
-% (texte demarre a 45mm du haut ; bordure a 5.5mm => remonte de ~31mm)
-\vspace*{-3.1cm}
+% Remontee du contenu : marge superieure reelle = 172.48pt ~ 6.09cm.
+% -3.0cm => contenu a ~87pt du haut de page, soit ~2.3cm sous le cadre interieur.
+\vspace*{-2.85cm}
 
 % ---- En-tete bilingue centre avec logo ----
-% Colonnes 0.40+0.40 pour que "REPUBLIQUE DU CAMEROUN" tienne sur une ligne
 \noindent
 \begin{minipage}[t]{0.40\textwidth}
   \centering\footnotesize
@@ -47,7 +39,6 @@
 \end{minipage}%
 \hfill
 \begin{minipage}[t]{2.4cm}
-  % Logo legerement en dessous de la premiere ligne de texte
   \vspace{0.5em}
   \centering
   \includegraphics[width=2.4cm]{images/logouniv}
@@ -69,9 +60,9 @@
 
 % ---- Institutions ----
 \begin{center}
-  \large\textbf{\'ECOLE DES SCIENCES ET TECHNOLOGIES DE DSCHANG}\\[0.4em]
+  \large\textbf{\'ECOLE DES SCIENCES ET TECHNOLOGIES DE DSCHANG}\\[1.5em]
   \normalsize\textbf{UNIT\'E DE RECHERCHE EN INFORMATIQUE FONDAMENTALE,
-  ING\'ENIERIE ET APPLICATION (URIFIA)}\\[0.7em]
+  ING\'ENIERIE ET APPLICATION (URIFIA)}\\[1.5em]
   \large\textbf{TH\`EME~:}
 \end{center}
 
@@ -85,7 +76,7 @@
     shading angle  = 0,
     left color     = udsTealDark,
     right color    = udsTealLight,
-    text           = white,
+    text           = black,
     rounded corners= 6pt,
     inner sep      = 14pt,
     text width     = \dimexpr\linewidth - 28pt\relax,
@@ -104,23 +95,23 @@
   Option~: \textbf{\thesisOption}\\[0.12em]
   Sp\'ecialisation~: \textbf{\thesisSpecialization}
 
-  \vspace{0.8em}
-  \textbf{Par}
+  \vspace{2em}
+  % ---- Bloc auteur encadre : double filet teal ----
+  \textcolor{udsTealDark}{\rule{\linewidth}{2.5pt}}\\[0.8em]%
+  \textbf{Par}\\[0.7em]%
+  {\LARGE\color{udsAuthorBlue}\textbf{\thesisAuthor}}\\[0.6em]%
+  Matricule~: \textbf{\thesisMatricule}\\[0.3em]%
+  \textit{\thesisPriorDegree}\\[0.8em]%
+  \textcolor{udsTealDark}{\rule{\linewidth}{2.5pt}}
 
-  \vspace{0.4em}
-  {\LARGE\color{udsAuthorBlue}\textbf{\thesisAuthor}}\\[0.3em]
-  Matricule~: \texttt{\thesisMatricule}\\[0.12em]
-  \textit{\thesisPriorDegree}
-
-  \vspace{0.8em}
+  \vspace{2em}
   \textbf{Sous la direction de~:}
 
-  \vspace{0.3em}
-  \textbf{\thesisSupervisor}\\[0.12em]
+  \vspace{0.9em}
+  \textbf{\thesisSupervisor}\\[0.3em]
   \textit{\thesisSupervisorTitle}
 
-  \vspace{1.2em}
-  % Badge annee academique
+  \vspace{3em}
   \begin{tikzpicture}
     \node[
       fill            = udsTealDark,

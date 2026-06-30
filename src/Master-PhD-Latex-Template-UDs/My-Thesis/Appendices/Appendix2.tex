@@ -1,35 +1,20 @@
-\myChapter{Quelques fonctions Haskell pour le calcul des consensus}{}\label{annexeFonctionsHask}
+\myChapter{Publication issue de ce travail}{Publication issue de ce travail}\label{ann:publication}
 \mySaveMarks
-Dans cette annexe...
 
-\mySectionStar{Représentation des grammaires et des vues}{}{false}
-Une grammaire est constituée d'un ensemble de symboles et d'un ensemble de productions. Nous représentons une grammaire par le type \Verb|Gram| suivant:
-\begin{Verbatim}[fontsize=\small, numbers=left, numbersep=8pt]
-data Gram prod symb = Gram {prods::[prod], 
-                            symbols::[symb], 
-                            lhs::prod -> symb, 
-                            rhs::prod -> [symb]}
-\end{Verbatim}
+Cette annexe reproduit l'article de conf\'erence co-\'ecrit lors de ces travaux et accept\'e \`a la conf\'erence IEEE International Conference on Bioinformatics and Biomedicine (BIBM) 2025~\cite{bomgni2025pfas}.
 
-La fonction \Verb|lhs| (resp. \Verb|rhs|) prend en argument une grammaire \Verb|G| et une production \Verb|p| de \Verb|G| puis retourne le symbole en partie gauche (resp. la liste des symboles en partie droite) de \Verb|p|. \`{A} partir de ce type, on peut construire la grammaire $\mathbb{G}_{expl}$ (chap \ref{chapEditionStructure} exemple \ref{exempleGrammaire}) grâce au code Haskell suivant:
-\begin{Verbatim}[fontsize=\small, numbers=left, numbersep=8pt]
-data Prod = P1 | P2 | P3 | P4 | P5 | P6 | P7 | Aomega | Bomega | Comega
-            deriving (Eq, Show)
-data Symb = A | B | C  deriving (Eq, Show)
+\bigskip
+\noindent\textbf{R\'ef\'erence~:} Bomgni, A.~B., Dnjomou~Yonmba, W.~L., T\'en\'e~Ceskouts\'e, R.~F., Klein, N., Gadhamshetty, V., et Gnimpieba, E.~Z. (2025). Heterogeneous Graph Network (HGN) for Binary Spatio-Chemical-Source Classification of Per- and Polyfluoroalkyl Substances (PFAS) Contamination: An Optimized Approach. \emph{2025 IEEE International Conference on Bioinformatics and Biomedicine (BIBM)}, pp.~2954--2958.
 
-gram :: Gram Prod Symb
-gram = Gram lprod lsymb lhs_ rhs_
-   where
-      lprod = [P1, P2, P3, P4, P5, P6, P7]
-      lsymb = [A, B, C]
-      lhs_ p = case p of
-            P1 -> A; P2 -> A; P3 -> B; P4 -> B; P5 -> C; P6 -> C; P7 -> C
-      rhs_ p = case p of
-            P1 -> [C, B]; P2 -> []; P3 -> [C, A]; P4 -> [B, B]; 
-            P5 -> [A, C]; P6 -> [C, C]; P7 -> []
-\end{Verbatim}
-
-Les productions \Verb|Aomega, Bomega| et \Verb|Comega| ont été introduites pour pouvoir désigner les bourgeons de types respectifs \Verb|A|, \Verb|B| et \Verb|C|.
-
+\clearpage
+{\centering\includegraphics[page=1,width=\textwidth,height=0.95\textheight,keepaspectratio]{Appendices/S42220.pdf}\par}
+\clearpage
+{\centering\includegraphics[page=2,width=\textwidth,height=0.95\textheight,keepaspectratio]{Appendices/S42220.pdf}\par}
+\clearpage
+{\centering\includegraphics[page=3,width=\textwidth,height=0.95\textheight,keepaspectratio]{Appendices/S42220.pdf}\par}
+\clearpage
+{\centering\includegraphics[page=4,width=\textwidth,height=0.95\textheight,keepaspectratio]{Appendices/S42220.pdf}\par}
+\clearpage
+{\centering\includegraphics[page=5,width=\textwidth,height=0.95\textheight,keepaspectratio]{Appendices/S42220.pdf}\par}
 
 \myRestoreMarks

@@ -1,15 +1,15 @@
 % Quelques raccourcis utiles
 % *************** Nouvelles Commandes ***************
-\newcommand{\myChapterLabel}{Chapter}
-\newcommand{\myAppendixLabel}{Appendix}
-\newcommand{\myPartLabel}{Part}
-\newcommand{\lifa}{Laboratoire d'Informatique Fondamentale et Appliquée (LIFA)}
-\newcommand{\myBibliographyTitle}{Bibliography}
-\newcommand{\losname}{List of Symbols}
-\newcommand{\loaname}{List of Acronyms}
+\newcommand{\myChapterLabel}{Chapitre}
+\newcommand{\myAppendixLabel}{Annexe}
+\newcommand{\myPartLabel}{Partie}
+\newcommand{\lifa}{Laboratoire d'Informatique Fondamentale et Appliqu\'ee (LIFA)}
+\newcommand{\myBibliographyTitle}{Bibliographie}
+\newcommand{\losname}{Liste des Symboles}
+\newcommand{\loaname}{Liste des Acronymes}
 
-\newcommand{\doctypethesis}{Thèse de Doctorat en}
-\newcommand{\doctypemaster}{Mémoire de Master en}
+\newcommand{\doctypethesis}{Th\'ese de Doctorat en}
+\newcommand{\doctypemaster}{M\'emoire de Master en}
 \newcommand{\doctype}{\ifthenelse{\equal{\doclevel}{\master}}{\doctypemaster}{\doctypethesis}}
 \newcommand{\phd}{PhD}
 \newcommand{\master}{Master}
@@ -17,19 +17,19 @@
 \newcommand{\level}[1]{
 	\renewcommand{\doclevel}{#1}
 }
-\newcommand{\phdthesislabel}{\doctype $~$ \studentspeciality $~$, Université de Dschang}
+\newcommand{\phdthesislabel}{\doctype $~$ \studentspeciality $~$, Universit\'e de Dschang}
 \newcommand{\studentspeciality}{\computerScience}
 \newcommand{\speciality}[1]{
 	\renewcommand{\studentspeciality}{#1}
 }
 \newcommand{\computerScience}{Informatique}
-\newcommand{\mathematics}{Mathématiques}
+\newcommand{\mathematics}{Math\'ematiques}
 \newcommand{\studentlab}{LIFA}
 \newcommand{\lab}[1]{
 	\renewcommand{\studentlab}{#1}
 }
 
-% Environnement personnalisé de description
+% Environnement personnalisï¿½ de description
 \newcommand{\myDescription}[2]{
 \par\vspace{0.35cm}\noindent\textbf{#1}
 \begin{list}{}{}
@@ -377,20 +377,20 @@
 
 \newcommand{\switchLanguage}[1]{
 	\renewcommand{\currentlanguage}{#1}
-	\ifthenelse{\equal{#1}{français}}
+	\ifthenelse{\equal{#1}{franï¿½ais}}
 	{
 		\usepackage[frenchb]{babel}
 		\renewcommand{\myChapterLabel}{Chapitre}
 		\renewcommand{\myAppendixLabel}{Annexe}
 		\renewcommand{\myPartLabel}{Partie}
-		\renewcommand{\lifa}{Laboratoire d'Informatique Fondamentale et Appliquée (LIFA)}
+		\renewcommand{\lifa}{Laboratoire d'Informatique Fondamentale et Appliquï¿½e (LIFA)}
 		\renewcommand{\myBibliographyTitle}{Bibliographie}
-		\renewcommand{\phdthesislabel}{\doctype $~$ \studentspeciality $~$, Université de Dschang}
+		\renewcommand{\phdthesislabel}{\doctype $~$ \studentspeciality $~$, Universitï¿½ de Dschang}
 		\renewcommand{\computerScience}{Informatique}
-		\renewcommand{\mathematics}{Mathématiques}
+		\renewcommand{\mathematics}{Mathï¿½matiques}
 		\renewcommand{\studentlab}{URIFIA}
-		\renewcommand{\doctypethesis}{Thèse de Doctorat en}
-		\renewcommand{\doctypemaster}{Mémoire de Master en}
+		\renewcommand{\doctypethesis}{Thï¿½se de Doctorat en}
+		\renewcommand{\doctypemaster}{Mï¿½moire de Master en}
 		\renewcommand{\losname}{Liste des Symboles}
 		\renewcommand{\loaname}{Liste des Acronymes}
 	}{
@@ -398,7 +398,7 @@
 		\renewcommand{\myChapterLabel}{Chapter}
 		\renewcommand{\myAppendixLabel}{Appendix}
 		\renewcommand{\myPartLabel}{Part}
-		\renewcommand{\lifa}{Laboratoire d'Informatique Fondamentale et Appliquée (LIFA)}
+		\renewcommand{\lifa}{Laboratoire d'Informatique Fondamentale et Appliquï¿½e (LIFA)}
 		\renewcommand{\myBibliographyTitle}{Bibliography}
 				\renewcommand{\phdthesislabel}{\doctype $~$ \studentspeciality $~$, University of Dschang}
 		\renewcommand{\computerScience}{Computer Science}

@@ -65,7 +65,7 @@ Brusseau et al.~\cite{brusseau2019pfas} \'etablissent un mod\`ele de r\'etention
 Les compos\'es \`a longue cha\^ine (PFOS, PFOA) se retiennent davantage que les compos\'es \`a cha\^ine courte (PFBS, PFPeA), plus mobiles mais aussi plus difficiles \`a \'eliminer.
 Ce m\'ecanisme justifie l'inclusion de descripteurs de sol (granulom\'etrie, teneur en argile, ratio eau-argile) dans les vecteurs de features des mod\`eles tabulaires.
 
-\paragraph{D\'eposition atmosph\'erique.}
+\paragraph{D\'ep\^ot atmosph\'erique.}
 Les PFAS volatils ou semi-volatils (fluorot\'elom\`eres, sulfonamides) sont \'emis dans l'atmosph\`ere par les installations industrielles, transport\'es sur des distances pouvant d\'epasser 50~km et d\'epos\'es par les pr\'ecipitations~\cite{guelfo2021pfas}.
 Ce vecteur de contamination diffus et longue port\'ee explique pourquoi les variables m\'et\'eorologiques (humidit\'e, pr\'ecipitations, qualit\'e de l'air~: PM$_{2,5}$, NO$_2$) figurent parmi les pr\'edicteurs importants identifi\'es par Dong et al.~\cite{dong2024pfas}, alors qu'elles ne sont pas directement li\'ees aux sources ponctuelles locales.
 
@@ -171,7 +171,7 @@ La troisi\`eme famille d\'eplace le seuil de d\'ecision (par d\'efaut 0,5) vers 
 La quatri\`eme, transversale, \'evalue le mod\`ele avec des m\'etriques robustes au d\'es\'equilibre plut\^ot qu'avec l'exactitude (section~\ref{sec:chap2-metriques}).
 
 \paragraph{R\`egle m\'ethodologique commune.}
-Quelle que soit la technique, le r\'e\'echantillonnage ne s'applique qu'au \textbf{jeu d'entra\^inement}~; les jeux de validation et de test conservent la distribution r\'eelle des classes, faute de quoi les m\'etriques sont artificiellement gonfl\'ees.
+Quelle que soit la technique, le r\'e\'echantillonnage ne s'applique qu'au jeu d'entra\^inement~; les jeux de validation et de test conservent la distribution r\'eelle des classes, faute de quoi les m\'etriques sont artificiellement gonfl\'ees.
 Cette r\`egle est appliqu\'ee dans tous les travaux examin\'es~; son non-respect est signal\'e explicitement dans les limites.
 
 
@@ -182,7 +182,7 @@ Pour comparer les travaux examin\'es sur une base homog\`ene, nous distinguons d
 
 Le \textbf{mode confirmatoire} d\'esigne la configuration o\`u ce vecteur comprend des concentrations PFAS mesur\'ees (partielles ou compl\`etes) et o\`u la variable cible est elle-m\^eme d\'eriv\'ee de ces mesures~: $\mathbb{1}[\texttt{PFAS\_total} > 70\text{ ng/L}]$ en r\'ef\'erence \`a l'avis sanitaire EPA 2016~\cite{epa2016pfas}.
 Ce seuil de 70~ng/L, depuis abaiss\'e \`a 4~ng/L~\cite{epa2023npdwr}, demeure la r\'ef\'erence de la quasi-totalit\'e des travaux examin\'es, ce qui complique leur comparaison avec les \'etudes les plus r\'ecentes.
-La configuration cr\'ee une \textbf{circularit\'e}~: les entr\'ees contiennent l'information qui d\'etermine l'\'etiquette, de sorte que les performances publi\'ees (F1 sup\'erieur \`a 0,96) ne refl\`etent pas ce que le mod\`ele ferait sur un puits jamais analys\'e.
+La configuration cr\'ee une circularit\'e~: les entr\'ees contiennent l'information qui d\'etermine l'\'etiquette, de sorte que les performances publi\'ees (F1 sup\'erieur \`a 0,96) ne refl\`etent pas ce que le mod\`ele ferait sur un puits jamais analys\'e.
 Cette circularit\'e est le seul crit\`ere du mode confirmatoire~: la distinction ne porte donc que sur les t\^aches dont la cible est un statut de contamination d\'eriv\'e de concentrations PFAS, et ne s'applique pas aux t\^aches dont la cible est de nature diff\'erente, telles que l'attribution de sources ou la pr\'ediction de bioactivit\'e mol\'eculaire.
 
 Le \textbf{mode pr\'edictif} correspond au sc\'enario op\'erationnellement pertinent~: classer un puits avant tout pr\'el\`evement PFAS, sur la seule base d'informations contextuelles disponibles a priori (g\'eologie, hydrologie, qualit\'e g\'en\'erale de l'eau, proximit\'e aux sources anthropiques, coordonn\'ees g\'eographiques).
@@ -220,19 +220,19 @@ Deux travaux non bay\'esiens (McMahon et al., Hu et al.) sont rattach\'es \`a ce
 \mySubSubSection{Travaux de Li et MacDonald Gibson (2022)}{}
 \label{sec:art-li2022}
 
-\textbf{Probl\`eme.}
+\emph{Probl\`eme.}
 Li et MacDonald Gibson~\cite{li2022pfas} cherchent \`a pr\'edire la pr\'esence des PFAS \`a cha\^ine courte (PFBS, PFBA, PFPeA et leurs pr\'ecurseurs fluorot\'elom\`eres) dans les eaux souterraines du Minnesota.
 Ces compos\'es, substituts industriels aux PFAS \`a longue cha\^ine progressivement interdits, sont plus hydrophiles, plus mobiles en phase aqueuse et moins fr\'equemment mesur\'es dans les bases historiques, ce qui limite les approches purement supervis\'ees.
 
-\textbf{M\'ethodologie.}
+\emph{M\'ethodologie.}
 Les auteurs agr\`egent les donn\'ees du programme de surveillance du Minnesota, recodent les valeurs sous le seuil de d\'etection \`a LD/2 et standardisent 88 variables contextuelles couvrant~: proximit\'e aux sources industrielles (distance aux usines 3M de Cottage Grove et Oakdale), caract\'eristiques hydrog\'eologiques r\'egionales, occupation du sol et co-contaminants inorganiques.
 La structure du DAG est apprise automatiquement par Hill Climbing avec score BIC.
 
-\textbf{R\'esultats.}
+\emph{R\'esultats.}
 Les ROC-AUC d\'epassent 0,96 pour les compos\'es les mieux repr\'esent\'es (PFOS, PFOA, PFHxS) et sont de l'ordre de 0,78 \`a 0,82 pour les compos\'es \`a cha\^ine courte.
 Les ar\^etes les plus fortes du DAG relient le statut de contamination PFAS aux variables de proximit\'e industrielle, relation m\'edi\'ee par les zones humides (bassins de r\'etention des compos\'es PFAS transport\'es par ruissellement).
 
-\textbf{Limites.}
+\emph{Limites.}
 Le mod\`ele est entra\^in\'e et valid\'e exclusivement sur le Minnesota (transf\'erabilit\'e non valid\'ee).
 Le r\'eseau bay\'esien inf\`ere la cible en marginalisant les variables non observ\'ees~; lorsque des mesures PFAS partielles figurent parmi les n\oe uds observ\'es, leur contribution \`a la pr\'ediction reste difficile \`a isoler sans protocole de division strict par site.
 
@@ -240,18 +240,18 @@ Le r\'eseau bay\'esien inf\`ere la cible en marginalisant les variables non obse
 \mySubSubSection{Travaux de McMahon et al.\ (2022)}{}
 \label{sec:art-mcmahon2022}
 
-\textbf{Probl\`eme.}
+\emph{Probl\`eme.}
 McMahon et al.~\cite{mcmahon2022pfas} cherchent \`a caract\'eriser la distribution spatiale des concentrations PFAS dans les eaux souterraines potables de l'est des \'Etats-Unis \`a partir de proxies g\'eochimiques, en s'affranchissant de mesures PFAS cibl\'ees syst\'ematiques.
 
-\textbf{M\'ethodologie.}
+\emph{M\'ethodologie.}
 Les auteurs mobilisent des arbres de r\'egression boost\'es (BRT, variante de gradient boosting, section~\ref{sec:boosting}) sur un corpus de plusieurs centaines d'\'echantillons g\'eor\'ef\'erenc\'es.
 Les pr\'edicteurs incluent la concentration en tritium (\textsuperscript{3}H), le carbone organique dissous (COD), la pr\'esence de solvants chlor\'es volatils (TCE, PCE) et divers indicateurs hydrog\'eologiques r\'egionaux.
 
-\textbf{R\'esultats (approche descriptive).}
-Le tritium, indicateur d'une recharge r\'ecente, est le pr\'edicteur le plus fortement associ\'e aux concentrations PFAS \'elev\'ees~: r\'esultat m\'ecanistiquement interpr\'etable, les aquif\`eres recharg\'es r\'ecemment ayant \'et\'e en contact avec des eaux de surface potentiellement contamin\'ees par les rejets industriels de la seconde moiti\'e du XX\textsuperscript{e} si\`ecle.
-Le COD et les solvants chlor\'es constituent \'egalement des co-pr\'edicteurs significatifs, sugg\'erant que les indicateurs indirects d'activit\'e industrielle peuvent servir de proxies efficaces sans mesure PFAS directe.
+\emph{R\'esultats (approche descriptive).}
+Le tritium, indicateur d'une recharge r\'ecente, est le pr\'edicteur le plus fortement associ\'e aux concentrations PFAS \'elev\'ees~: r\'esultat interpr\'etable d'un point de vue m\'ecaniste, les aquif\`eres recharg\'es r\'ecemment ayant \'et\'e en contact avec des eaux de surface potentiellement contamin\'ees par les rejets industriels de la seconde moiti\'e du XX\textsuperscript{e} si\`ecle.
+Le COD et les solvants chlor\'es constituent \'egalement des covariables significatives, sugg\'erant que les indicateurs indirects d'activit\'e industrielle peuvent servir de proxies efficaces sans mesure PFAS directe.
 
-\textbf{Limites.}
+\emph{Limites.}
 Les auteurs ne fournissent pas de m\'etriques quantitatives de classification~; le travail est davantage descriptif qu'op\'erationnel pour la priorisation directe des puits.
 Il n'est pas transposable tel quel \`a une d\'emarche de priorisation sans \'etape de calibration quantitative suppl\'ementaire.
 
@@ -259,19 +259,19 @@ Il n'est pas transposable tel quel \`a une d\'emarche de priorisation sans \'eta
 \mySubSubSection{Travaux de Hu et al.\ (2021)}{}
 \label{sec:art-hu2021}
 
-\textbf{Probl\`eme.}
+\emph{Probl\`eme.}
 Environ 43 millions d'Am\'ericains d\'ependent de puits priv\'es qui \'echappent aux programmes de surveillance institutionnels.
 Hu et al.~\cite{hu2021privatewells} cherchent \`a identifier ces puits \`a risque \'elev\'e \`a l'\'echelle nationale sans disposer d'aucune donn\'ee analytique PFAS a priori.
 
-\textbf{M\'ethodologie.}
+\emph{M\'ethodologie.}
 Les auteurs mobilisent uniquement des variables contextuelles disponibles sans campagne PFAS~: densit\'e d'installations militaires et a\'eronautiques dans un rayon de 20~km, proximit\'e de stations d'\'epuration et de d\'echarges, caract\'eristiques p\'edologiques.
 Ce protocole constitue un exemple r\'ef\'erence de mode pr\'edictif pur, sans aucune mesure PFAS en entr\'ee.
 
-\textbf{R\'esultats (mode pr\'edictif pur).}
+\emph{R\'esultats (mode pr\'edictif pur).}
 Les auteurs produisent des cartes de vuln\'erabilit\'e nationales permettant de prioriser les puits \`a contr\^oler.
 La d\'emarche d\'emontre qualitativement sa valeur pour orienter des campagnes d'information \`a grande \'echelle.
 
-\textbf{Limites.}
+\emph{Limites.}
 La validation externe reste absente~; l'incertitude sur les estimations n'est pas quantifi\'ee.
 La couverture nationale introduit un lissage r\'egional pouvant sous-repr\'esenter des aquif\`eres sp\'ecifiques.
 
@@ -280,46 +280,46 @@ La couverture nationale introduit un lissage r\'egional pouvant sous-repr\'esent
 \label{sec:chap2-ensemble}
 
 L'\'emergence des m\'ethodes d'ensemble \`a base d'arbres (for\^et al\'eatoire~\cite{breiman2001rf}, XGBoost~\cite{chen2016xgboost}, LightGBM~\cite{ke2017lightgbm}, section~\ref{sec:boosting}) a \'elargi les capacit\'es de priorisation \`a des corpus de plus grande taille.
-Quatre propri\'et\'es expliquent leur domination sur les jeux de donn\'ees tabulaires de surveillance PFAS~\cite{borisov2024tabular}~: compatibilit\'e native avec les donn\'ees mixtes, robustesse aux valeurs manquantes par branches par d\'efaut, interpr\'etabilit\'e par importances SHAP~\cite{lundberg2017shap}, et absence de n\'ecessit\'e de r\'eglage d'architecture.
+Quatre propri\'et\'es expliquent leur domination sur les jeux de donn\'ees tabulaires de surveillance PFAS~\cite{borisov2024tabular}~: compatibilit\'e native avec les donn\'ees mixtes, robustesse aux valeurs manquantes par branches par d\'efaut, interpr\'etabilit\'e par importances SHAP~\cite{lundberg2017shap}, et absence de r\'eglage d'architecture pr\'ealable.
 Le d\'es\'equilibre structurel de classes impose l'usage syst\'ematique de SMOTE ou ADASYN~\cite{chawla2002smote,he2008adasyn}~: Dong et al.~\cite{dong2024pfas} montrent que le choix de la strat\'egie de r\'e\'echantillonnage et du ratio cible influence de 3 \`a 12 points de F1 sur la classe positive, rendant non comparables les \'etudes qui omettent de documenter ce protocole.
 
 
 \mySubSubSection{Travaux de George et Dixit (2021)}{}
 \label{sec:art-george2021}
 
-\textbf{Probl\`eme.}
+\emph{Probl\`eme.}
 George et Dixit~\cite{george2021pfas} proposent l'un des premiers cadres d\'edi\'es \`a la priorisation des puits de surveillance PFAS par apprentissage automatique, sur un corpus californien constitu\'e \`a partir des bases publiques du California State Water Resources Control Board.
 L'objectif est de concevoir un outil capable d'orienter les pr\'el\`evements vers les sites \`a risque avant ou en compl\'ement des analyses de laboratoire.
 
-\textbf{M\'ethodologie.}
+\emph{M\'ethodologie.}
 Les auteurs entra\^inent et comparent une for\^et al\'eatoire et XGBoost sur des descripteurs couvrant la proximit\'e aux sources (bases militaires, sites industriels, stations d'\'epuration, a\'eroports), les caract\'eristiques hydrog\'eologiques (type de lithologie, perm\'eabilit\'e, profondeur de cr\'epine, type d'aquif\`ere) et la qualit\'e g\'en\'erale de l'eau (nitrates, sulfates, chlorures, TDS).
 Le d\'es\'equilibre est corrig\'e par SMOTE avant entra\^inement~; les performances sont \'evalu\'ees par validation crois\'ee stratifi\'ee \`a 5 plis.
 
-\textbf{R\'esultats (mode mixte).}
+\emph{R\'esultats (mode mixte).}
 La for\^et al\'eatoire obtient une ROC-AUC d'environ 0,948 et un F1 d'environ 0,964~; XGBoost atteint respectivement 0,906 et 0,878.
 L'analyse SHAP r\'ev\`ele que les variables de proximit\'e aux bases militaires et aux installations fluorochimiques contribuent le plus \`a l'\'ecart entre puits contamin\'es et non contamin\'es.
 
-\textbf{Limites.}
+\emph{Limites.}
 Les auteurs eux-m\^emes signalent~\cite{george2021pfas} qu'une fraction des observations inclut des mesures PFAS pr\'ealablement disponibles dans la base californienne, introduisant une composante confirmatoire partielle~: les performances publi\'ees ne refl\`etent pas n\'ecessairement ce qui serait obtenu sur des puits jamais \'echantillonn\'es (cf. modes, section~\ref{sec:chap2-modes}).
 
 
 \mySubSubSection{Travaux de Tokranov et al.\ (2024)}{}
 \label{sec:art-tokranov2024}
 
-\textbf{Probl\`eme.}
+\emph{Probl\`eme.}
 Tokranov et al.~\cite{tokranov2024pfas} \'etendent la d\'emarche \`a l'\'echelle nationale am\'ericaine, en s'appuyant sur les donn\'ees g\'eochimiques de l'USGS collect\'ees entre 2019 et 2022.
 L'enjeu est d'estimer l'exposition de la population am\'ericaine \`a une \'echelle encore inatteignable par les \'etudes r\'egionales.
 
-\textbf{M\'ethodologie.}
+\emph{M\'ethodologie.}
 Un mod\`ele XGBoost est entra\^in\'e sur plusieurs milliers d'\'echantillons g\'eor\'ef\'erenc\'es avec des centaines de variables couvrant la g\'eologie, l'hydrologie, l'occupation du sol, la proximit\'e aux sources et la profondeur des puits.
 L'importance des variables est analys\'ee par SHAP global et par permutation.
 
-\textbf{R\'esultats (mode mixte).}
+\emph{R\'esultats (mode mixte).}
 Les r\'esultats permettent d'estimer qu'entre 71 et 95 millions d'Am\'ericains d\'ependraient de sources d'eau souterraine avec des concentrations d\'etectables de PFAS.
 L'analyse des importances classe en t\^ete l'utilisation des sols en zone urbaine, la profondeur de cr\'epine, la densit\'e de population et la distance aux a\'eroports et centres d'entra\^inement des pompiers.
 Ce classement est coh\'erent avec celui de George et Dixit, confirmant la robustesse du signal de proximit\'e industrielle \`a travers des r\'egions g\'eologiquement tr\`es diverses.
 
-\textbf{Limites.}
+\emph{Limites.}
 La pr\'esence de mesures PFAS dans une fraction des donn\'ees d'entra\^inement introduit une composante confirmatoire partielle dont l'impact en d\'eploiement pur reste difficile \`a quantifier a posteriori.
 Le lissage de la r\'esolution r\'egionale par la grande h\'et\'erog\'en\'eit\'e des aquif\`eres nationaux constitue une limite suppl\'ementaire pour les applications locales.
 
@@ -357,35 +357,35 @@ Cette t\^ache, qui pr\'esuppose des concentrations PFAS d\'ej\`a connues et inte
 \mySubSubSection{Travaux de Kibbey et al.\ (2020)}{}
 \label{sec:art-kibbey2020}
 
-\textbf{Probl\`eme.}
+\emph{Probl\`eme.}
 Kibbey et al.~\cite{kibbey2020pfas} cherchent \`a identifier la source de contamination PFAS (AFFF, industrie fluorochimique, station d'\'epuration) \`a partir du profil analytique multi-compos\'e d'un \'echantillon d'eau, sans n\'ecessiter de mod\`ele hydrog\'eologique.
 
-\textbf{M\'ethodologie.}
+\emph{M\'ethodologie.}
 Les auteurs exploitent les empreintes chimiques des \'echantillons~: les profils relatifs d'une cinquantaine de compos\'es PFAS constituent un vecteur de caract\'eristiques multi-analytique.
 La pertinence de ce vecteur repose sur un fondement chimique~: chaque type de source industrielle g\'en\`ere des profils PFAS sp\'ecifiques en termes de longueur de cha\^ine carbo-fluor\'ee et de groupement fonctionnel terminal (sulfonate/carboxylate/phosphonate), partiellement conserv\'es lors du transport en aquif\`ere.
 Plusieurs algorithmes sont compar\'es (for\^ets al\'eatoires, SVM \`a noyau radial, classifieurs na\"ifs bay\'esiens), \'evalu\'es par validation crois\'ee \`a 10 plis.
 
-\textbf{R\'esultats (t\^ache diagnostique).}
-Une pr\'ecision d'attribution d'environ 90\,\% est obtenue pour distinguer entre sources AFFF, industrielles et diffuses~; ce r\'esultat d\'emontre que la diversit\'e structurale des profils PFAS encode des informations diagnostiques robustes.
+\emph{R\'esultats (t\^ache diagnostique).}
+Une pr\'ecision d'attribution d'environ 90\,\% est obtenue pour distinguer entre les sources AFFF, industrielles et diffuses~; ce r\'esultat d\'emontre que la diversit\'e structurelle des profils PFAS encode des informations diagnostiques robustes.
 
-\textbf{Limites.}
+\emph{Limites.}
 La qualit\'e de l'attribution d\'epend du nombre d'analytes cibl\'es~; les m\'elanges de sources g\'en\`erent des vecteurs ambig\"us pour lesquels les classifieurs standard produisent des attributions incertaines.
 
 
 \mySubSubSection{Travaux de D\'avila-Santiago et al.\ (2022)}{}
 \label{sec:art-davilasantiago2022}
 
-\textbf{Probl\`eme.}
+\emph{Probl\`eme.}
 D\'avila-Santiago et al.~\cite{davilasantiago2022} prolongent la d\'emarche de Kibbey et al.\ vers l'attribution de sources \`a partir de donn\'ees non cibl\'ees (NTS, \emph{non-target screening})~: sans viser a priori un ensemble d\'efini d'analytes, les techniques d'analyse de masse haute r\'esolution (HRMS) d\'etectent des milliers de signaux chimiques dans un \'echantillon.
 
-\textbf{M\'ethodologie.}
+\emph{M\'ethodologie.}
 Les auteurs d\'eveloppent un pipeline int\'egrant normalisation et filtrage des signaux HRMS, r\'eduction de dimension par d\'ecomposition en valeurs singuli\`eres (SVD) et un classifieur de gradient boosting sur l'espace r\'eduit.
 Le pipeline est appliqu\'e sur des jeux de donn\'ees californiens d'eau de surface et souterraine.
 
-\textbf{R\'esultats (t\^ache diagnostique).}
+\emph{R\'esultats (t\^ache diagnostique).}
 Des signatures li\'ees aux sources AFFF, industrielles et agricoles restent identifiables m\^eme sans ciblage analytique~: la d\'emarche ouvre la voie \`a un criblage de surveillance \`a grande \'echelle moins co\^uteux qu'une analyse multi-r\'esidus cibl\'ee syst\'ematique.
 
-\textbf{Limites.}
+\emph{Limites.}
 Le pipeline d\'epend fortement de la r\'esolution HRMS disponible.
 Sa g\'en\'eralisation \`a des contextes o\`u seul un LC-MS/MS standard est disponible reste \`a \'evaluer.
 
@@ -407,36 +407,36 @@ Les architectures profondes ont \'emerg\'e pour int\'egrer ces d\'ependances~: d
 \mySubSubSection{Travaux de Borisov et al.\ (2024)}{}
 \label{sec:art-borisov2024}
 
-\textbf{Probl\`eme.}
+\emph{Probl\`eme.}
 Borisov et al.~\cite{borisov2024tabular} \'evaluent empiriquement si les r\'eseaux de neurones surpassent les arbres d'ensemble sur les jeux de donn\'ees tabulaires de taille petite \`a moyenne~: r\'egime typique des corpus de surveillance environnementale, o\`u quelques centaines \`a quelques dizaines de milliers d'observations analys\'ees sont disponibles.
 
-\textbf{M\'ethodologie.}
+\emph{M\'ethodologie.}
 Les auteurs r\'ealisent un benchmark syst\'ematique comparant MLP g\'en\'eriques, TabNet~\cite{arik2021tabnet} et SAINT~\cite{somepalli2021saint} aux m\'ethodes d'ensemble (for\^et al\'eatoire, XGBoost) sur des jeux de donn\'ees publics g\'en\'eraux et environnementaux, avec r\'eglage soigneux des hyperparam\`etres pour toutes les architectures.
 
-\textbf{R\'esultats.}
+\emph{R\'esultats.}
 Les m\'ethodes d'ensemble \`a base d'arbres surpassent ou \'egalent les r\'eseaux de neurones dans la grande majorit\'e des benchmarks.
 Trois m\'ecanismes explicatifs sont identifi\'es~: (i) les donn\'ees tabulaires ne sont pas invariantes par transformation, rendant inutilisable le biais inductif local des convolutions~; (ii) les effets non-lin\'eaires sont souvent locaux et discrets dans les donn\'ees environnementales, ce que les arbres capturent par leur m\'ecanisme de partitionnement r\'ecursif~; (iii) les perceptrons requi\`erent davantage de donn\'ees pour g\'en\'eraliser.
 Par transposition au r\'egime de donn\'ees typique des corpus de surveillance PFAS comme \texttt{EW3C00134} (environ 26\,000 observations, dont seulement 2\,600 \`a 3\,000 \'etiquet\'ees), ces r\'esultats g\'en\'eraux indiquent que les architectures profondes tabulaires restent d\'esavantag\'ees par rapport \`a XGBoost dans ce r\'egime partiellement \'etiquet\'e.
 
-\textbf{Limites.}
+\emph{Limites.}
 Ces r\'esultats sont g\'en\'eraux et ne ferment pas la porte aux architectures sp\'ecialis\'ees exploitant la structure relationnelle des donn\'ees de surveillance.
 
 
 \mySubSubSection{Travaux de Cheng et Ng (2019)}{}
 \label{sec:art-cheng2019}
 
-\textbf{Probl\`eme.}
+\emph{Probl\`eme.}
 Cheng et Ng~\cite{cheng2019pfas} cherchent \`a pr\'edire la bioactivit\'e de plus de 3\,400 compos\'es PFAS r\'epertori\'es sur la liste OCDE sur 26 cibles biologiques (prot\'eines, enzymes, r\'ecepteurs cellulaires), sans exp\'erimentation anim\'ale syst\'ematique, dans le cadre d'une approche QSAR (\emph{Quantitative Structure-Activity Relationship}).
 
-\textbf{M\'ethodologie.}
+\emph{M\'ethodologie.}
 Les auteurs comparent des classifieurs classiques, des r\'eseaux de neurones multit\^aches (\emph{Multitask Neural Networks}, MNN) partageant des couches entre les 26 cibles, et des r\'eseaux convolutifs sur graphes mol\'eculaires (GCN).
-Les mol\'ecules sont encod\'ees par des descripteurs physicochimiques~: masse molaire, $\log P$, nombre d'atomes de fluor, longueur de cha\^ine carbo-fluor\'ee, groupe fonctionnel terminal.
+Les mol\'ecules sont encod\'ees par des descripteurs physico-chimiques~: masse molaire, $\log P$, nombre d'atomes de fluor, longueur de cha\^ine carbo-fluor\'ee, groupe fonctionnel terminal.
 
-\textbf{R\'esultats (QSAR mol\'eculaire).}
+\emph{R\'esultats (QSAR mol\'eculaire).}
 Les MNN et GCN mol\'eculaires obtiennent une pr\'ecision \'equilibr\'ee entre 70 et 80\,\% selon l'essai cibl\'e, et une ROC-AUC moyenne de 0,916 pour les meilleures architectures, surpassant les classifieurs classiques de 5 \`a 10 points.
 L'apprentissage multit\^ache se r\'ev\`ele particuli\`erement b\'en\'efique~: le partage de repr\'esentations entre plusieurs cibles compense le manque d'\'etiquettes pour les essais peu document\'es.
 
-\textbf{Limites.}
+\emph{Limites.}
 Cette approche est mol\'eculaire~: elle pr\'edit la bioactivit\'e d'un compos\'e PFAS, pas la contamination d'un puits de surveillance.
 Sa port\'ee est avant tout m\'ethodologique~: elle illustre que l'apprentissage profond trouve un terrain favorable d\`es lors que la structure mol\'eculaire peut \^etre exploit\'ee directement, ce qui explique l'int\'er\^et des r\'eseaux convolutifs sur graphes mol\'eculaires (GCN) pour repr\'esenter les compos\'es PFAS.
 
@@ -456,41 +456,41 @@ Les cha\^ines de classifieurs~\cite{read2011classifier} capturent ces d\'ependan
 o\`u chaque classifieur $f_\ell$ utilise les pr\'edictions pr\'ec\'edentes comme variables suppl\'ementaires.
 L'apprentissage semi-supervis\'e (section~\ref{sec:ml-semi-supervise}) r\'epond \`a la contrainte de raret\'e en g\'en\'erant des pseudo-\'etiquettes pour les observations non \'etiquet\'ees dont la probabilit\'e d\'epasse un seuil de confiance, puis en r\'e-entra\^inant sur le jeu \'elargi.
 
-\textbf{Probl\`eme.}
+\emph{Probl\`eme.}
 Dong et al.~\cite{dong2024pfas} cherchent \`a pr\'edire, \`a partir de variables contextuelles exclusivement (sans concentration PFAS mesur\'ee en entr\'ee), deux cibles distinctes sur le corpus californien \texttt{EW3C00134}~: (i)~le d\'epassement du seuil global de 70~ng/L (criblage binaire) et (ii)~la pr\'esence de chacun des 35 analytes PFAS individuels au-del\`a de 2~ng/L (classification multi-\'etiquettes).
 Le corpus regroupe 26\,000 observations g\'eor\'ef\'erenc\'ees issues de 23 sources publiques (programme GAMA, Geotracker, EPA, NOAA, SGMA, etc.) pour la p\'eriode 2016--2022.
 
-\textbf{Corpus et features.}
+\emph{Corpus et features.}
 Apr\`es nettoyage (suppression des variables avec plus de 40\,\% de valeurs manquantes), les 112 variables d'entr\'ee couvrent six cat\'egories~: sources de contamination (nombre d'installations industrielles \`a 1, 3, 10 et 50~km), g\'eospatial/date, qualit\'e de l'air et m\'et\'eo (humidit\'e, PM$_{2,5}$, NO$_2$, SO$_2$), sol (granulom\'etrie, uniformit\'e), hydrologie, et qualit\'e de l'eau souterraine mesur\'ee via des co-contaminants indicateurs (solvants chlor\'es, hydrocarbures aromatiques, nitrates).
-\textbf{Aucune concentration PFAS mesur\'ee n'est incluse dans ces features.}
-Les coordonn\'ees g\'eographiques explicites (longitude, latitude, comt\'e) sont volontairement exclues afin d'am\'eliorer la g\'en\'eralisabilit\'e spatiale du mod\`ele.
+Aucune concentration PFAS mesur\'ee n'est incluse dans ces features.
+Les coordonn\'ees g\'eographiques explicites (longitude, latitude, comt\'e) sont volontairement exclues afin d'am\'eliorer la capacit\'e de g\'en\'eralisation spatiale du mod\`ele.
 
-\textbf{M\'ethodologie.}
+\emph{M\'ethodologie.}
 Le pipeline est organis\'e en deux t\^aches s\'equentielles (figure~\ref{fig:dong-pipeline})~:
 \begin{enumerate}
-    \item \textbf{T\^ache~1 -- Criblage total.}
+    \item \emph{T\^ache~1 -- Criblage total.}
     Un classifieur binaire (for\^et al\'eatoire avec sur-\'echantillonnage ADASYN) pr\'edit si la somme des concentrations PFAS d\'epasse 70~ng/L~; la cible est d\'eriv\'ee des donn\'ees de laboratoire disponibles, les 112 features contextuelles servant de seule entr\'ee.
-    \item \textbf{T\^ache~2 -- Pr\'ediction multi-analytes.}
+    \item \emph{T\^ache~2 -- Pr\'ediction multi-analytes.}
     Les 35 analytes sont r\'epartis en quatre classes selon leur taux de d\'etection (Class~0~: $n > 25\,000$~obs. ; Class~3~: $n < 100$~obs.).
     Pour chaque classe~:
     \begin{itemize}
-        \item \textbf{Apprentissage semi-supervis\'e par pseudo-\'etiquetage}~: un premier mod\`ele est entra\^in\'e sur les puits \'etiquet\'es (PFAS mesur\'e)~; ses pr\'edictions sur les puits non \'etiquet\'es (PFAS non mesur\'e) dont la probabilit\'e d\'epasse 95\,\% de confiance sont r\'eint\'egr\'ees comme pseudo-\'etiquettes dans un second entra\^inement.
-        \item \textbf{Cha\^ines de classifieurs XGBoost} (\'equation~\eqref{eq:classif-chain})~: les analytes sont ordonn\'es par sous-famille (PFCAs, fluorot\'elom\`eres, PFSAs, sulfonamides) puis par longueur de cha\^ine croissante~; chaque classifieur $f_\ell$ re\c{c}oit en entr\'ee les 112 features contextuelles ainsi que les \'etiquettes pr\'edites $\hat{y}_1, \ldots, \hat{y}_{\ell-1}$ des analytes pr\'ec\'edents.
+        \item \emph{Apprentissage semi-supervis\'e par pseudo-\'etiquetage}~: un premier mod\`ele est entra\^in\'e sur les puits \'etiquet\'es (PFAS mesur\'e)~; ses pr\'edictions sur les puits non \'etiquet\'es (PFAS non mesur\'e) dont la probabilit\'e d\'epasse 95\,\% de confiance sont r\'eint\'egr\'ees comme pseudo-\'etiquettes dans un second entra\^inement.
+        \item \emph{Cha\^ines de classifieurs XGBoost} (\'equation~\eqref{eq:classif-chain})~: les analytes sont ordonn\'es par sous-famille (PFCAs, fluorot\'elom\`eres, PFSAs, sulfonamides) puis par longueur de cha\^ine croissante~; chaque classifieur $f_\ell$ re\c{c}oit en entr\'ee les 112 features contextuelles ainsi que les \'etiquettes pr\'edites $\hat{y}_1, \ldots, \hat{y}_{\ell-1}$ des analytes pr\'ec\'edents.
         L'entr\'ee suppl\'ementaire de la cha\^ine est donc une pr\'ediction de mod\`ele, non une concentration PFAS mesur\'ee.
-        \item Sur-\'echantillonnage SMOTE (Task~2) sur le jeu d'entra\^inement uniquement.
+        \item Sur-\'echantillonnage SMOTE (T\^ache~2) sur le jeu d'entra\^inement uniquement.
     \end{itemize}
 \end{enumerate}
 
-\textbf{R\'esultats.}
+\emph{R\'esultats.}
 \emph{T\^ache~1}~: la for\^et al\'eatoire avec ADASYN atteint une ROC-AUC de 0,99, une exactitude de 96\,\% et un rappel de 95\,\% sur le jeu de test final, surpassant XGBoost (ROC-AUC~0,91) et tous les classifieurs lin\'eaires (ce score doit \^etre interpr\'et\'e avec la r\'eserve du spatial data leakage identifi\'e en lacune~L2, section~\ref{sec:chap2-lacunes}).
 \emph{T\^ache~2}~: la cha\^ine de classifieurs XGBoost est la m\'ethode la plus performante pour l'ensemble des classes~; les ROC-AUC moyennes par classe sont 0,938 (Class~0), 0,965 (Class~1), 0,942 (Class~2) et 0,985 (Class~3)~; la valeur minimale individuelle est 0,729 (PFBA, analyte tr\`es rare).
 Le pseudo-\'etiquetage am\'eliore la ROC-AUC de Class~2 de $+2{,}9$~pp (gain n\'egligeable pour Classes~1 et~3).
 Les sources de contamination (nombre d'installations \`a 1--50~km) et la granulom\'etrie du sol dominent l'importance des variables pour les deux t\^aches~; un seul co-contaminant inorganique (nitrate) appara\^it parmi les 20 variables les plus importantes.
 
-\textbf{Limites.}
+\emph{Limites.}
 L'apprentissage semi-supervis\'e ne se confond pas avec le mode confirmatoire~: le pseudo-\'etiquetage g\`ere la raret\'e des \'etiquettes sur des puits non analys\'es, mais les features restent purement contextuelles.
 La cha\^ine de classifieurs exploite des corr\'elations inter-analytes via des \'etiquettes pr\'edites, non des concentrations mesur\'ees~; l'\'evaluation reste proche du mode pr\'edictif au sens de la section~\ref{sec:chap2-modes}.
-Les limites op\'erationnelles sont~: (i)~biais de s\'election du programme GAMA (sur-repr\'esentation des zones suspectes)~; (ii)~division al\'eatoire 80/20 sans contrainte g\'eographique, exposant \`a un \textbf{spatial data leakage}~; (iii)~d\'egradation du pseudo-\'etiquetage en dessous de 100 exemples \'etiquet\'es (Class~3).
+Les limites op\'erationnelles sont~: (i)~biais de s\'election du programme GAMA (sur-repr\'esentation des zones suspectes)~; (ii)~division al\'eatoire 80/20 sans contrainte g\'eographique, exposant \`a un spatial data leakage~; (iii)~d\'egradation du pseudo-\'etiquetage en dessous de 100 exemples \'etiquet\'es (Class~3).
 
 \begin{figure}[H]
     \centering
@@ -543,15 +543,15 @@ Aucune \'etude publi\'ee ne compare les deux modes sur le m\^eme corpus avec le 
 
 Trois enseignements transversaux ressortent de la lecture crois\'ee des dix travaux.
 
-\textbf{La proximit\'e industrielle est le signal le plus robuste.}
+La proximit\'e industrielle est le signal le plus robuste.
 La proximit\'e aux bases militaires, aux usines fluorochimiques et aux a\'eroports ressort en t\^ete des variables explicatives dans des contextes g\'eologiques tr\`es diff\'erents, qu'elle soit mesur\'ee par les importances SHAP (George et Dixit, Tokranov, Dong et al.) ou par les ar\^etes du r\'eseau bay\'esien (Li et al.).
 Ce r\'esultat constitue un fondement solide pour la s\'election des features contextuelles.
 
-\textbf{La compl\'ementarit\'e tabulaire/relationnelle est structurellement fond\'ee.}
+La compl\'ementarit\'e tabulaire/relationnelle est structurellement fond\'ee.
 L'exploitation de la structure relationnelle entre analytes am\'eliore les scores par rapport aux mod\`eles tabulaires ind\'ependants~: les cha\^ines de classifieurs de Dong et al.\ en fournissent la seule d\'emonstration publi\'ee sur les PFAS.
-La structure relationnelle entre puits voisins, attendue m\'ecanistiquement (section~\ref{sec:chap2-transport}), n'a en revanche pas encore \'et\'e \'evalu\'ee dans la litt\'erature PFAS~: les features contextuelles encodent le risque statique, tandis que la topologie d'\'ecoulement, encore inexploit\'ee, encoderait la corr\'elation spatiale entre puits voisins et la proximit\'e aux sources anthropiques.
+La structure relationnelle entre puits voisins, attendue sur le plan m\'ecaniste (section~\ref{sec:chap2-transport}), n'a en revanche pas encore \'et\'e \'evalu\'ee dans la litt\'erature PFAS~: les features contextuelles encodent le risque statique, tandis que la topologie d'\'ecoulement, encore inexploit\'ee, encoderait la corr\'elation spatiale entre puits voisins et la proximit\'e aux sources anthropiques.
 
-\textbf{Le mode d'\'evaluation conditionne les performances de fa\c con fondamentale.}
+Le mode d'\'evaluation conditionne de mani\`ere d\'ecisive le niveau des performances.
 Les \'etudes dont les features comprennent des concentrations PFAS mesur\'ees publient des scores bien sup\'erieurs (F1~$> 0{,}90$) \`a celles qui s'appuient exclusivement sur des variables contextuelles.
 Cette diff\'erence ne refl\`ete pas un surcro\^it de qualit\'e algorithmique~: elle quantifie la valeur informative des mesures de laboratoire, et ne vaut que si l'on compare strictement le m\^eme mod\`ele dans les deux modes sur un m\^eme ensemble de test.
 
@@ -563,7 +563,7 @@ L'examen crois\'e des travaux r\'ev\`ele quatre lacunes structurelles.
 
 \paragraph{L1 -- Structure relationnelle sous-exploit\'ee.}
 La majorit\'e des \'etudes tabulaires ignore les liens entre puits voisins, panaches et sources communes.
-Les graphes h\'et\'erog\`enes~\cite{hu2020hgt} comblent partiellement ce vide, mais la sensibilit\'e des performances aux choix de construction du graphe (seuil de distance pour les ar\^etes, nombre de types de n\oe uds, dimension de l'embedding) n'a pas fait l'objet d'une \'etude de sensibilit\'e syst\'ematique dans la litt\'erature publi\'ee.
+Les graphes h\'et\'erog\`enes~\cite{hu2020hgt} comblent partiellement ce vide, mais la sensibilit\'e des performances aux choix de construction du graphe (seuil de distance pour les ar\^etes, nombre de types de n\oe uds, dimension de l'embedding) n'a pas encore \'et\'e syst\'ematiquement \'evalu\'ee dans la litt\'erature publi\'ee.
 La question de la sensibilit\'e au seuil de distance et au nombre de types de n\oe uds reste ouverte.
 
 \paragraph{L2 -- Biais d'\'evaluation circulaire.}
@@ -574,7 +574,7 @@ La v\'erification de l'absence de fuite d'information entre variables contextuel
 \paragraph{L3 -- Transf\'erabilit\'e g\'eographique non valid\'ee.}
 Les mod\`eles sont entra\^in\'es et test\'es sur une seule r\'egion (Californie, Minnesota, est des \'Etats-Unis).
 Les validations crois\'ees spatiales (entra\^inement sur un aquif\`ere, test sur un autre de lithologie diff\'erente) restent pratiquement absentes.
-Pour les graphes h\'et\'erog\`enes, la question est architecturalement profonde~: le graphe \'etant construit sur les n\oe uds d'entra\^inement, une approche inductive~\cite{hamilton2017inductive} (GraphSAGE) serait requise pour g\'en\'eraliser \`a des n\oe uds non vus.
+Pour les graphes h\'et\'erog\`enes, la question soul\`eve un probl\`eme architectural fondamental~: le graphe \'etant construit sur les n\oe uds d'entra\^inement, une approche inductive~\cite{hamilton2017inductive} (GraphSAGE) serait requise pour g\'en\'eraliser \`a des n\oe uds non vus.
 
 \paragraph{L4 -- Interpr\'etabilit\'e insuffisamment standardis\'ee.}
 Si SHAP~\cite{lundberg2017shap} s'impose progressivement comme standard, les protocoles varient fortement entre \'etudes.
@@ -588,7 +588,7 @@ Le tableau~\ref{tab:synthese-positionnement} positionne les principales contribu
 
 \begin{table}[h!]
     \centering
-    \caption{Positionnement des principales contributions au regard des quatre lacunes identifi\'ees. $\bullet$~: lacune adress\'ee~; $\circ$~: partiellement adress\'ee~; $\times$~: non adress\'ee. L1~: structure relationnelle~; L2~: biais confirmatoire~; L3~: transfert g\'eographique~; L4~: interpr\'etabilit\'e standardis\'ee.}
+    \caption{Positionnement des principales contributions au regard des quatre lacunes identifi\'ees. $\bullet$~: lacune trait\'ee~; $\circ$~: partiellement trait\'ee~; $\times$~: non trait\'ee. L1~: structure relationnelle~; L2~: biais confirmatoire~; L3~: transfert g\'eographique~; L4~: interpr\'etabilit\'e standardis\'ee.}
     \label{tab:synthese-positionnement}
     \small
     \begin{tabular}{lcccc}
@@ -604,7 +604,7 @@ Le tableau~\ref{tab:synthese-positionnement} positionne les principales contribu
     \end{tabular}
 \end{table}
 
-Aucun travail de la litt\'erature n'adresse simultan\'ement L1, L2 et L4~: les \'etudes tabulaires ignorent la structure relationnelle~; celles qui exploitent un graphe ne documentent pas le mode pr\'edictif strict~; l'interpr\'etabilit\'e reste non standardis\'ee.
+Aucun travail de la litt\'erature ne traite simultan\'ement L1, L2 et L4~: les \'etudes tabulaires ignorent la structure relationnelle~; celles qui exploitent un graphe ne documentent pas le mode pr\'edictif strict~; l'interpr\'etabilit\'e reste non standardis\'ee.
 La combinaison de ces lacunes, en particulier la validation inter-aquif\`eres (L3), d\'efinit autant de directions de recherche encore ouvertes.
 
 
@@ -613,7 +613,7 @@ La combinaison de ces lacunes, en particulier la validation inter-aquif\`eres (L
 \label{sec:synthese-chap2}
 % =========================================================
 
-Ce chapitre a dress\'e un panorama structur\'e de l'application de l'intelligence artificielle \`a la pr\'ediction et \`a la surveillance des PFAS en eaux souterraines.
+Ce chapitre a bross\'e un panorama structur\'e de l'application de l'intelligence artificielle \`a la pr\'ediction et \`a la surveillance des PFAS en eaux souterraines.
 La premi\`ere g\'en\'eration (mod\`eles probabilistes et arbres d'ensemble) a \'etabli le socle des variables pr\'edictives (proximit\'e aux sources, indicateurs hydrog\'eologiques, co-contaminants) et d\'emontr\'e la faisabilit\'e de la priorisation r\'egionale et nationale.
 La deuxi\`eme (r\'eseaux de neurones, puis cha\^ines semi-supervis\'ees multi-\'etiquettes) a \'etendu le champ \`a plusieurs dizaines d'analytes et exploit\'e les donn\'ees non \'etiquet\'ees, sans toujours expliciter le r\'egime d'\'evaluation retenu.
 
